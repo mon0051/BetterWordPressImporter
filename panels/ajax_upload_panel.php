@@ -17,7 +17,6 @@ require 'javascript_baker.php';
 include_once '../better-wordpress-importer-admin.php';
 global $bwi_plugin_folder_url;
 ?>
-
 <div class="bwi-slide-wrapper" id="upload-slide">
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
@@ -72,7 +71,6 @@ global $bwi_plugin_folder_url;
                     );
                 }
             }
-
             function OnProgress(event, position, total, percentComplete) {
                 // Update Progress Bar
                 var progress_box = $('#progress-box');
@@ -81,7 +79,6 @@ global $bwi_plugin_folder_url;
                 var text_progress = percentComplete.toString() + "%";
                 progress_box.find('#status-txt').text(text_progress);
             }
-
             function afterSuccess() {
                 $('#submit-btn').hide(); //hide submit button
                 $('#progress-box').delay(1000).fadeOut(); //hide progress bar

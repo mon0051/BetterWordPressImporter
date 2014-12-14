@@ -5,7 +5,7 @@
  */
 require_once 'PanelController.php';
 ?>
-<div id="ajax-return-values"></div>
+<div id="ajax-return-values" class="bwi-hidden"></div>
 <div class="buffer"></div>
 <!-- This Script controls the slider that displays the panels -->
 <script type="text/javascript">
@@ -87,6 +87,7 @@ require_once 'PanelController.php';
     </div>
 </div>
 <script type="text/javascript">
+    // Simply adding the onClick handlers to the control buttons
     jQuery('#bwi-slider-left-button').click(function () {
         slideRight();
     });
@@ -96,5 +97,6 @@ require_once 'PanelController.php';
     jQuery('#bwi-page-selector').on('click','.page-selector-button',function(){
         bwi_jump_to_slide(jQuery(this).index());
     });
+    // resetMagazine now, all slides should be added
     resetMagazine();
 </script>
