@@ -9,6 +9,7 @@ require_once 'PanelController.php';
 <div class="buffer"></div>
 <!-- This Script controls the slider that displays the panels -->
 <script type="text/javascript">
+    // This code is very fast, no need for it to be in footer
     var slideWidth = 680;
     var bwi_active_slide = 0;
     // This variable keeps track of how many slides there are client side

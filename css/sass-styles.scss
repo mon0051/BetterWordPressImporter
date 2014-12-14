@@ -81,6 +81,7 @@ html {
     top:-$container-height - $tiny-padding;
     text-align: center;
     div {
+      cursor:pointer;
       opacity: 0.5;
       position: absolute;
       display: inline-block;

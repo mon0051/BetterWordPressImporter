@@ -53,6 +53,7 @@ html {
     top: -3.55rem;
     text-align: center; }
     html #bwi-slider-controls div {
+      cursor: pointer;
       opacity: 0.5;
       position: absolute;
       display: inline-block; }
