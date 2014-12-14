@@ -1,3 +1,6 @@
+/***************************************************************
+*   Standard Colors
+***************************************************************/
 $dark-background: #1e1e1e;
 $dark-border: #3e3e3e;
 $light-text: #ccc;
@@ -9,6 +12,9 @@ $doc-comment: #0088ff;
 $doc-param: #22aaff;
 $doc-markup: #569cd6;
 $class: #4ec9b0;
+/***************************************************************
+*   Standard Sizes
+***************************************************************/
 $small-padding: 2rem;
 $tiny-padding:0.25rem;
 $button-font-size:2rem;
@@ -20,18 +26,22 @@ $slide-window-height:48rem+(2 *$small-padding);
 
 html {
   font-size: 10px;
-  /*
-    General Plugin Styles
-  */
+  /***************************************************************
+  *   General Plugin Styles
+  ***************************************************************/
   body .better-wordpress-importer-better-wordpress-importer-admin-php {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
   }
   .blurb *, .blurb {
     color: $light-text;
   }
+  .bwi-center{
+    text-align: center;
+  }
   .bwi-button{
     position: relative;
-    display: block;
+    display: inline-block;
+    margin:0 $small-padding;
     min-width: 12rem;
     min-height: $container-height;
     width: 20%;
@@ -58,9 +68,9 @@ html {
   .blocker {
     background: $dark-background;
   }
-  /*
-    Slider Window Styles
-  */
+  /***************************************************************
+  *   Slider Window
+  ***************************************************************/
   #bwi-slide-magazine {
     position: relative;
     height: 48rem +(2 *$small-padding);
@@ -81,9 +91,9 @@ html {
     padding: $small-padding;
     background: $dark-background;
   }
-  /*
-    Slider Controls
-  */
+  /***************************************************************
+  *   Slider Controls
+  ***************************************************************/
   #bwi-slider-controls {
     color:$light-text;
     width:$slide-width;
@@ -138,10 +148,10 @@ html {
       left:0;
     }
   }
-  /*
-    Slide Specific Controls
-  */
-  // File Upload Slide
+  /***************************************************************
+  *   Slide Specific Styles
+  ***************************************************************/
+  /* File Upload Slide */
   #AjaxFileUpload {
     h1, h2, h3, p {
       color: $light-text;

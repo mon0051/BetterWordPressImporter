@@ -9,24 +9,51 @@
     </div>
     <div class="blurb">
         <p>
-            There can only be one import process going on per user, to avoid database conflicts.
             Checking to see if there is another process running...
         </p>
     </div>
     <div id="ajax-response-session-check">
-        <div id="bwi_session_found" class="bwi-hidden">
-            A previous session was found, do you want to continue with this import, or start a new import?
+        <div id="bwi_session_found" class="bwi-hidden bwi-center">
+            <p>A previous session was found, do you want to continue with this import, or start a new import?</p>
             <div id="bwi_start_new" class="bwi-button"><div class="bwi-button-text">Start New</div></div>
-            <div id="bwi_resume" class="bwi-button"><div class="bwi-button-text">Start New</div></div>
+            <div id="bwi_resume" class="bwi-button"><div class="bwi-button-text">Resume</div></div>
+        </div>
+        <div id="bwi_no_session_found" class="bwi-hidden bwi-center">
+            <p>No Session was found</p>
+            <div id="bwi_retry_session" class="bwi-button"><div class="bwi-button-text">Retry</div></div>
         </div>
     </div>
     <script type="text/javascript">
-        jQuery(document).ready(function(){
+        var session_check_response = "";
+        function check_session(){
             var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
             jQuery.ajax({url: ajax_file_url, data: { action:"first_contact" } }).done( function(html) {
-                jQuery('#ajax-response-session-check').append(html);
-                jQuery('#bwi_session_found').removeClass('bwi-hidden');
+                session_check_response = html;
+
+                if(html == "no_session"){
+                    jQuery('#bwi_no_session_found').toggleClass('bwi-hidden',false);
+                    jQuery('#bwi_session_found').toggleClass("bwi-hidden",true);
+                    slideLeft();
+
+                }else{
+                    jQuery('#bwi_no_session_found').toggleClass('bwi-hidden',true);
+                    jQuery('#bwi_session_found').toggleClass("bwi-hidden",false);
+                }
+
             });
+        }
+        jQuery(document).ready(function(){
+           check_session();
+        });
+        jQuery('#bwi_start_new').click(function(){
+            var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
+            jQuery.ajax({url: ajax_file_url, data: { action:"delete_session" } }).done(function(response) {
+                check_session();
+            });
+            slideLeft();
+        });
+        jQuery('#bwi_retry_session').click(function () {
+            check_session();
         });
     </script>
 </div>

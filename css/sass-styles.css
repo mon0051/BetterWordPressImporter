@@ -1,24 +1,34 @@
+/***************************************************************
+*   Standard Colors
+***************************************************************/
+/***************************************************************
+*   Standard Sizes
+***************************************************************/
 html {
   font-size: 10px;
-  /*
-    General Plugin Styles
-  */
-  /*
-    Slider Window Styles
-  */
-  /*
-    Slider Controls
-  */
-  /*
-    Slide Specific Controls
-  */ }
+  /***************************************************************
+  *   General Plugin Styles
+  ***************************************************************/
+  /***************************************************************
+  *   Slider Window
+  ***************************************************************/
+  /***************************************************************
+  *   Slider Controls
+  ***************************************************************/
+  /***************************************************************
+  *   Slide Specific Styles
+  ***************************************************************/
+  /* File Upload Slide */ }
   html body .better-wordpress-importer-better-wordpress-importer-admin-php {
     font-family: "Open Sans", Helvetica, Arial, sans-serif; }
   html .blurb *, html .blurb {
     color: #cccccc; }
+  html .bwi-center {
+    text-align: center; }
   html .bwi-button {
     position: relative;
-    display: block;
+    display: inline-block;
+    margin: 0 2rem;
     min-width: 12rem;
     min-height: 3.3rem;
     width: 20%;
