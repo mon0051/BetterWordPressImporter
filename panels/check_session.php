@@ -14,7 +14,19 @@
         </p>
     </div>
     <div id="ajax-response-session-check">
+        <div id="bwi_session_found" class="bwi-hidden">
+            A previous session was found, do you want to continue with this import, or start a new import?
+            <div id="bwi_start_new" class="bwi-button"><div class="bwi-button-text">Start New</div></div>
+            <div id="bwi_resume" class="bwi-button"><div class="bwi-button-text">Start New</div></div>
+        </div>
     </div>
     <script type="text/javascript">
+        jQuery(document).ready(function(){
+            var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
+            jQuery.ajax({url: ajax_file_url, data: { action:"first_contact" } }).done( function(html) {
+                jQuery('#ajax-response-session-check').append(html);
+                jQuery('#bwi_session_found').removeClass('bwi-hidden');
+            });
+        });
     </script>
 </div>

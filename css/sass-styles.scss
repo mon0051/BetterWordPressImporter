@@ -26,9 +26,22 @@ html {
   body .better-wordpress-importer-better-wordpress-importer-admin-php {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
   }
-
   .blurb *, .blurb {
     color: $light-text;
+  }
+  .bwi-button{
+    position: relative;
+    display: block;
+    min-width: 12rem;
+    min-height: $container-height;
+    width: 20%;
+    background: $doc-comment;
+    border: 2px solid $light-text;
+    color: $light-text;
+    font-size: $button-font-size;
+  }
+  .bwi-button:hover {
+    background: $doc-markup;
   }
   .bwi-button-text {
     position: relative;
@@ -39,7 +52,9 @@ html {
   .buffer {
     padding-bottom: $small-padding;
   }
-
+  .bwi-hidden{
+    display:none !important;
+  }
   .blocker {
     background: $dark-background;
   }
@@ -70,7 +85,6 @@ html {
     Slider Controls
   */
   #bwi-slider-controls {
-
     color:$light-text;
     width:$slide-width;
     display: block;
@@ -127,23 +141,6 @@ html {
   /*
     Slide Specific Controls
   */
-  // Parse Slide
-  #ajax-parse-button {
-    position: relative;
-    display: block;
-    min-width: 12rem;
-    min-height: $container-height;
-    width: 20%;
-    background: $doc-comment;
-    border: 2px solid $light-text;
-    color: $light-text;
-    font-size: $button-font-size;
-
-  }
-  #ajax-parse-button:hover {
-    background: $doc-markup;
-  }
-
   // File Upload Slide
   #AjaxFileUpload {
     h1, h2, h3, p {
@@ -161,21 +158,18 @@ html {
     background: $dark-background;
     color: $light-text;
   }
-
   #progress-bar {
     background: $doc-param;
     height: 100%;
     min-height: $container-height;
     width: 0;
   }
-
   #status-txt {
     position: absolute;
     top: 0.5em;
     left: 50%;
     color: $light-text;
   }
-
   #output {
     min-height: 1rem;
   }

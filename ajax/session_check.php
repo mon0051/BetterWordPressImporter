@@ -9,6 +9,6 @@ if(isset($_SESSION['bwi_results'])){
     if(isset($_SESSION['bwi_results']['associated_filename'])){
         echo $_SESSION['bwi_results']['associated_filename'];
     }
-
-
+}else{
+    echo "no Session";
 }

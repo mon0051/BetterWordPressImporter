@@ -17,7 +17,7 @@
         <p>Click on the Parse button (that's computer speak for read) to start the process. This should take no more
             than 30 seconds if the file is properly exported.</p>
     </div>
-    <div id="ajax-parse-button">
+    <div id="ajax-parse-button" class="bwi-button">
         <div class="bwi-button-text">Parse</div>
     </div>
     <div id="ajax-parse-return" class="ajax-return-value"></div>
