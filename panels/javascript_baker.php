@@ -17,6 +17,7 @@ function bakeInPhpUploadLimits()
         $max_post_cli = ini_get('post_max_size');
         $size_checks = array('max_upload_size' => $max_up_cli, 'post_max_size' => $max_post_cli);
 
+
         /*
          * Sometimes the size is specified in kilobytes
          * or megabytes. The section below will convert the number

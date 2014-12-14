@@ -43,7 +43,6 @@ html {
     padding: 2rem;
     background: #1e1e1e; }
   html #bwi-slider-controls {
-    opacity: 0.5;
     color: #cccccc;
     width: 64rem;
     display: block;
@@ -54,8 +53,11 @@ html {
     top: -3.55rem;
     text-align: center; }
     html #bwi-slider-controls div {
+      opacity: 0.5;
       position: absolute;
       display: inline-block; }
+    html #bwi-slider-controls div:hover {
+      opacity: 1; }
     html #bwi-slider-controls #bwi-page-selector {
       position: relative;
       margin-left: auto;
@@ -66,8 +68,22 @@ html {
         padding-right: 0.25rem; }
     html #bwi-slider-controls #bwi-slider-right-button {
       right: 0; }
+      html #bwi-slider-controls #bwi-slider-right-button a {
+        color: #cccccc;
+        padding-left: 2rem;
+        padding-right: 2rem; }
+      html #bwi-slider-controls #bwi-slider-right-button a:hover {
+        color: white;
+        opacity: 1; }
     html #bwi-slider-controls #bwi-slider-left-button {
       left: 0; }
+      html #bwi-slider-controls #bwi-slider-left-button a {
+        color: #cccccc;
+        padding-left: 2rem;
+        padding-right: 2rem; }
+      html #bwi-slider-controls #bwi-slider-left-button a:hover {
+        color: white;
+        opacity: 1; }
   html #ajax-parse-button {
     position: relative;
     display: block;

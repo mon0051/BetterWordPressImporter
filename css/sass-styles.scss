@@ -70,7 +70,7 @@ html {
     Slider Controls
   */
   #bwi-slider-controls {
-    opacity: 0.5;
+
     color:$light-text;
     width:$slide-width;
     display: block;
@@ -81,8 +81,12 @@ html {
     top:-$container-height - $tiny-padding;
     text-align: center;
     div {
+      opacity: 0.5;
       position: absolute;
       display: inline-block;
+    }
+    div:hover {
+      opacity: 1;
     }
     #bwi-page-selector{
       position: relative;
@@ -95,9 +99,27 @@ html {
       }
     }
     #bwi-slider-right-button{
+      a {
+        color: $light-text;
+        padding-left: $small-padding;
+        padding-right: $small-padding;
+      }
+      a:hover{
+        color:white;
+        opacity: 1;
+      }
       right:0;
     }
     #bwi-slider-left-button{
+      a {
+        color: $light-text;
+        padding-left: $small-padding;
+        padding-right: $small-padding;
+      }
+      a:hover{
+        color:white;
+        opacity: 1;
+      }
       left:0;
     }
   }
