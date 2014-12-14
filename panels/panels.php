@@ -11,6 +11,7 @@ require_once 'PanelController.php';
 <!-- This Script controls the slider that displays the panels -->
 <script type="text/javascript">
     var bwi_active_slide = 0;
+
     // This variable keeps track of how many slides there are client side
     var bwi_slide_count = 0;
     // Reset Magazine is used to ensure that panels are in the correct order
