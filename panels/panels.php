@@ -16,9 +16,9 @@ require_once 'PanelController.php';
     var bwi_slide_count = 0;
     // Reset Magazine is used to ensure that panels are in the correct order
     function bwi_slide_select(){
-        page_selector = jQuery('#bwi-page-selector');
+        var page_selector = jQuery('#bwi-page-selector');
         page_selector.empty();
-        for (i=0;i<bwi_slide_count;i++) {
+        for (var i=0;i<bwi_slide_count;i++) {
             if(i==bwi_active_slide){
                 page_selector.append("<div class=\"page-selector-button\"><i class=\"fa fa-circle\"></i></div>");
             }else {
