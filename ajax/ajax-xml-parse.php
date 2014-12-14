@@ -17,7 +17,7 @@ $results = array();
 $ajax_parser = new WXR_Parser();
 if ( ! is_file($filename) ) {
     echo $filename;
-    die(" file error");
+    die("File Error");
 }
 try {
     $results = $ajax_parser->parse($filename);
@@ -27,10 +27,6 @@ try {
     foreach($authors as $author){
         echo "<div class=\"author_wrapper\">"."<div class=\"author_login\">".$author['author_login']."</div></div>";
     }
-
-
-
-
 }catch (Exception $e){
     echo $e->getMessage();
 }
