@@ -19,6 +19,7 @@ class PanelController {
      * Pass a string referance to the panel, this will add it to the page
      */
     function add_panel($panel_name){
+        /** @noinspection PhpIncludeInspection */
         include $panel_name;
         $this->panel_count += 1;
     }
