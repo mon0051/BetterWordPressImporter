@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="my_code" pattern="(file[better-wordpress-importer]:*&amp;&amp;!file[better-wordpress-importer]:.idea/*&amp;&amp;!file[better-wordpress-importer]:backup/*&amp;&amp;!file:JavaScript/jquery.form.js||file[better-wordpress-importer]:ajax/*||file[better-wordpress-importer]:panels/*||file[better-wordpress-importer]:css/*||file[better-wordpress-importer]:images/*||file:JavaScript/index.php)&amp;&amp;!file:ajax/parser.php" />
-</component>
