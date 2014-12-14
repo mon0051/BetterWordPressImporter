@@ -17,15 +17,58 @@ $slide-width:64rem;
 $slide-window-width:$slide-width+(2 *$small-padding);
 $slide-height:48rem;
 $slide-window-height:48rem+(2 *$small-padding);
-/*
-    General Plugin Styles
- */
+
 html {
   font-size: 10px;
+  /*
+    General Plugin Styles
+  */
   body .better-wordpress-importer-better-wordpress-importer-admin-php {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
   }
 
+  .blurb *, .blurb {
+    color: $light-text;
+  }
+  .bwi-button-text {
+    position: relative;
+    padding-top: ($container-height /2) - ($button-font-size / 2);
+    display: block;
+    text-align: center;
+  }
+  .buffer {
+    padding-bottom: $small-padding;
+  }
+
+  .blocker {
+    background: $dark-background;
+  }
+  /*
+    Slider Window Styles
+  */
+  #bwi-slide-magazine {
+    position: relative;
+    height: 48rem +(2 *$small-padding);
+    width: 100000rem;
+  }
+  #bwi-slide-window {
+    margin-left: auto;
+    margin-right: auto;
+    width: $slide-window-width;
+    height: $slide-window-height;
+    overflow: hidden;
+  }
+  .bwi-slide-wrapper {
+    position: absolute;
+    display: inline-block;
+    width: $slide-width;
+    min-height: $slide-height;
+    padding: $small-padding;
+    background: $dark-background;
+  }
+  /*
+    Slider Controls
+  */
   #bwi-slider-controls {
     opacity: 0.5;
     color:$light-text;
@@ -58,17 +101,10 @@ html {
       left:0;
     }
   }
-
-  .blurb *, .blurb {
-    color: $light-text;
-  }
-  .bwi-button-text {
-    position: relative;
-    padding-top: ($container-height /2) - ($button-font-size / 2);
-    display: block;
-    text-align: center;
-  }
-
+  /*
+    Slide Specific Controls
+  */
+  // Parse Slide
   #ajax-parse-button {
     position: relative;
     display: block;
@@ -84,46 +120,13 @@ html {
   #ajax-parse-button:hover {
     background: $doc-markup;
   }
-  .buffer {
-    padding-bottom: $small-padding;
-  }
 
-  .blocker {
-    background: $dark-background;
-  }
-
+  // File Upload Slide
   #AjaxFileUpload {
     h1, h2, h3, p {
       color: $light-text;
     }
   }
-
-  #bwi-hidden-pannels {
-    position: absolute;
-    left: -100000px;
-    overflow: hidden;
-  }
-  #bwi-slide-magazine {
-    position: relative;
-    height: 48rem +(2 *$small-padding);
-    width: 100000rem;
-  }
-  #bwi-slide-window {
-    margin-left: auto;
-    margin-right: auto;
-    width: $slide-window-width;
-    height: $slide-window-height;
-    overflow: hidden;
-  }
-  .bwi-slide-wrapper {
-    position: absolute;
-    display: inline-block;
-    width: $slide-width;
-    min-height: $slide-height;
-    padding: $small-padding;
-    background: $dark-background;
-  }
-
   #progress-box {
     position: relative;
     margin-top: 120px;

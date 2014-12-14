@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Andrew Monteith
+ * Silence is Golden
+ */
 function bakeInPhpUploadLimits()
 {
     /*
