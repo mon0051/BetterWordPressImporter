@@ -51,13 +51,14 @@ global $bwi_plugin_folder_url;
                     if (fsize > max_upload_size) {
                         var max_upload_size_readable = max_upload_size / mb;
                         alert(
-                            "<p><b>" + fsize + "</b> is over your servers file upload size limit (" + max_upload_size + " bytes ).</p>" +
+                            "<p><b>" + fsize + "</b> is over your servers file upload size limit (" + max_upload_size_readable + " bytes ).</p>" +
                             "<p>You may need to contact your host about raising this limit.</p>");
                         return false;
                     }
                     if (fsize > post_max_size) {
+                        var max_post_size_readable = post_max_size / mb;
                         alert(
-                            "<p><b>" + fsize + "</b> is over your servers file upload size limit (" + post_max_size + " bytes ).</p>" +
+                            "<p><b>" + fsize + "</b> is over your servers file upload size limit (" + max_post_size_readable + " bytes ).</p>" +
                             "<p>You may need to contact your host about raising this limit.</p>");
                         return false;
                     }
