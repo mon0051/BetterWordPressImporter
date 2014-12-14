@@ -1,0 +1,156 @@
+$dark-background: #1e1e1e;
+$dark-border: #3e3e3e;
+$light-text: #ccc;
+$keyword: #569cd6;
+$string: #d69d85;
+$number: #b5cea8;
+$comment: #57a64a;
+$doc-comment: #0088ff;
+$doc-param: #22aaff;
+$doc-markup: #569cd6;
+$class: #4ec9b0;
+$small-padding: 2rem;
+$tiny-padding:0.25rem;
+$button-font-size:2rem;
+$container-height:3.3rem;
+$slide-width:64rem;
+$slide-window-width:$slide-width+(2 *$small-padding);
+$slide-height:48rem;
+$slide-window-height:48rem+(2 *$small-padding);
+/*
+    General Plugin Styles
+ */
+html {
+  font-size: 10px;
+  body .better-wordpress-importer-better-wordpress-importer-admin-php {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  }
+
+  #bwi-slider-controls {
+    opacity: 0.5;
+    color:$light-text;
+    width:$slide-width;
+    display: block;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: $container-height;
+    top:-$container-height - $tiny-padding;
+    text-align: center;
+    div {
+      position: absolute;
+      display: inline-block;
+    }
+    #bwi-page-selector{
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      *{
+        position: relative;
+        padding-left: $tiny-padding;
+        padding-right: $tiny-padding;
+      }
+    }
+    #bwi-slider-right-button{
+      right:0;
+    }
+    #bwi-slider-left-button{
+      left:0;
+    }
+  }
+
+  .blurb *, .blurb {
+    color: $light-text;
+  }
+  .bwi-button-text {
+    position: relative;
+    padding-top: ($container-height /2) - ($button-font-size / 2);
+    display: block;
+    text-align: center;
+  }
+
+  #ajax-parse-button {
+    position: relative;
+    display: block;
+    min-width: 12rem;
+    min-height: $container-height;
+    width: 20%;
+    background: $doc-comment;
+    border: 2px solid $light-text;
+    color: $light-text;
+    font-size: $button-font-size;
+
+  }
+  #ajax-parse-button:hover {
+    background: $doc-markup;
+  }
+  .buffer {
+    padding-bottom: $small-padding;
+  }
+
+  .blocker {
+    background: $dark-background;
+  }
+
+  #AjaxFileUpload {
+    h1, h2, h3, p {
+      color: $light-text;
+    }
+  }
+
+  #bwi-hidden-pannels {
+    position: absolute;
+    left: -100000px;
+    overflow: hidden;
+  }
+  #bwi-slide-magazine {
+    position: relative;
+    height: 48rem +(2 *$small-padding);
+    width: 100000rem;
+  }
+  #bwi-slide-window {
+    margin-left: auto;
+    margin-right: auto;
+    width: $slide-window-width;
+    height: $slide-window-height;
+    overflow: hidden;
+  }
+  .bwi-slide-wrapper {
+    position: absolute;
+    display: inline-block;
+    width: $slide-width;
+    min-height: $slide-height;
+    padding: $small-padding;
+    background: $dark-background;
+  }
+
+  #progress-box {
+    position: relative;
+    margin-top: 120px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid $dark-border;
+    height: $container-height;
+    background: $dark-background;
+    color: $light-text;
+  }
+
+  #progress-bar {
+    background: $doc-param;
+    height: 100%;
+    min-height: $container-height;
+    width: 0;
+  }
+
+  #status-txt {
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    color: $light-text;
+  }
+
+  #output {
+    min-height: 1rem;
+  }
+}

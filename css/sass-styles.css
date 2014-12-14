@@ -1,0 +1,101 @@
+/*
+    General Plugin Styles
+ */
+html {
+  font-size: 10px; }
+  html body .better-wordpress-importer-better-wordpress-importer-admin-php {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif; }
+  html #bwi-slider-controls {
+    opacity: 0.5;
+    color: #cccccc;
+    width: 64rem;
+    display: block;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 3.3rem;
+    top: -3.55rem;
+    text-align: center; }
+    html #bwi-slider-controls div {
+      position: absolute;
+      display: inline-block; }
+    html #bwi-slider-controls #bwi-page-selector {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto; }
+      html #bwi-slider-controls #bwi-page-selector * {
+        position: relative;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem; }
+    html #bwi-slider-controls #bwi-slider-right-button {
+      right: 0; }
+    html #bwi-slider-controls #bwi-slider-left-button {
+      left: 0; }
+  html .blurb *, html .blurb {
+    color: #cccccc; }
+  html .bwi-button-text {
+    position: relative;
+    padding-top: 0.65rem;
+    display: block;
+    text-align: center; }
+  html #ajax-parse-button {
+    position: relative;
+    display: block;
+    min-width: 12rem;
+    min-height: 3.3rem;
+    width: 20%;
+    background: #0088ff;
+    border: 2px solid #cccccc;
+    color: #cccccc;
+    font-size: 2rem; }
+  html #ajax-parse-button:hover {
+    background: #569cd6; }
+  html .buffer {
+    padding-bottom: 2rem; }
+  html .blocker {
+    background: #1e1e1e; }
+  html #AjaxFileUpload h1, html #AjaxFileUpload h2, html #AjaxFileUpload h3, html #AjaxFileUpload p {
+    color: #cccccc; }
+  html #bwi-hidden-pannels {
+    position: absolute;
+    left: -100000px;
+    overflow: hidden; }
+  html #bwi-slide-magazine {
+    position: relative;
+    height: 52rem;
+    width: 100000rem; }
+  html #bwi-slide-window {
+    margin-left: auto;
+    margin-right: auto;
+    width: 68rem;
+    height: 52rem;
+    overflow: hidden; }
+  html .bwi-slide-wrapper {
+    position: absolute;
+    display: inline-block;
+    width: 64rem;
+    min-height: 48rem;
+    padding: 2rem;
+    background: #1e1e1e; }
+  html #progress-box {
+    position: relative;
+    margin-top: 120px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #3e3e3e;
+    height: 3.3rem;
+    background: #1e1e1e;
+    color: #cccccc; }
+  html #progress-bar {
+    background: #22aaff;
+    height: 100%;
+    min-height: 3.3rem;
+    width: 0; }
+  html #status-txt {
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    color: #cccccc; }
+  html #output {
+    min-height: 1rem; }
