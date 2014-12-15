@@ -21,5 +21,4 @@
     </div>
     <div id="author_container">
     </div>
-
 </div>
