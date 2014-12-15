@@ -2,6 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 14/12/14 6:34 AM
+ * @package panels
  */ ?>
 
 <div class="bwi-panel-header">
@@ -32,10 +33,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    // This line of code just shuts my inspection tools up about not finding jQuery
-    // which it can't find due to it being a dynamic inclusion I will remove it in
-    // the final version
-    jQuery = jQuery;
     var session_check_response = "";
     var bwi_session_check_first = true;
     function check_session() {
@@ -55,7 +52,6 @@
                 jQuery('#bwi_no_session_found').toggleClass('bwi-hidden', true);
                 jQuery('#bwi_session_found').toggleClass("bwi-hidden", false);
             }
-
         });
     }
     jQuery(document).ready(function () {
@@ -64,6 +60,7 @@
     jQuery('#bwi_start_new').click(function () {
         var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
         jQuery.ajax({url: ajax_file_url, data: {action: "delete_session"}}).done(function () {
+            bwi_session_check_first = false;
             check_session();
         });
         slideLeft();

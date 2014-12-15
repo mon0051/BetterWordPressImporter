@@ -2,7 +2,9 @@
 /**
  * Author: Andrew Monteith
  * Date: 12/12/14 1:18 PM
- */ ?>
+ * @package panels
+ */
+?>
 
 <div class="blurb">
     <h1>We found some authors attached to the posts!</h1>
@@ -21,3 +23,9 @@
 </div>
 <div id="author_container">
 </div>
+<script>
+
+    jQuery('#import_authors').on("slideFocused" , function(){
+        jQuery('#ajax-parse-return').appendTo("author_container");
+    });
+</script>

@@ -2,6 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 11/12/14 10:08 AM
+ * @package panels
  */
 
 ?>
@@ -22,10 +23,7 @@
 </div>
 <div id="ajax-parse-return" class="ajax-return-value"></div>
 <script type="text/javascript">
-    // This line of code just shuts my inspection tools up about not finding jQuery
-    // which it can't find due to it being a dynamic inclusion I will remove it in
-    // the final version
-    jQuery = jQuery;
+
     function bwi_local_parse() {
         var parse_button = jQuery('#ajax-parse-button');
         parse_button.children(".bwi-button-text").text("Parsing ...");

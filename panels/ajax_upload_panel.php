@@ -2,6 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14
+ * @package panels
  */
 /*
  * Unfortunately the JavaScript for this can't be enqueued as normal
@@ -19,10 +20,7 @@ global $bwi_plugin_folder_url;
 ?>
 
 <script type="text/javascript">
-    // This line of code just shuts my inspection tools up about not finding jQuery
-    // which it can't find due to it being a dynamic inclusion I will remove it in
-    // the final version
-    jQuery = jQuery;
+
     jQuery(document).ready(function ($) {
         var options = {
             target: '#output',   // target element(s) to be updated with server response
@@ -73,7 +71,9 @@ global $bwi_plugin_folder_url;
                     "<p>This Web Browser does not support some features this plugin requires.</p>" +
                     "<p>Try the latest version of Chrome or Firefox :)</p>"
                 );
+                return false;
             }
+            return true;
         }
 
         //noinspection JSUnusedLocalSymbols

@@ -2,6 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 14/12/14 6:59 AM
+ * @package panels
  */
 
 class PanelController {

@@ -2,6 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14 2:41 AM
+ * @package panels
  */
 require_once 'PanelController.php';
 $panelController = new PanelController();
@@ -10,10 +11,7 @@ $panelController = new PanelController();
 <div class="buffer"></div>
 <!-- This Script controls the slider that displays the panels -->
 <script type="text/javascript">
-    // This line of code just shuts my inspection tools up about not finding jQuery
-    // which it can't find due to it being a dynamic inclusion I will remove it in
-    // the final version
-    jQuery = jQuery;
+
     // This code is very fast, no need for it to be in footer
     var slideWidth = 680;
     var bwi_active_slide = 0;
