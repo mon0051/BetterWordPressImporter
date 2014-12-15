@@ -22,6 +22,10 @@
 </div>
 <div id="ajax-parse-return" class="ajax-return-value"></div>
 <script type="text/javascript">
+    // This line of code just shuts my inspection tools up about not finding jQuery
+    // which it can't find due to it being a dynamic inclusion I will remove it in
+    // the final version
+    jQuery = jQuery;
     function bwi_local_parse() {
         var parse_button = jQuery('#ajax-parse-button');
         parse_button.children(".bwi-button-text").text("Parsing ...");
@@ -35,7 +39,12 @@
             return_val.appendTo('#ajax-return-values');
             parse_button.children(".bwi-button-text").text("Done");
             slideLeft();
-            //parse_button.click(function (){return false;});
         });
     }
+    jQuery("#ajax-parse-button").click(function(){
+        bwi_local_parse();
+    });
+    jQuery("#parse_xml").on("slideFocused",function(){
+        bwi_local_parse();
+    });
 </script>

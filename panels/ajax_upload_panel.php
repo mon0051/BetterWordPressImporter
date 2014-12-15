@@ -19,6 +19,10 @@ global $bwi_plugin_folder_url;
 ?>
 
 <script type="text/javascript">
+    // This line of code just shuts my inspection tools up about not finding jQuery
+    // which it can't find due to it being a dynamic inclusion I will remove it in
+    // the final version
+    jQuery = jQuery;
     jQuery(document).ready(function ($) {
         var options = {
             target: '#output',   // target element(s) to be updated with server response
@@ -72,6 +76,7 @@ global $bwi_plugin_folder_url;
             }
         }
 
+        //noinspection JSUnusedLocalSymbols
         function OnProgress(event, position, total, percentComplete) {
             // Update Progress Bar
             var progress_box = $('#progress-box');
@@ -86,6 +91,7 @@ global $bwi_plugin_folder_url;
             $('#progress-box').delay(1000).fadeOut(); //hide progress bar
             $('#serverside-filename').prependTo('#ajax-return-values');
             slideLeft();
+
         }
     });
 </script>

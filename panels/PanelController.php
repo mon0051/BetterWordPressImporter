@@ -26,6 +26,7 @@ class PanelController {
         $panel_id = 'id="' . $matchs[1] .'"';
         $panel_number = 'data_position="' . $this->panel_count .'"';
         echo "<div class=\"bwi-slide-wrapper\" $panel_id $panel_number>";
+        /** @noinspection PhpIncludeInspection */
         include $panel_name;
         echo "</div>";
         $this->panel_count += 1;
