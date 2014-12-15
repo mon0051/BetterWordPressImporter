@@ -6,12 +6,7 @@
  */
 
 
-/**
- * WXR Parser that uses regular expressions. The other methods that were implemented here failed most of the time,
- * then fell back to regex anyway, resulting in a performance loss.
- * This method is the most reliable and given that even with enormous amounts of data this still executes
- * quite quickly, i choose to forsake the more efficient but less reliable methods entirely.
- */
+
 class WXR_Parser {
     /**
      * @param $file

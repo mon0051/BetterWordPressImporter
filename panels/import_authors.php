@@ -7,25 +7,27 @@
 ?>
 
 <div class="blurb">
-    <h1>We found some authors attached to the posts!</h1>
-
-    <p>
-        The posts that you are importing already have some authors attached to them.
-        This is normal, but because they were exported from another WordPress site, the server can't
-        tell if they are related to authors on this WordPress site, or if they are new authors.
-    </p>
-
-    <p>
-        So what we need to do now is to choose how to deal with these authors.
-        By default, they will be imported as new WordPress users, but you can choose to
-        associate the users with a local WordPress user instead.
-    </p>
+    <h1>Import Authors</h1>
 </div>
-<div id="author_container">
-</div>
+<div id="bwi_re-read_authors" class="bwi-button"><div class="bwi-button-text">Re-Read Authors</div></div>
+<form id="author_container">
+</form>
 <script>
+    var ajax_file_url = "";
+    ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
+    function import_authors(){
+        jQuery.ajax({url: ajax_file_url, data: {action:'read_authors'}}).done(function(response) {
+            var author_container = jQuery('#author_container');
+            author_container.children(".author_wrapper").remove();
+            author_container.append(response);
+        });
+    }
 
     jQuery('#import_authors').on("slideFocused" , function(){
-        jQuery('#ajax-parse-return').appendTo("author_container");
+        import_authors();
     });
+    jQuery('#bwi_re-read_authors').click(function(){
+        import_authors();
+    });
+
 </script>

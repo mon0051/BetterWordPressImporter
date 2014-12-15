@@ -91,6 +91,9 @@ $panelController = new PanelController();
         var jquery_selector = "#"+slideId;
         var panel_position = jQuery(jquery_selector).attr('data_position');
         bwi_jump_to_slide(panel_position);
+        var magazine = jQuery('#bwi-slide-magazine');
+        jquery_selector = "[data_position=" + bwi_active_slide +"]";
+        magazine.children(jquery_selector).trigger("slideFocused");
     }
 </script>
 <div id="bwi-panel-wrapper">

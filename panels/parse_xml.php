@@ -29,9 +29,9 @@
         parse_button.children(".bwi-button-text").text("Parsing ...");
         //noinspection JSUnusedAssignment
         var ajax_file_url = "";
-        ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/ajax-xml-parse.php"?>";
+        ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
         var serverside_filename = jQuery('#serverside-filename').text();
-        jQuery.ajax({url: ajax_file_url, data: {filename: serverside_filename}}).done(function (html) {
+        jQuery.ajax({url: ajax_file_url, data: {filename: serverside_filename,action:'parse_xml'}}).done(function (html) {
             var return_val = jQuery('#ajax-parse-return');
             return_val.append(html);
             return_val.appendTo('#ajax-return-values');

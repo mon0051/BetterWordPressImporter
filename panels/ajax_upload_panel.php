@@ -24,6 +24,7 @@ global $bwi_plugin_folder_url;
     jQuery(document).ready(function ($) {
         var options = {
             target: '#output',   // target element(s) to be updated with server response
+            action: 'processUpload',
             beforeSubmit: beforeSubmit,  // pre-submit callback
             success: afterSuccess,  // post-submit callback
             uploadProgress: OnProgress, //upload progress callback
@@ -91,11 +92,10 @@ global $bwi_plugin_folder_url;
             $('#progress-box').delay(1000).fadeOut(); //hide progress bar
             $('#serverside-filename').prependTo('#ajax-return-values');
             slideLeft();
-
         }
     });
 </script>
-<form action="<?php echo $bwi_plugin_folder_url ?>ajax/processupload.php" id="AjaxFileUpload" method="POST"
+<form action="<?php echo $bwi_plugin_folder_url ?>ajax/bwi_ajax.php" id="AjaxFileUpload" method="POST"
       enctype="multipart/form-data">
     <h2>Select File To Import</h2>
 

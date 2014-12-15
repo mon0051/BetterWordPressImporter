@@ -18,7 +18,7 @@
         <p>A previous session was found, do you want to continue with this import, or start a new import?</p>
 
         <div id="bwi_start_new" class="bwi-button">
-            <div class="bwi-button-text">Start New</div>
+            <div class="bwi-button-text">New Import</div>
         </div>
         <div id="bwi_resume" class="bwi-button">
             <div class="bwi-button-text">Resume</div>
@@ -36,7 +36,7 @@
     var session_check_response = "";
     var bwi_session_check_first = true;
     function check_session() {
-        var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
+        var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
 
         jQuery.ajax({url: ajax_file_url, data: {action: "first_contact"}}).done(function (html) {
             session_check_response = html;
@@ -47,10 +47,13 @@
                 if(bwi_session_check_first){
                     bwi_session_check_first = false;
                     slideLeft();
+                }else{
+                    jQuery('#bwi_start_new').appendTo('#bwi_no_session_found');
                 }
             } else {
                 jQuery('#bwi_no_session_found').toggleClass('bwi-hidden', true);
                 jQuery('#bwi_session_found').toggleClass("bwi-hidden", false);
+                jQuery('#bwi_start_new').appendTo('#bwi_session_found');
             }
         });
     }
