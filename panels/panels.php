@@ -4,6 +4,7 @@
  * Date: 13/11/14 2:41 AM
  */
 require_once 'PanelController.php';
+$panelController = new PanelController();
 ?>
 <div id="ajax-return-values" class="bwi-hidden"></div>
 <div class="buffer"></div>
@@ -68,15 +69,15 @@ require_once 'PanelController.php';
         return false;
     }
 </script>
-<?php $panelConroller = new PanelController(); ?>
+
 <div id="bwi-panel-wrapper">
     <div id="bwi-slide-window">
         <div id="bwi-slide-magazine">
             <?php
-            $panelConroller->add_panel('check_session.php');
-            $panelConroller->add_panel('ajax_upload_panel.php');
-            $panelConroller->add_panel('parse_xml.php');
-            $panelConroller->add_panel('import_authors.php');
+            $panelController->add_panel('check_session.php');
+            $panelController->add_panel('ajax_upload_panel.php');
+            $panelController->add_panel('parse_xml.php');
+            $panelController->add_panel('import_authors.php');
             ?>
         </div>
     </div>

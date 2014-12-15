@@ -99,8 +99,6 @@ global $bwi_plugin_folder_url;
         </div>
         <div id="upload-button-wrapper"><input type="submit" id="submit-btn" value="Upload"></div>
     </form>
-
     <div id="output"></div>
-
 </div>
 
