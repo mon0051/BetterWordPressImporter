@@ -51,6 +51,7 @@ class BigUpload {
     /**
      * Set the name of the temporary directory
      * @param string $value Temporary directory
+     * @return true if successful
      */
     public function setTempDirectory($value) {
         $this->tempDirectory = $value;
@@ -132,7 +133,7 @@ class BigUpload {
 
     /**
      * Function to rename and move the finished file
-     * @param  string $final_name Name to rename the finished upload to
+     * @param final_name string to rename the finished upload to
      * @return string JSON object with result of rename
      */
     public function finishUpload($finalName) {
@@ -157,7 +158,7 @@ class BigUpload {
      */
     public function postUnsupported() {
         $name = $_FILES['bigUploadFile']['name'];
-        $size = $_FILES['bigUploadFile']['size'];
+        //$size = $_FILES['bigUploadFile']['size'];
         $tempName = $_FILES['bigUploadFile']['tmp_name'];
 
         if(filesize($tempName) > self::MAX_SIZE) {

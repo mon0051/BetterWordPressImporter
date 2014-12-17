@@ -136,8 +136,7 @@ class AjaxHandler
         // filename is an absolute path to the location of the xml file uploaded
 
         $filename = $uploadPath . $_SESSION['bwi-uploadFilename'];
-        // Initialise arrays to store data
-        $authors = $posts = $terms = $categories = $tags = $results = array();
+
         // Create the WXR_Parser object that will handle the file, die() if file not valid
         $ajax_parser = new WXR_Parser();
         if (!is_file($filename)) {
@@ -159,7 +158,7 @@ class AjaxHandler
 
     private static function read_authors(){
         
-        $authors = array();
+
         $authors = $_SESSION['bwi_results']['authors'];
         foreach ($authors as $author) {
             echo "<div class=\"author_wrapper\">" . "<div class=\"author_login\">" . $author['author_login'] ."</div></div>";

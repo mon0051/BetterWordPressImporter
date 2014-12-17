@@ -1,4 +1,6 @@
+
 function BigUpload () {
+
 	//These are the main config variables and should be able to take care of most of the customization
 	this.settings = {
 		'inputField': 'bigUploadFile',
@@ -12,6 +14,7 @@ function BigUpload () {
 		'scriptPathParams': '',
 		'chunkSize': 1000000,
 		'maxFileSize': 2147483648
+
 	};
 	//Upload specific variables
 	this.uploadData = {
@@ -27,8 +30,13 @@ function BigUpload () {
 	};
 	//Success callback
 	this.success = function(response) {
-		safeLog("upload done");
-		bwi_slideLeft();
+		panelSlider = typeof panelSlider !== 'undefined' ? panelSlider : false;
+		panelSlider.safeLog("Ajax completed with response "+response);
+		if(panelSlider === false){
+			alert('panelSlider not defined, this usually means that a required script (PanelSlider.js) has not been included in the header.');
+		}
+		panelSlider.safeLog("upload done");
+		panelSlider.bwi_jumpToSlideWithId('parse_xml');
 		jQuery('#upload-button-wrapper').addClass('bwi-hidden');
 	};
 	parent = this;

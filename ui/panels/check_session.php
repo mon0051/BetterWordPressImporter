@@ -46,7 +46,7 @@
                 jQuery('#bwi_session_found').toggleClass("bwi-hidden", true);
                 if(bwi_session_check_first){
                     bwi_session_check_first = false;
-                    slideLeft();
+                    panelSlider.bwi_slideLeft();
                 }else{
                     jQuery('#bwi_start_new').appendTo('#bwi_no_session_found');
                 }
@@ -66,13 +66,13 @@
             bwi_session_check_first = false;
             check_session();
         });
-        slideLeft();
+        panelSlider.bwi_slideLeft();
     });
     jQuery('#bwi_retry_session').click(function () {
         check_session();
     });
     jQuery('#bwi_resume').click(function() {
-        jumpToSlideWithId("import_authors");
+        panelSlider.bwi_jumpToSlideWithId("import_authors",true);
     });
 </script>
 

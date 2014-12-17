@@ -26,6 +26,7 @@
 
     function bwi_local_parse() {
         var parse_button = jQuery('#ajax-parse-button');
+        //noinspection JSCheckFunctionSignatures
         parse_button.children(".bwi-button-text").text("Parsing ...");
         //noinspection JSUnusedAssignment
         var ajax_file_url = "";
@@ -35,8 +36,9 @@
             var return_val = jQuery('#ajax-parse-return');
             return_val.append(html);
             return_val.appendTo('#ajax-return-values');
+            //noinspection JSCheckFunctionSignatures
             parse_button.children(".bwi-button-text").text("Done");
-            slideLeft();
+            panelSlider.bwi_jumpToSlideWithId('import_authors',true);
         });
     }
     jQuery("#ajax-parse-button").click(function(){

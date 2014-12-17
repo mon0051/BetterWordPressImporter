@@ -24,6 +24,7 @@
     ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
     function import_authors() {
         var reload_authors = jQuery("#bwi_reload_authors").children(".bwi-button-text");
+        //noinspection JSCheckFunctionSignatures
         reload_authors.text("loading...");
         jQuery.ajax({url: ajax_file_url, data: {action: 'read_authors'}}).done(function (response) {
             var author_container = jQuery('#author_container');
@@ -35,6 +36,7 @@
                 var author_input_element = "<input type=\"text\" class=\"bwi-text-input\"" + name + " >";
                 jQuery(this).append(author_input_element);
             });
+            //noinspection JSCheckFunctionSignatures
             reload_authors.text('Refresh');
         });
     }

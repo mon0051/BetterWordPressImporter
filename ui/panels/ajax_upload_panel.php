@@ -25,15 +25,16 @@ global $bwi_plugin_folder_url;
     <?php bakeInPhpUploadLimits(); ?>
     function upload() {
 
-        safeLog("called upload");
+        panelSlider.safeLog("called upload");
         bigUpload.fire();
     }
     function abort() {
-        safeLog("called abort");
+        panelSlider.safeLog("called abort");
         bigUpload.abortFileUpload();
     }
     function OnProgress(event, position, total, percentComplete) {
         // Update Progress Bar
+        panelSlider.safeLog(event+position+total);
         var progress_box = jQuery('#chunk-progress-box');
         progress_box.show();
         progress_box.find('#chunk-progress-bar').width(percentComplete + '%');
