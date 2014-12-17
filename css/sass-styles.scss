@@ -16,6 +16,7 @@ $class: #4ec9b0;
 *   Standard Sizes
 ***************************************************************/
 $small-padding: 2rem;
+$half-text-padding:0.5rem;
 $tiny-padding:0.25rem;
 $button-font-size:2rem;
 $container-height:3.3rem;
@@ -170,13 +171,38 @@ html {
   }
   #progress-bar {
     background: $doc-param;
-    height: 100%;
-    min-height: $container-height;
+    height: $container-height - $half-text-padding;
     width: 0;
+    text-align: center;
+    padding-top:$half-text-padding;
   }
   #status-txt {
     position: absolute;
-    top: 0.5em;
+    top: $half-text-padding;
+    left: 50%;
+    color: $light-text;
+  }
+  #chunk-progress-box {
+    position: relative;
+    margin-top: 120px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid $dark-border;
+    height: $container-height;
+    background: $dark-background;
+    color: $light-text;
+  }
+  #chunk-progress-bar {
+    background: $doc-param;
+    height: $container-height - $half-text-padding;
+    width: 0;
+    text-align: center;
+    padding-top:$half-text-padding;
+  }
+  #chunk-status-txt {
+    position: absolute;
+    top: $half-text-padding;
     left: 50%;
     color: $light-text;
   }

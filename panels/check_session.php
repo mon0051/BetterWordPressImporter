@@ -61,7 +61,7 @@
         check_session();
     });
     jQuery('#bwi_start_new').click(function () {
-        var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/session_check.php"?>";
+        var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
         jQuery.ajax({url: ajax_file_url, data: {action: "delete_session"}}).done(function () {
             bwi_session_check_first = false;
             check_session();

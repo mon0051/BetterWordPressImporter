@@ -24,23 +24,31 @@ function bakeInPhpUploadLimits()
          * or megabytes. The section below will convert the number
          * if this is the case.
          */
+        $smallest_value = $megabyte *100;
         foreach ($size_checks as $check_name => $check_value) {
             $last_letter = strtolower(substr($check_value, -1));
             if ($last_letter == "m") {
-                $$check_value = substr($check_value, 0, -1);
+                $check_value = substr($check_value, 0, -1);
                 $i_max = floatval($check_value);
                 $i_max = $i_max * $megabyte;
-                $check_value = $i_max;
+                // Leaving 10kb for headers etc
+                $check_value = $i_max -($kilobyte *10);
             }
             if ($last_letter == "k") {
                 $check_value = substr($check_value, 0, -1);
                 $i_max = floatval($check_value);
                 $i_max = $i_max * $kilobyte;
-                $check_value = $i_max;
+                // Leaving 10kb for headers etc
+                $check_value = $i_max - ($kilobyte *10);
             }
-            echo "var " . $check_name . "=" . $check_value . ";" . PHP_EOL;
+            if($check_value < $smallest_value){
+
+                $smallest_value = $check_value;
+            }
+
 
         }
+        echo 'bigUpload.settings[\'chunkSize\'] =' . $smallest_value . ";" . PHP_EOL;
         // Now we update the script to use the correct upload_max_size value
 
     } catch (exception $e) {

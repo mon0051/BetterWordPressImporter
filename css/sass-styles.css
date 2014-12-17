@@ -123,12 +123,34 @@ html {
     color: #cccccc; }
   html #progress-bar {
     background: #22aaff;
-    height: 100%;
-    min-height: 3.3rem;
-    width: 0; }
+    height: 2.8rem;
+    width: 0;
+    text-align: center;
+    padding-top: 0.5rem; }
   html #status-txt {
     position: absolute;
-    top: 0.5em;
+    top: 0.5rem;
+    left: 50%;
+    color: #cccccc; }
+  html #chunk-progress-box {
+    position: relative;
+    margin-top: 120px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #3e3e3e;
+    height: 3.3rem;
+    background: #1e1e1e;
+    color: #cccccc; }
+  html #chunk-progress-bar {
+    background: #22aaff;
+    height: 2.8rem;
+    width: 0;
+    text-align: center;
+    padding-top: 0.5rem; }
+  html #chunk-status-txt {
+    position: absolute;
+    top: 0.5rem;
     left: 50%;
     color: #cccccc; }
   html #output {

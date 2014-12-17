@@ -11,7 +11,6 @@ $panelController = new PanelController();
 <div class="buffer"></div>
 <!-- This Script controls the slider that displays the panels -->
 <script type="text/javascript">
-
     // This code is very fast, no need for it to be in footer
     var slideWidth = 680;
     var bwi_active_slide = 0;
@@ -38,7 +37,7 @@ $panelController = new PanelController();
     function bwi_jump_to_slide(slide_number){
         safeLog("bwi_jump_to_slide "+slide_number);
         var slide_offset = slide_number - bwi_active_slide;
-        if (slide_offset == 0) {
+        if (slide_offset === 0) {
             return true;
         }
         if(slide_number > bwi_slide_count || slide_number < 0) {

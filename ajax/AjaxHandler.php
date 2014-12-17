@@ -5,6 +5,7 @@
  */
 require_once 'ajax_authenticate.php';
 require_once 'parser.php';
+require_once 'BigUpload.php';
 
 /**
  * Class AjaxHandler
@@ -12,71 +13,98 @@ require_once 'parser.php';
  */
 class AjaxHandler
 {
-    private static $BWIUploadDirectory = "/var/www/html/wordpress/wp-content/uploads/2014/";
-
     public static function doAction()
     {
-        if (isset($_FILES["FileInput"]) && $_FILES["FileInput"]["error"] == UPLOAD_ERR_OK) {
-            AjaxHandler::processUpload();
-            return;
-        } elseif (isset($_GET['action']) && $_GET['action'] == "first_contact") {
-            AjaxHandler::check_session();
-            return;
-        } elseif (isset($_GET['action']) && $_GET['action'] == "delete_session") {
-            AjaxHandler::delete_session();
-            return;
-        } elseif (isset($_GET['action']) && $_GET['action'] == 'parse_xml') {
-            AjaxHandler::parse_xml();
-        } elseif (isset($_GET['action']) && $_GET['action'] == 'read_authors'){
-            AjaxHandler::read_authors();
-        }
-
-    }
-
-    private static function processUpload()
-    {
-        // Validate FileSize ServerSide
-        $max_up = ini_get('upload_max_filesize');
-        // Sometimes the max upload size is specified in kilobytes or megabytes. The section below will convert the number
-        // if this is the case.
-        $last_letter = strtolower(substr($max_up, -1));
-        if ($last_letter == "m") {
-            $max_up = substr($max_up, 0, -1);
-            $i_max_up = floatval($max_up);
-            $i_max_up = $i_max_up * 1048576;
-            $max_up = $i_max_up;
-        }
-        if ($last_letter == "k") {
-            $max_up = substr($max_up, 0, -1);
-            $i_max_up = floatval($max_up);
-            $i_max_up = $i_max_up * 1024;
-            $max_up = $i_max_up;
-        }
-        if ($_FILES['FileInput']['size'] > $max_up) {
-            echo "File to Big";
-            die('File to large');
-        }
-        $File_Name = strtolower($_FILES["FileInput"]["name"]);
-        $File_Ext = substr($File_Name, strrpos($File_Name, '.'));
-        $Random_Number = rand(0, 999999999);
-        $NewFileName = $File_Name . "_" . $Random_Number . $File_Ext;
-        if (move_uploaded_file($_FILES['FileInput']['tmp_name'], AjaxHandler::$BWIUploadDirectory . $NewFileName)) {
-            echo "<div class=\"ajax-return-value\" id=\"serverside-filename\">" . AjaxHandler::$BWIUploadDirectory . $NewFileName . "</div>";
-            die('WordPress Export File Uploaded Successfully');
-        } else {
-            echo "Failed";
-            die('Upload Failed');
+        if (isset($_GET['action'])){
+            switch($_GET['action']){
+                case "first_contact":
+                    AjaxHandler::check_session();
+                    break;
+                case "delete_session":
+                    AjaxHandler::delete_session();
+                    break;
+                case "parse_xml":
+                    AjaxHandler::parse_xml();
+                    break;
+                case "read_authors":
+                    AjaxHandler::read_authors();
+                    break;
+                case "upload":
+                    AjaxHandler::bigUpload();
+                    break;
+                case "abort":
+                    AjaxHandler::bigUploadAbort();
+                    break;
+                case "finish":
+                    AjaxHandler::bigUploadFinish();
+                    break;
+                case 'post-unsupported':
+                    AjaxHandler::bigUploadUnsupported();
+                    break;
+            }
         }
     }
+    private static function bigUpload(){
+        $bigUpload = new BigUpload;
+        $tempName = null;
+        if(isset($_GET['key'])) {
+            $tempName = $_GET['key'];
+        }
+        if(isset($_POST['key'])) {
+            $tempName = $_POST['key'];
+        }
+        $bigUpload->setTempName($tempName);
+        print $bigUpload->uploadFile();
+    }
+    private static function bigUploadFinish(){
+        $bigUpload = new BigUpload;
+        $tempName = null;
+        if(isset($_GET['key'])) {
+            $tempName = $_GET['key'];
+        }
+        if(isset($_POST['key'])) {
+            $tempName = $_POST['key'];
+        }
+        $bigUpload->setTempName($tempName);
+        $_SESSION['bwi-uploadFilename'] = $_POST['name'];
+        print $bigUpload->finishUpload($_POST['name']);
+
+    }
+    private static function bigUploadUnsupported(){
+        $bigUpload = new BigUpload;
+        $tempName = null;
+        if(isset($_GET['key'])) {
+            $tempName = $_GET['key'];
+        }
+        if(isset($_POST['key'])) {
+            $tempName = $_POST['key'];
+        }
+        $bigUpload->setTempName($tempName);
+        print $bigUpload->postUnsupported();
+    }
+    private static function bigUploadAbort(){
+        //Instantiate the class
+        $bigUpload = new BigUpload;
+        $tempName = null;
+        if(isset($_GET['key'])) {
+            $tempName = $_GET['key'];
+        }
+        if(isset($_POST['key'])) {
+            $tempName = $_POST['key'];
+        }
+        $bigUpload->setTempName($tempName);
+        print $bigUpload->abortUpload();
+    }
+
 
     private static function check_session()
     {
         // If the bwi_result exists and is not empty
         if (isset($_SESSION['bwi_results']) && $_SESSION['bwi_results'] != array()) {
             // And if the bwi_result has a file associated with it
-            if (isset($_SESSION['bwi_results']['associated_filename'])) {
+            if (isset($_SESSION['bwi-uploadFilename']) && $_SESSION['bwi-uploadFilename'] != '') {
                 // return that filename
-                echo '<p>' . $_SESSION['bwi_results']['associated_filename'] . '</p>';
+                echo '<p>' . $_SESSION['bwi-uploadFilename'] . '</p>';
             }
         } else {
             echo "no_session";
@@ -86,13 +114,15 @@ class AjaxHandler
     private static function delete_session()
     {
         $_SESSION['bwi_results'] = array();
+        $_SESSION['bwi-uploadFilename']='';
         echo "session_deleted";
     }
 
     private static function parse_xml()
     {
-        if (!isset($_GET['filename'])) {
-            die("File Error");
+        if (!isset($_SESSION['bwi-uploadFilename'])|| $_SESSION['bwi-uploadFilename'] == '') {
+
+            die("Filename is not set, have you uploaded the file?");
         }
         // parser.php is the same parser used by the official WordPress Importer, with some
         // improvements to the robustness of the code.
@@ -102,22 +132,23 @@ class AjaxHandler
          *   It would be extreamly inefficient to add this data to the database every
          *   time it is updated, so it will only be added once compleated.
          */
-        $working_path = ABSPATH . 'wp-content/plugins/better-wordpress-importer/backup/';
+        $wp_uploads = wp_upload_dir();
+        $uploadPath = $wp_uploads['basedir'] . '/imports/';
         // filename is an absolute path to the location of the xml file uploaded
-        $filename = $_GET['filename'];
+
+        $filename = $uploadPath . $_SESSION['bwi-uploadFilename'];
         // Initialise arrays to store data
         $authors = $posts = $terms = $categories = $tags = $results = array();
         // Create the WXR_Parser object that will handle the file, die() if file not valid
         $ajax_parser = new WXR_Parser();
         if (!is_file($filename)) {
             echo $filename;
-            die("File Error");
+            die("File Error: File could not be opened");
         }
         try {
             $results = $ajax_parser->parse($filename);
             // Save results to SESSION variable that will be available to future AJAX requests
             $_SESSION['bwi_results'] = $results;
-            $_SESSION['bwi_results']['associated_filename'] = $_GET['filename'];
             $authors = $results['authors'];
             foreach ($authors as $author) {
                 echo "<div class=\"author_wrapper\">" . "<div class=\"author_login\">" . $author['author_login'] . "</div></div>";
@@ -128,6 +159,7 @@ class AjaxHandler
     }
 
     private static function read_authors(){
+        $authors = array();
         $authors = $_SESSION['bwi_results']['authors'];
         foreach ($authors as $author) {
             echo "<div class=\"author_wrapper\">" . "<div class=\"author_login\">" . $author['author_login']

@@ -17,10 +17,10 @@ function register_admin_menu()
 function bwi_scripts()
 {
     $bwi_plugin_folder_url = plugins_url() . '/better-wordpress-importer';
-    wp_register_script('jQueryFormPlugin', $bwi_plugin_folder_url . "/JavaScript/jquery.form.js", array('jquery'));
+    wp_register_script('bigUpload', $bwi_plugin_folder_url . "/JavaScript/bigUpload.js", array('jquery'));
     wp_register_style('bwistylesheet',$bwi_plugin_folder_url . "/css/sass-styles.css",array(),false,false);
     wp_register_style('bwi-font-awesome',$bwi_plugin_folder_url . '/css/font-awesome-4.2.0/css/font-awesome.css');
-    wp_enqueue_script('jQueryFormPlugin');
+    wp_enqueue_script('bigUpload');
     wp_enqueue_style('bwistylesheet');
     wp_enqueue_style('bwi-font-awesome');
 }
