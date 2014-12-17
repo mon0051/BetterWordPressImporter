@@ -24,6 +24,7 @@ global $bwi_plugin_folder_url;
     bigUpload.settings['scriptPath'] = "<?php echo $bwi_plugin_folder_url; ?>ajax/bwi_ajax.php";
     <?php bakeInPhpUploadLimits(); ?>
     function upload() {
+
         safeLog("called upload");
         bigUpload.fire();
     }

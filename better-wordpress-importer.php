@@ -2,10 +2,10 @@
 /*
 Plugin Name: Better Wordpress Importer
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
-Description: A brief description of the Plugin.
+Description: A more robust implementation of the WordPress importer
 Version: 1.0a
-Author: mon
-Author URI: http://URI_Of_The_Plugin_Author
+Author: Andrew Monteith
+Author URI: https://plus.google.com/u/0/105936864125151130411/about
 License: GPL2
 */
 add_action('admin_menu', 'register_admin_menu');

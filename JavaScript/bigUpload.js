@@ -2,53 +2,16 @@ function BigUpload () {
 
 	//These are the main config variables and should be able to take care of most of the customization
 	this.settings = {
-		//The id of the file input
 		'inputField': 'bigUploadFile',
-
-		//The id of the form with the file upload.
-		//This should be a valid html form (see index.html) so there is a fallback for unsupported browsers
 		'formId': 'AjaxFileUpload',
-
-		//The id of the progress bar
-		//Width of this element will change based on progress
-		//Content of this element will display a percentage
-		//See bigUpload.progressUpdate() to change this code
 		'progressBarField': 'progress-bar',
-		//The id of the time remaining field
-		//Content of this element will display the estimated time remaining for the upload
-		//See bigUpload.progressUpdate() to change this code
 		'timeRemainingField': 'timeRemaining',
-
-		//The id of the text response field
-		//Content of this element will display the response from the server on success or error
 		'responseField': 'bigUploadResponse',
-
-		//The id of the submit button
-		//This is then changed to become the pause/resume button based on the status of the upload
 		'submitButton': 'bigUploadSubmit',
-
-		//Color of the background of the progress bar
-		//This must also be defined in the progressBarField css, but it's used here to reset the color after an error
-		//Default: green
 		'progressBarColor': '#0088ff',
-
-		//Color of the background of the progress bar when an error is triggered
-		//Default: red
 		'progressBarColorError': '#da4f49',
-
-		//Path to the php script for handling the uploads
-		//'scriptPath': 'http://immarnahouse.com/wp-content/plugins/better-wordpress-importer/ajax/bwi_ajax.php',
-
-		//Additional URL variables to be passed to the script path
-		//ex: &foo=bar
 		'scriptPathParams': '',
-
-		//Size of chunks to upload (in bytes)
-		//Default: 1MB
 		'chunkSize': 1000000,
-
-		//Max file size allowed
-		//Default: 2GB
 		'maxFileSize': 2147483648
 	};
 
@@ -64,14 +27,12 @@ function BigUpload () {
 		'timeStart': 0,
 		'totalTime': 0
 	};
-
 	//Success callback
 	this.success = function(response) {
 		safeLog("upload done");
 		slideLeft();
 		jQuery('#upload-button-wrapper').addClass('bwi-hidden');
 	};
-
 	parent = this;
 
 	//Quick function for accessing objects
@@ -93,7 +54,6 @@ function BigUpload () {
 			'totalTime': 0
 		};
 	};
-
 	//Inital method called
 	//Determines whether to begin/pause/resume an upload based on whether or not one is already in progress
 	this.fire = function() {
@@ -112,9 +72,14 @@ function BigUpload () {
 	//Initial upload method
 	//Pulls the size of the file being uploaded and calculated the number of chunks, then calls the recursive upload method
 	this.processFiles = function() {
-
+		var upfile = this.$(this.settings.inputField).files[0];
+		if(!upfile.type.match('text/xml')){
+			alert("File is not a valid WordPress export File. Must be of type XML");
+			return;
+		}
 		//If the user is using an unsupported browser, the form just submits as a regular form
 		if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+
 			this.$(this.settings.formId).submit();
 			return;
 		}

@@ -6,10 +6,10 @@
 $wp_bootstrap = dirname(__FILE__) . '../../../../../wp-load.php';
 /** @noinspection PhpIncludeInspection */
 require_once $wp_bootstrap;
-$BWIUploadDirectory = "/var/www/html/wordpress/wp-content/uploads/2014/";
-//if( ! is_user_logged_in() ) {
-//    die("Must be logged in as admin, ensure that cookies are enabled.");
-//}
+
+if( ! is_user_logged_in() ) {
+    die("Must be logged in as admin, ensure that cookies are enabled.");
+}
 session_start();
 if(! isset($_SESSION['bwi_ajax'])){
     $_SESSION['bwi_ajax'] = array();
