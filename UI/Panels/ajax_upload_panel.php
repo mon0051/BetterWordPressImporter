@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14
- * @package ui
+ * @package UI
  */
 /*
  * Unfortunately the JavaScript for this can't be enqueued as normal

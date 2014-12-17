@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Silence is Golden
- * @package ui
+ * @package UI
  */
 function bakeInPhpUploadLimits()
 {

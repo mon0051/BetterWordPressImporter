@@ -2,23 +2,23 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14 2:41 AM
- * @package ui
+ * @package UI
  */
 require_once 'PanelController.php';
 $panelController = new PanelController();
 ?>
 <div id="ajax-return-values" class="bwi-hidden"></div>
 <div class="buffer"></div>
-<!-- This Script controls the slider that displays the ui -->
+<!-- This Script controls the slider that displays the UI -->
 
 <div id="bwi-panel-wrapper">
     <div id="bwi-slide-window">
         <div id="bwi-slide-magazine">
             <?php
-            $panelController->add_panel('panels/check_session.php');
-            $panelController->add_panel('panels/ajax_upload_panel.php');
-            $panelController->add_panel('panels/parse_xml.php');
-            $panelController->add_panel('panels/import_authors.php');
+            $panelController->add_panel('Panels/check_session.php');
+            $panelController->add_panel('Panels/ajax_upload_panel.php');
+            $panelController->add_panel('Panels/parse_xml.php');
+            $panelController->add_panel('Panels/import_authors.php');
             ?>
         </div>
     </div>
