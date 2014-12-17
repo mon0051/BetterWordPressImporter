@@ -35,9 +35,12 @@
 <script type="text/javascript">
     var session_check_response = "";
     var bwi_session_check_first = true;
+    /**
+     * Checks to see if a import session has already been started, and
+     * displays options to resume the session if that is the case.
+     */
     function check_session() {
         var ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
-
         jQuery.ajax({url: ajax_file_url, data: {action: "first_contact"}}).done(function (html) {
             session_check_response = html;
 
