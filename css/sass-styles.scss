@@ -209,4 +209,18 @@ html {
   #output {
     min-height: 1rem;
   }
+  /* Import Authors */
+  #author_container {
+    text-align: center;
+    padding-top:$small-padding ;
+  }
+  .bwi-text-input,.author_login{
+    display:inline-block;
+  }
+  .author_login {
+    color: $light-text;
+    min-width: 30%;
+    text-align: left;
+  }
+
 }

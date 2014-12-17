@@ -162,8 +162,7 @@ class AjaxHandler
         $authors = array();
         $authors = $_SESSION['bwi_results']['authors'];
         foreach ($authors as $author) {
-            echo "<div class=\"author_wrapper\">" . "<div class=\"author_login\">" . $author['author_login']
-                . "<input class=\"new_author_name\" type=\"text\" ></div></div>";
+            echo "<div class=\"author_wrapper\">" . "<div class=\"author_login\">" . $author['author_login'] ."</div></div>";
         }
     }
 

@@ -18,7 +18,8 @@ html {
   /***************************************************************
   *   Slide Specific Styles
   ***************************************************************/
-  /* File Upload Slide */ }
+  /* File Upload Slide */
+  /* Import Authors */ }
   html body .better-wordpress-importer-better-wordpress-importer-admin-php {
     font-family: "Open Sans", Helvetica, Arial, sans-serif; }
   html .blurb *, html .blurb {
@@ -155,3 +156,12 @@ html {
     color: #cccccc; }
   html #output {
     min-height: 1rem; }
+  html #author_container {
+    text-align: center;
+    padding-top: 2rem; }
+  html .bwi-text-input, html .author_login {
+    display: inline-block; }
+  html .author_login {
+    color: #cccccc;
+    min-width: 30%;
+    text-align: left; }

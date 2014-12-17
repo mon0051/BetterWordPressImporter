@@ -1,5 +1,4 @@
 function BigUpload () {
-
 	//These are the main config variables and should be able to take care of most of the customization
 	this.settings = {
 		'inputField': 'bigUploadFile',
@@ -14,7 +13,6 @@ function BigUpload () {
 		'chunkSize': 1000000,
 		'maxFileSize': 2147483648
 	};
-
 	//Upload specific variables
 	this.uploadData = {
 		'uploadStarted': false,
@@ -30,16 +28,14 @@ function BigUpload () {
 	//Success callback
 	this.success = function(response) {
 		safeLog("upload done");
-		slideLeft();
+		bwi_slideLeft();
 		jQuery('#upload-button-wrapper').addClass('bwi-hidden');
 	};
 	parent = this;
-
 	//Quick function for accessing objects
 	this.$ = function(id) {
 		return document.getElementById(id);
 	};
-
 	//Resets all the upload specific data before a new upload
 	this.resetKey = function() {
 		this.uploadData = {
@@ -68,7 +64,6 @@ function BigUpload () {
 		}
 
 	};
-
 	//Initial upload method
 	//Pulls the size of the file being uploaded and calculated the number of chunks, then calls the recursive upload method
 	this.processFiles = function() {
@@ -83,21 +78,17 @@ function BigUpload () {
 			this.$(this.settings.formId).submit();
 			return;
 		}
-
 		//Reset the upload-specific variables
 		this.resetKey();
 		this.uploadData.uploadStarted = true;
-
 		//Some HTML tidying
 		//Reset the background color of the progress bar in case it was changed by any earlier errors
 		//Change the Upload button to a Pause button
 		this.$(this.settings.progressBarField).style.backgroundColor = this.settings.progressBarColor;
 		this.$(this.settings.responseField).textContent = 'Uploading...';
 		this.$(this.settings.submitButton).value = 'Pause';
-
 		//Alias the file input object to this.uploadData
 		this.uploadData.file = this.$(this.settings.inputField).files[0];
-
 		//Check the filesize. Obviously this is not very secure, so it has another check in inc/bigUpload.php
 		//But this should be good enough to catch any immediate errors
 		var fileSize = this.uploadData.file.size;
@@ -105,41 +96,31 @@ function BigUpload () {
 			this.printResponse('The file you have chosen is too large.', true);
 			return;
 		}
-
 		//Calculate the total number of file chunks
 		this.uploadData.numberOfChunks = Math.ceil(fileSize / this.settings.chunkSize);
-
 		//Start the upload
 		this.sendFile(0);
 	};
-
 	//Main upload method
 	this.sendFile = function (chunk) {
-
 		//Set the time for the beginning of the upload, used for calculating time remaining
 		this.uploadData.timeStart = new Date().getTime();
-
 		//Check if the upload has been cancelled by the user
 		if(this.uploadData.aborted === true) {
 			return;
 		}
-
 		//Check if the upload has been paused by the user
 		if(this.uploadData.paused === true) {
 			this.uploadData.pauseChunk = chunk;
 			this.printResponse('Upload paused.', false);
 			return;
 		}
-
 		//Set the byte to start uploading from and the byte to end uploading at
 		var start = chunk * this.settings.chunkSize;
 		var stop = start + this.settings.chunkSize;
-
 		//Initialize a new FileReader object
 		var reader = new FileReader();
-
 		reader.onloadend = function(evt) {
-
 			//Build the AJAX request
 			//
 			//this.uploadData.key is the temporary filename
@@ -147,8 +128,6 @@ function BigUpload () {
 			//this.uploadData.key is then populated with the filename to use for subsequent requests
 			//When this method sends a valid filename (i.e. key != 0), the server will just append the data being sent to that file.
 			xhr = new XMLHttpRequest();
-
-
 			xhr.open("POST", parent.settings.scriptPath + '?action=upload&key=' + parent.uploadData.key + parent.settings.scriptPathParams, true);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -318,7 +297,5 @@ function BigUpload () {
 		if(error === true) {
 			this.$(this.settings.progressBarField).style.backgroundColor = this.settings.progressBarColorError;
 		}
-
-
 	};
 }
