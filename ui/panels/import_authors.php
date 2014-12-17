@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 12/12/14 1:18 PM
- * @package panels
+ * @package ui
  */
 ?>
 

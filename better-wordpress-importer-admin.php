@@ -9,5 +9,5 @@ $bwi_plugin_folder_url = plugins_url() . '/better-wordpress-importer/';
 ?>
 
 <div id="bwi-panel-container">
-    <?php include 'panels/panels.php';?>
+    <?php include 'ui/panel_slider.php';?>
 </div>

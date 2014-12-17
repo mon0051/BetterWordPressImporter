@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14
- * @package panels
+ * @package ui
  */
 /*
  * Unfortunately the JavaScript for this can't be enqueued as normal
@@ -14,8 +14,8 @@
  * function, server load should be minimal, hence my choice to
  * perform this server-side.
  */
-require_once 'javascript_baker.php';
-include_once dirname(__FILE__) . '/../better-wordpress-importer-admin.php';
+require_once dirname(__FILE__) . '/../javascript_baker.php';
+include_once dirname(__FILE__) . '/../../better-wordpress-importer-admin.php';
 global $bwi_plugin_folder_url;
 ?>
 <script type="text/javascript">

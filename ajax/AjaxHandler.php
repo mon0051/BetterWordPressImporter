@@ -121,7 +121,6 @@ class AjaxHandler
     private static function parse_xml()
     {
         if (!isset($_SESSION['bwi-uploadFilename'])|| $_SESSION['bwi-uploadFilename'] == '') {
-
             die("Filename is not set, have you uploaded the file?");
         }
         // parser.php is the same parser used by the official WordPress Importer, with some
@@ -159,6 +158,7 @@ class AjaxHandler
     }
 
     private static function read_authors(){
+        
         $authors = array();
         $authors = $_SESSION['bwi_results']['authors'];
         foreach ($authors as $author) {

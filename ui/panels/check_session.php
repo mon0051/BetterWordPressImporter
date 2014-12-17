@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 14/12/14 6:34 AM
- * @package panels
+ * @package ui
  */ ?>
 
 <div class="bwi-panel-header">

@@ -2,21 +2,21 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14 2:41 AM
- * @package panels
+ * @package ui
  */
 require_once 'PanelController.php';
 $panelController = new PanelController();
 ?>
 <div id="ajax-return-values" class="bwi-hidden"></div>
 <div class="buffer"></div>
-<!-- This Script controls the slider that displays the panels -->
+<!-- This Script controls the slider that displays the ui -->
 <script type="text/javascript">
     // This code is very fast, no need for it to be in footer
     var slideWidth = 680;
     var bwi_active_slide = 0;
     // This variable keeps track of how many slides there are client side
     var bwi_slide_count = 0;
-    // Reset Magazine is used to ensure that panels are in the correct order
+    // Reset Magazine is used to ensure that ui are in the correct order
     var slider_transistion_time = 250;
     function safeLog(message){
         if(window.console){
@@ -67,6 +67,7 @@ $panelController = new PanelController();
             bwi_active_slide += 1;
             bwi_slide_select();
             var jquery_selector = "[data_position=" + bwi_active_slide +"]";
+            safeLog("trigger"+jquery_selector);
             magazine.children(jquery_selector).trigger("slideFocused");
             return true;
         }
@@ -81,6 +82,7 @@ $panelController = new PanelController();
             bwi_active_slide -= 1;
             bwi_slide_select();
             var jquery_selector = "[data_position=" + bwi_active_slide +"]";
+            safeLog("trigger"+jquery_selector);
             magazine.children(jquery_selector).trigger("slideFocused");
             return true;
         }
@@ -92,6 +94,7 @@ $panelController = new PanelController();
         bwi_jump_to_slide(panel_position);
         var magazine = jQuery('#bwi-slide-magazine');
         jquery_selector = "[data_position=" + bwi_active_slide +"]";
+        safeLog("trigger"+jquery_selector);
         magazine.children(jquery_selector).trigger("slideFocused");
     }
 </script>
@@ -99,10 +102,10 @@ $panelController = new PanelController();
     <div id="bwi-slide-window">
         <div id="bwi-slide-magazine">
             <?php
-            $panelController->add_panel('check_session.php');
-            $panelController->add_panel('ajax_upload_panel.php');
-            $panelController->add_panel('parse_xml.php');
-            $panelController->add_panel('import_authors.php');
+            $panelController->add_panel('panels/check_session.php');
+            $panelController->add_panel('panels/ajax_upload_panel.php');
+            $panelController->add_panel('panels/parse_xml.php');
+            $panelController->add_panel('panels/import_authors.php');
             ?>
         </div>
     </div>

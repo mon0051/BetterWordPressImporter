@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 14/12/14 6:59 AM
- * @package panels
+ * @package ui
  */
 
 class PanelController {
@@ -17,12 +17,12 @@ class PanelController {
 
     /**
      * @param $panel_name
-     * Pass a string referance to the panels php file, this will add it to the page and setup
+     * Pass a string referance to the ui php file, this will add it to the page and setup
      * the variables for its position and id
      */
     function add_panel($panel_name){
         /** @noinspection PhpIncludeInspection */
-        $regex = "/(.*)(?:\\.php)/";
+        $regex = "/(?:panels\\/)(.*)(?:\\.php)/";
         preg_match($regex,$panel_name,$matchs);
         $panel_id = 'id="' . $matchs[1] .'"';
         $panel_number = 'data_position="' . $this->panel_count .'"';
@@ -34,7 +34,7 @@ class PanelController {
     }
     /**
      * @return int
-     * returns the current number of panels
+     * returns the current number of ui
      */
     function getSlideCount(){
         return $this->panel_count;
