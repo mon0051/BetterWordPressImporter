@@ -15,15 +15,16 @@ $class: #4ec9b0;
 /***************************************************************
 *   Standard Sizes
 ***************************************************************/
-$small-padding: 2rem;
+$medium-padding: 2rem;
+$small-padding:1rem;
 $half-text-padding:0.5rem;
 $tiny-padding:0.25rem;
 $button-font-size:2rem;
 $container-height:3.3rem;
 $slide-width:64rem;
-$slide-window-width:$slide-width+(2 *$small-padding);
+$slide-window-width:$slide-width+(2 *$medium-padding);
 $slide-height:48rem;
-$slide-window-height:48rem+(2 *$small-padding);
+$slide-window-height:48rem+(2 *$medium-padding);
 
 html {
   font-size: 10px;
@@ -40,9 +41,10 @@ html {
     text-align: center;
   }
   .bwi-button{
+    text-align: center;
     position: relative;
     display: inline-block;
-    margin:0 $small-padding;
+    margin:$medium-padding $medium-padding;
     min-width: 12rem;
     min-height: $container-height;
     width: 20%;
@@ -61,7 +63,7 @@ html {
     text-align: center;
   }
   .buffer {
-    padding-bottom: $small-padding;
+    padding-bottom: $medium-padding;
   }
   .bwi-hidden{
     display:none !important;
@@ -74,7 +76,7 @@ html {
   ***************************************************************/
   #bwi-slide-magazine {
     position: relative;
-    height: 48rem +(2 *$small-padding);
+    height: 48rem +(2 *$medium-padding);
     width: 100000rem;
   }
   #bwi-slide-window {
@@ -89,7 +91,7 @@ html {
     display: inline-block;
     width: $slide-width;
     min-height: $slide-height;
-    padding: $small-padding;
+    padding: $medium-padding;
     background: $dark-background;
   }
   /***************************************************************
@@ -127,8 +129,8 @@ html {
     #bwi-slider-right-button{
       a {
         color: $light-text;
-        padding-left: $small-padding;
-        padding-right: $small-padding;
+        padding-left: $medium-padding;
+        padding-right: $medium-padding;
       }
       a:hover{
         color:white;
@@ -139,8 +141,8 @@ html {
     #bwi-slider-left-button{
       a {
         color: $light-text;
-        padding-left: $small-padding;
-        padding-right: $small-padding;
+        padding-left: $medium-padding;
+        padding-right: $medium-padding;
       }
       a:hover{
         color:white;
@@ -210,17 +212,54 @@ html {
     min-height: 1rem;
   }
   /* Import Authors */
-  #author_container {
-    text-align: center;
-    padding-top:$small-padding ;
+  #author-container {
+    text-align: left;
+    padding-top: $medium-padding;
   }
-  .bwi-text-input,.author_login{
+  .bwi-text-input,.author-login{
     display:inline-block;
   }
-  .author_login {
-    color: $light-text;
-    min-width: 30%;
+  #import-author-form .author-wrapper{
+    display: block;
+    margin-top: $medium-padding;
+    margin-bottom: $medium-padding;
+  }
+
+  #import-author-form{
     text-align: left;
+  }
+  #import-author-form * {
+    display: inline-block;
+    color:$light-text;
+  }
+  #import-author-form{
+    select,input,option{
+      color:$dark-border;
+    }
+  }
+  .bwi-author-name-wrapper{
+    min-width:20%;
+  }
+  .bwi-input-area{
+    padding: $small-padding;
+    width:$slide-width - $medium-padding;
+    margin-top: $small-padding;
+    margin-right:$medium-padding;
+    height:20rem;
+    overflow-y: scroll;
+    box-shadow: 0px 2px 1px $light-text,0 -1px 1px $dark-border;
+  }
+  .bwi-form-header{
+    width:$slide-width - 2 *$medium-padding;
+  }
+  .bwi-author{
+    position: relative;
+    display: inline-block;
+    width:20%;
+  }
+  .bwi-action{
+    position: relative;
+    display: inline-block;
   }
 
 }

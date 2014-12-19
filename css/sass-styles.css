@@ -27,9 +27,10 @@ html {
   html .bwi-center {
     text-align: center; }
   html .bwi-button {
+    text-align: center;
     position: relative;
     display: inline-block;
-    margin: 0 2rem;
+    margin: 2rem 2rem;
     min-width: 12rem;
     min-height: 3.3rem;
     width: 20%;
@@ -156,12 +157,38 @@ html {
     color: #cccccc; }
   html #output {
     min-height: 1rem; }
-  html #author_container {
-    text-align: center;
+  html #author-container {
+    text-align: left;
     padding-top: 2rem; }
-  html .bwi-text-input, html .author_login {
+  html .bwi-text-input, html .author-login {
     display: inline-block; }
-  html .author_login {
-    color: #cccccc;
-    min-width: 30%;
+  html #import-author-form .author-wrapper {
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: 2rem; }
+  html #import-author-form {
     text-align: left; }
+  html #import-author-form * {
+    display: inline-block;
+    color: #cccccc; }
+  html #import-author-form select, html #import-author-form input, html #import-author-form option {
+    color: #3e3e3e; }
+  html .bwi-author-name-wrapper {
+    min-width: 20%; }
+  html .bwi-input-area {
+    padding: 1rem;
+    width: 62rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    height: 20rem;
+    overflow-y: scroll;
+    box-shadow: 0px 2px 1px #cccccc, 0 -1px 1px #3e3e3e; }
+  html .bwi-form-header {
+    width: 60rem; }
+  html .bwi-author {
+    position: relative;
+    display: inline-block;
+    width: 20%; }
+  html .bwi-action {
+    position: relative;
+    display: inline-block; }

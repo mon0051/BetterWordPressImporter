@@ -12,34 +12,31 @@
 <div id="bwi_reload_authors" class="bwi-button">
     <div class="bwi-button-text">Refresh</div>
 </div>
-<div id="author_selector_wrapper">
-    <label for="existing_author_selector">Assign Existing Author</label>
-    <select name="existing_author_selector" id="existing_author_selector"></select>
+<?php include dirname(__FILE__) . '../../Elements/import_user_template.php'; ?>
+<div id="author-form-container">
 </div>
-<form id="author_container">
-</form>
 <script>
     var ajax_file_url = "";
     // bake the correct url into the script
     ajax_file_url = "<?php echo plugins_url() . "/better-wordpress-importer/ajax/bwi_ajax.php"?>";
+    /**
+     *  Reads the authors found on the server and creates a form from that data
+     **/
     function import_authors() {
-        var reload_authors = jQuery("#bwi_reload_authors").children(".bwi-button-text");
-        //noinspection JSCheckFunctionSignatures
-        reload_authors.text("loading...");
-        jQuery.ajax({url: ajax_file_url, data: {action: 'read_authors'}}).done(function (response) {
-            var author_container = jQuery('#author_container');
-            author_container.children(".author_wrapper").remove();
-            author_container.append(response);
-            var authors = author_container.children(".author_wrapper");
-            authors.each(function (index) {
-                var name = "new_author_name"+index;
-                var author_input_element = "<input type=\"text\" class=\"bwi-text-input\"" + name + " >";
-                jQuery(this).append(author_input_element);
-            });
-            //noinspection JSCheckFunctionSignatures
-            reload_authors.text('Refresh');
+        // Button Management
+        var reload_authors_button = jQuery("#bwi_reload_authors").children(".bwi-button-text");
+        reload_authors_button.text("loading...");
+
+        // Read author values from server (As a JSON object) , then construct a form from those authors
+        jQuery.ajax({url: ajax_file_url, data: {action: 'get_authors_form'}}).done(function (author_form) {
+            var form_wrapper = jQuery('#author-form-container');
+            panelSlider.safeLog("response = " + author_form);
+            form_wrapper.empty();
+            form_wrapper.append(author_form);
+            reload_authors_button.text('Refresh');
         });
     }
+
     jQuery('#import_authors').on("slideFocused", function () {
         import_authors();
     });
