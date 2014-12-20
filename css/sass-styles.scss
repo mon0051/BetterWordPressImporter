@@ -40,6 +40,9 @@ html {
   .bwi-center{
     text-align: center;
   }
+  .bwi-input-area{
+    color:$light-text;
+  }
   .bwi-button{
     text-align: center;
     position: relative;
@@ -70,6 +73,9 @@ html {
   }
   .blocker {
     background: $dark-background;
+  }
+  .bwi-row {
+    width:100%;
   }
   /***************************************************************
   *   Slider Window
@@ -260,6 +266,9 @@ html {
   .bwi-action{
     position: relative;
     display: inline-block;
+  }
+  .bwi-children-align-right{
+    text-align: right;
   }
 
 }

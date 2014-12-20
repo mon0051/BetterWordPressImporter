@@ -26,6 +26,8 @@ html {
     color: #cccccc; }
   html .bwi-center {
     text-align: center; }
+  html .bwi-input-area {
+    color: #cccccc; }
   html .bwi-button {
     text-align: center;
     position: relative;
@@ -51,6 +53,8 @@ html {
     display: none !important; }
   html .blocker {
     background: #1e1e1e; }
+  html .bwi-row {
+    width: 100%; }
   html #bwi-slide-magazine {
     position: relative;
     height: 52rem;
@@ -192,3 +196,5 @@ html {
   html .bwi-action {
     position: relative;
     display: inline-block; }
+  html .bwi-children-align-right {
+    text-align: right; }

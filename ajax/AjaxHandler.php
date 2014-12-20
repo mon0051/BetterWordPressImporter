@@ -6,6 +6,7 @@
 require_once 'ajax_authenticate.php';
 require_once 'parser.php';
 require_once 'BigUpload.php';
+require_once 'BMI_Import.php';
 
 /**
  * Class AjaxHandler
@@ -19,38 +20,62 @@ class AjaxHandler
     public static function doAction()
     {
         if (isset($_GET['action'])) {
-            switch ($_GET['action']) {
-                case "first_contact":
-                    AjaxHandler::check_session();
-                    break;
-                case "delete_session":
-                    AjaxHandler::delete_session();
-                    break;
-                case "parse_xml":
-                    AjaxHandler::parse_xml();
-                    break;
-                case "read_authors":
-                    AjaxHandler::read_authors();
-                    break;
-                case "get_authors_form":
-                    AjaxHandler::get_authors_form();
-                    break;
-                case "upload":
-                    AjaxHandler::bigUpload();
-                    break;
-                case "abort":
-                    AjaxHandler::bigUploadAbort();
-                    break;
-                case "finish":
-                    AjaxHandler::bigUploadFinish();
-                    break;
-                case 'post-unsupported':
-                    AjaxHandler::bigUploadUnsupported();
-                    break;
-            }
+            AjaxHandler::doGetAction();
+        }
+        if (isset($_POST['action'])) {
+            AjaxHandler::doPostAction();
         }
     }
 
+    private static function doGetAction()
+    {
+        switch ($_GET['action']) {
+            case "first_contact":
+                AjaxHandler::check_session();
+                break;
+            case "delete_session":
+                AjaxHandler::delete_session();
+                break;
+            case "parse_xml":
+                AjaxHandler::parse_xml();
+                break;
+            case "read_authors":
+                AjaxHandler::read_authors();
+                break;
+            case "get_authors_form":
+                AjaxHandler::get_authors_form();
+                break;
+            case "upload":
+                AjaxHandler::bigUpload();
+                break;
+            case "abort":
+                AjaxHandler::bigUploadAbort();
+                break;
+            case "finish":
+                AjaxHandler::bigUploadFinish();
+                break;
+            case 'post-unsupported':
+                AjaxHandler::bigUploadUnsupported();
+                break;
+        }
+    }
+
+    /**
+     * @global $_POST['action']
+     */
+    private static function doPostAction()
+    {
+        switch ($_POST['action']){
+            case "post-author-import-form":
+                $importer = new BMI_Import();
+                $importer->authorImport();
+                break;
+        }
+    }
+
+    /**
+     * @global $_GET['key']
+     */
     private static function bigUpload()
     {
         $bigUpload = new BigUpload;
@@ -64,7 +89,9 @@ class AjaxHandler
         $bigUpload->setTempName($tempName);
         print $bigUpload->uploadFile();
     }
-
+    /**
+     * @global $_GET['key']
+     */
     private static function bigUploadFinish()
     {
         $bigUpload = new BigUpload;
@@ -79,7 +106,9 @@ class AjaxHandler
         $_SESSION['bwi-uploadFilename'] = $_POST['name'];
         print $bigUpload->finishUpload($_POST['name']);
     }
-
+    /**
+     * @global $_GET['key']
+     */
     private static function bigUploadUnsupported()
     {
         $bigUpload = new BigUpload;
@@ -93,7 +122,9 @@ class AjaxHandler
         $bigUpload->setTempName($tempName);
         print $bigUpload->postUnsupported();
     }
-
+    /**
+     * @global $_GET['key']
+     */
     private static function bigUploadAbort()
     {
         //Instantiate the class
@@ -203,67 +234,74 @@ class AjaxHandler
          * Template for user form
          */
         ?>
-        <form class="bwi-form" id="import-author-form">
-            <div class="bwi-input-area">
-                <div class="bwi-form-header">
-                    <div class="bwi-author bwi-header">Author</div>
-                    <div class="bwi-action bwi-header">Action</div>
-                </div>
-                <?php
-                foreach ($authors as $author) :
-                    $id = $author['author_id'];
-                    $name = $author['author_display_name'];
-                    ?>
-                    <div class="author-wrapper" id="bwi-author-template">
-                        <input type="hidden" name="author-id" value="<?php echo $id;?>">
 
-                        <div class="bwi-author-name-wrapper bwi-author">
-                            <div class="bwi-author-name"><?php echo $name;?></div>
+        <div class="bwi-input-area">
+            <div class="bwi-form-header">
+                <div class="bwi-author bwi-header">Author</div>
+                <div class="bwi-action bwi-header">Action</div>
+            </div>
+            <?php
+            foreach ($authors as $author) :
+                $id = $author['author_id'];
+                $name = $author['author_display_name'];
+                $username = $author['username'];
+                ?>
+                <div class="author-wrapper" id="bwi-author-template">
+                    <input type="hidden" class="bwi-author-id" name="author-id" value="<?php echo $id;?>">
+                    <input type="hidden" name="action" value="post-author-import-form">
+                    <input type="hidden" name="username" value="<?php echo $username; ?>" class="bwi-username">
+                    <div class="bwi-author-name-wrapper bwi-author">
+                        <div class="bwi-author-name"><?php echo $name;?></div>
+                    </div>
+                    <div class="bwi-action">
+                        <label for="author-import-option-selector-<?php echo $id;?>"></label>
+                        <select name="author-import-option-selector-<?php echo $id;?>"
+                                id="author-import-option-selector-<?php echo $id;?>"
+                                class="author-selector">
+                            <option value="import">Import Author</option>
+                            <option value="import">Create New Author</option>
+                            <option value="import">Use Existing Author</option>
+                        </select>
+                    </div>
+                    <div class="author-input-wrapper bwi-hidden">
+                        <div class="author-new-input-wrapper">
+                            <label for="new-author-input-<?php echo $id;?>">New Name</label>
+                            <input type="text" name="new-author-input-<?php echo $id;?>" value="<?php echo $name;?>"
+                                   id="new-author-input-<?php echo $id;?>">
                         </div>
-                        <div class="bwi-action">
-                            <label for="author-import-option-selector-<?php echo $id;?>"></label>
-                            <select name="author-import-option-selector-<?php echo $id;?>"
-                                    id="author-import-option-selector-<?php echo $id;?>">
-                                <option value="import">Import Author</option>
-                                <option value="import">Create New Author</option>
-                                <option value="import">Use Existing Author</option>
+                        <div class="author-select-wrapper bwi-hidden">
+                            <label for="existing-author-selector-<?php echo $id;?>">Assign Existing Author</label>
+                            <select name="existing-author-selector-<?php echo $id;?>"
+                                    id="existing-author-selector-<?php echo $id;?>">
+                                <?php
+                                foreach ($wp_users as $wp_user) {
+                                    $value = "value=\"" . $wp_user->ID . "\"";
+                                    $uname = $wp_user->display_name;
+                                    echo "<option $value > $uname </option>";
+                                }
+                                ?>
                             </select>
                         </div>
-                        <div class="author-input-wrapper bwi-hidden">
-                            <div class="author-new-input-wrapper">
-                                <label for="new-author-input-<?php echo $id;?>">New Name</label>
-                                <input type="text" name="new-author-input-<?php echo $id;?>" value="<?php echo $name;?>"
-                                       id="new-author-input-<?php echo $id;?>">
-                            </div>
-                            <div class="author-select-wrapper bwi-hidden">
-                                <label for="existing-author-selector-<?php echo $id;?>">Assign Existing Author</label>
-                                <select name="existing-author-selector-<?php echo $id;?>"
-                                        id="existing-author-selector-<?php echo $id;?>">
-                                    <?php
-                                    foreach ($wp_users as $wp_user) {
-                                        $value = "value=\"" . $wp_user->ID . "\"";
-                                        $uname = $wp_user->display_name;
-                                        echo "<option $value > $uname </option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
                     </div>
-                <?php endforeach;?>
-            </div>
+                </div>
+            <?php endforeach;?>
+        </div>
+        <div class="bwi-row bwi-children-align-right">
             <div class="bwi-button" id="bwi-submit-author-form">
                 <div class="bwi-button-text">Import</div>
             </div>
-        </form>
+        </div>
+
     <?php
     }
 
     /**
      * @return array Array of WordPress Users
      */
-    private static function get_wordpress_users()
+    public static function get_wordpress_users()
     {
         return get_users(array('who' => 'authors'));
     }
+
+
 }

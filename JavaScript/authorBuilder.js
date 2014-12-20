@@ -25,6 +25,4 @@ function AuthorBuilder(){
         radioButtons.appendTo(author);
         author.appendTo(jQuery(author_container_id));
     }
-
-
 }
