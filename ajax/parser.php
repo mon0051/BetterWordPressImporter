@@ -4,8 +4,8 @@
  * @package WordPress
  * @subpackage Importer
  */
-
-
+require_once 'ajax_authenticate.php';
+require_once dirname(__FILE__) . "../../WxrModels/WxrFile.php";
 
 class WXR_Parser {
     /**
@@ -64,6 +64,8 @@ class WXR_Parser_SimpleXML {
      * Takes a file pointer and returns an array containing pointers to the exported information
      */
     function parse( $file ) {
+        $_SESSION['WxrFileObject'] = new WxrFile();
+
         $authors = $posts = $categories = $tags = $terms = array();
 
         $internal_errors = libxml_use_internal_errors(true);
@@ -119,6 +121,7 @@ class WXR_Parser_SimpleXML {
                 'author_first_name' => (string) $a->author_first_name,
                 'author_last_name' => (string) $a->author_last_name
             );
+            $authors[$login . "_obj"] = new Wxr_File();
         }
 
         // grab cats, tags and terms

@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14
- * @package UI
+ * @package PanelSlider
  */
 /*
  * Unfortunately the JavaScript for this can't be enqueued as normal

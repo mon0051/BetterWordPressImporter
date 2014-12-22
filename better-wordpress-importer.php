@@ -8,6 +8,7 @@ Author: Andrew Monteith
 Author URI: https://plus.google.com/u/0/105936864125151130411/about
 License: GPL2
 */
+require_once 'bwi_helpers.php';
 add_action('admin_menu', 'register_admin_menu');
 function register_admin_menu()
 {
@@ -53,11 +54,11 @@ function register_bwi_custom_post_types(){
 function bwi_scripts()
 {
     $bwi_plugin_folder_url = plugins_url() . '/better-wordpress-importer';
-    wp_register_script('bigUpload', $bwi_plugin_folder_url . "/JavaScript/bigUpload.js", array('jquery'));
-    wp_register_script('panelSlider', $bwi_plugin_folder_url . "/JavaScript/PanelSlider.js", array('jquery'));
-    wp_register_script('authorBuilder', $bwi_plugin_folder_url . "/JavaScript/authorBuilder.js", array('jquery'));
-    wp_register_style('bwistylesheet',$bwi_plugin_folder_url . "/css/sass-styles.css",array(),false,false);
-    wp_register_style('bwi-font-awesome',$bwi_plugin_folder_url . '/css/font-awesome-4.2.0/css/font-awesome.css');
+    wp_register_script('bigUpload', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/bigUpload.js", array('jquery'));
+    wp_register_script('panelSlider', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/PanelSlider.js", array('jquery'));
+    wp_register_script('authorBuilder', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/authorBuilder.js", array('jquery'));
+    wp_register_style('bwistylesheet',$bwi_plugin_folder_url . "/PanelSlider/css/sass-styles.css",array(),false,false);
+    wp_register_style('bwi-font-awesome',$bwi_plugin_folder_url . '/PanelSlider/css/font-awesome-4.2.0/css/font-awesome.css');
     wp_enqueue_script('panelSlider');
     wp_enqueue_script('bigUpload');
     wp_enqueue_script('authorBuilder');

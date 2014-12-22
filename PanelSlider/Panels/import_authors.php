@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 12/12/14 1:18 PM
- * @package UI
+ * @package PanelSlider
  */
 $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
 ?>
@@ -55,7 +55,6 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
         var authors = jQuery("#bwi-import-author-form").find(".author-wrapper");
         var authorData = [];
         authors.each(function () {
-            var username = jQuery(this).find(".bwi-username").val();
             var author_id = jQuery(this).find(".bwi-author-id").val();
             var a_option = jQuery(this).find('select.author-selector option:selected').val();
             var new_author_value = jQuery(this).find('.author-new-input-wrapper input').val();
@@ -64,8 +63,7 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
                 aid: author_id,
                 option: a_option,
                 new_value: new_author_value,
-                exisiting_author: existing_author_value,
-                username: username
+                exisiting_author: existing_author_value
             });
         });
         return authorData;

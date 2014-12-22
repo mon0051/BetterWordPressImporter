@@ -2,7 +2,7 @@
 /**
  * Author: Andrew Monteith
  * Date: 14/12/14 6:59 AM
- * @package UI
+ * @package PanelSlider
  */
 
 class PanelController {
@@ -17,7 +17,7 @@ class PanelController {
 
     /**
      * @param $panel_name
-     * Pass a string referance to the UI php file, this will add it to the page and setup
+     * Pass a string referance to the PanelSlider php file, this will add it to the page and setup
      * the variables for its position and id
      */
     function add_panel($panel_name){
@@ -34,7 +34,7 @@ class PanelController {
     }
     /**
      * @return int
-     * returns the current number of UI
+     * returns the current number of PanelSlider
      */
     function getSlideCount(){
         return $this->panel_count;

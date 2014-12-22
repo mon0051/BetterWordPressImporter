@@ -2,14 +2,14 @@
 /**
  * Author: Andrew Monteith
  * Date: 13/11/14 2:41 AM
- * @package UI
+ * @package PanelSlider
  */
 require_once 'PanelController.php';
 $panelController = new PanelController();
 ?>
 <div id="ajax-return-values" class="bwi-hidden"></div>
 <div class="buffer"></div>
-<!-- This Script controls the slider that displays the UI -->
+<!-- This Script controls the slider that displays the PanelSlider -->
 
 <div id="bwi-panel-wrapper">
     <div id="bwi-slide-window">

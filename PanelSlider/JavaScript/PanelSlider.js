@@ -19,7 +19,7 @@ function PanelSlider(){
         }
     };
     /**
-     * Updates the UI to show correct slide selected in the controls
+     * Updates the PanelSlider to show correct slide selected in the controls
      */
     this.bwi_slide_select = function () {
         var page_selector = jQuery('#bwi-page-selector');
