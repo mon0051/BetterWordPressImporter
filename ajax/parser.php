@@ -5,16 +5,16 @@
  * @subpackage Importer
  */
 require_once 'ajax_authenticate.php';
-require_once dirname(__FILE__) . "../../WxrModels/WxrFile.php";
+
 
 class WXR_Parser
 {
     /**
+     * Takes a File Pointer and returns an array of results.
+     * Depending on the installed PHP library's, will pass this off to
+     * another class to be completed.
      * @param $file
      * @return array|WP_Error
-     * Takes a File Pointer and returns an array of results
-     * Depending on the installed PHP librarys, will pass this off to
-     * another class to be compleated.
      */
     function parse($file)
     {
@@ -68,8 +68,6 @@ class WXR_Parser_SimpleXML
      */
     function parse($file)
     {
-        $_SESSION['WxrFileObject'] = new WxrFile();
-
         $authors = $posts = $categories = $tags = $terms = array();
 
         $internal_errors = libxml_use_internal_errors(true);
@@ -268,6 +266,11 @@ class WXR_Parser_XML
     private $tag;
     private $authors;
     private $base_url;
+    private $sub_data;
+    private $data;
+    private $cdata;
+    private $in_sub_tag;
+    private $in_tag;
 
     var $wp_tags = array(
         'wp:post_id', 'wp:post_date', 'wp:post_date_gmt', 'wp:comment_status', 'wp:ping_status', 'wp:attachment_url',

@@ -233,6 +233,7 @@ class AjaxHandler
         /*
          * Template for user form
          */
+        require_once dirname(__FILE__) . '../../PanelSlider/Elements/import_user_template.php';
 
     }
 
