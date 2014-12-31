@@ -14,6 +14,7 @@ class WxrPost extends aWxrModel
     public $guid;
     public $post_author;
     public $post_content;
+    public $post_excerpt;
     public $post_id;
     public $post_date;
     public $post_date_gmt;

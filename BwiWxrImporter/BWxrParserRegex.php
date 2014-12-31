@@ -141,13 +141,13 @@ class BWXR_Parser_Regex
      */
     function process_category($c)
     {
-        return array(
-            'term_id' => $this->get_tag($c, 'wp:term_id'),
-            'cat_name' => $this->get_tag($c, 'wp:cat_name'),
-            'category_nicename' => $this->get_tag($c, 'wp:category_nicename'),
-            'category_parent' => $this->get_tag($c, 'wp:category_parent'),
-            'category_description' => $this->get_tag($c, 'wp:category_description'),
-        );
+        $category = new WxrCategory();
+        $category->term_id = $this->get_tag($c, 'wp:term_id');
+        $category->cat_name =  $this->get_tag($c, 'wp:cat_name');
+        $category->category_nicename = $this->get_tag($c, 'wp:category_nicename');
+        $category->category_parent = $this->get_tag($c, 'wp:category_parent');
+        $category->category_description =$this->get_tag($c, 'wp:category_description');
+        return $category;
     }
 
     /**
@@ -156,12 +156,12 @@ class BWXR_Parser_Regex
      */
     function process_tag($t)
     {
-        return array(
-            'term_id' => $this->get_tag($t, 'wp:term_id'),
-            'tag_name' => $this->get_tag($t, 'wp:tag_name'),
-            'tag_slug' => $this->get_tag($t, 'wp:tag_slug'),
-            'tag_description' => $this->get_tag($t, 'wp:tag_description'),
-        );
+        $tag = new WxrTag();
+        $tag->term_id = $this->get_tag($t, 'wp:term_id');
+        $tag->tag_slug=$this->get_tag($t, 'wp:tag_slug');
+        $tag->tag_name=$this->get_tag($t, 'wp:tag_name');
+        $tag->tag_description = $this->get_tag($t, 'wp:tag_description');
+        return $tag;
     }
 
     /**
@@ -170,14 +170,15 @@ class BWXR_Parser_Regex
      */
     function process_term($t)
     {
-        return array(
-            'term_id' => $this->get_tag($t, 'wp:term_id'),
-            'term_taxonomy' => $this->get_tag($t, 'wp:term_taxonomy'),
-            'slug' => $this->get_tag($t, 'wp:term_slug'),
-            'term_parent' => $this->get_tag($t, 'wp:term_parent'),
-            'term_name' => $this->get_tag($t, 'wp:term_name'),
-            'term_description' => $this->get_tag($t, 'wp:term_description'),
-        );
+        $term = new WxrTerm();
+        $term->term_id = $this->get_tag($t, 'wp:term_id');
+        $term->term_taxonomy = $this->get_tag($t, 'wp:term_taxonomy');
+        $term->slug = $this->get_tag($t, 'wp:term_slug');
+        $term->term_parent = $this->get_tag($t, 'wp:term_parent');
+        $term->term_name = $this->get_tag($t, 'wp:term_name');
+        $term->term_description = $this->get_tag($t, 'wp:term_description');
+        return $term;
+
     }
 
     /**
@@ -203,84 +204,110 @@ class BWXR_Parser_Regex
      */
     function process_post($post)
     {
-        $post_id = $this->get_tag($post, 'wp:post_id');
-        $post_title = $this->get_tag($post, 'title');
-        $post_date = $this->get_tag($post, 'wp:post_date');
-        $post_date_gmt = $this->get_tag($post, 'wp:post_date_gmt');
-        $comment_status = $this->get_tag($post, 'wp:comment_status');
-        $ping_status = $this->get_tag($post, 'wp:ping_status');
-        $status = $this->get_tag($post, 'wp:status');
-        $post_name = $this->get_tag($post, 'wp:post_name');
-        $post_parent = $this->get_tag($post, 'wp:post_parent');
-        $menu_order = $this->get_tag($post, 'wp:menu_order');
-        $post_type = $this->get_tag($post, 'wp:post_type');
-        $post_password = $this->get_tag($post, 'wp:post_password');
-        $is_sticky = $this->get_tag($post, 'wp:is_sticky');
-        $guid = $this->get_tag($post, 'guid');
-        $post_author = $this->get_tag($post, 'dc:creator');
+        //----------------------------------------------
+        // Standard Post Data
+        //----------------------------------------------
+        $wxrPost = new WxrPost();
+        $wxrPost->post_id = $this->get_tag($post, 'wp:post_id');
+        $wxrPost->post_title = $this->get_tag($post, 'title');
+        $wxrPost->post_date = $this->get_tag($post, 'wp:post_date');
+        $wxrPost->post_date_gmt = $this->get_tag($post, 'wp:post_date_gmt');
+        $wxrPost->comment_status = $this->get_tag($post, 'wp:comment_status');
+        $wxrPost->ping_status = $this->get_tag($post, 'wp:ping_status');
+        $wxrPost->status = $this->get_tag($post, 'wp:status');
+        $wxrPost->post_name = $this->get_tag($post, 'wp:post_name');
+        $wxrPost->post_parent = $this->get_tag($post, 'wp:post_parent');
+        $wxrPost->menu_order = $this->get_tag($post, 'wp:menu_order');
+        $wxrPost->post_type = $this->get_tag($post, 'wp:post_type');
+        $wxrPost->post_password = $this->get_tag($post, 'wp:post_password');
+        $wxrPost->is_sticky = $this->get_tag($post, 'wp:is_sticky');
+        $wxrPost->guid = $this->get_tag($post, 'guid');
+        $wxrPost->post_author = $this->get_tag($post, 'dc:creator');
+        //** End Standard Post Data **/
 
+        //----------------------------------------------
+        // post excerpt
+        //----------------------------------------------
         $post_excerpt = $this->get_tag($post, 'excerpt:encoded');
         $post_excerpt = preg_replace_callback('|<(/?[A-Z]+)|', array(&$this, '_normalize_tag'), $post_excerpt);
         $post_excerpt = str_replace('<br>', '<br />', $post_excerpt);
-        $post_excerpt = str_replace('<hr>', '<hr />', $post_excerpt);
+        $wxrPost->post_excerpt = str_replace('<hr>', '<hr />', $post_excerpt);
+        //** End Post Excerpt */
 
-        $post_content = $this->get_tag($post, 'content:encoded');
-        $post_content = preg_replace_callback('|<(/?[A-Z]+)|', array(&$this, '_normalize_tag'), $post_content);
-        $post_content = str_replace('<br>', '<br />', $post_content);
-        $post_content = str_replace('<hr>', '<hr />', $post_content);
+        //----------------------------------------------
+        // post content
+        //----------------------------------------------
+        $wxrPost->post_content = $this->get_tag($post, 'content:encoded');
+        $wxrPost->post_content = preg_replace_callback('|<(/?[A-Z]+)|', array(&$this, '_normalize_tag'), $wxrPost->post_content);
+        $wxrPost->post_content = str_replace('<br>', '<br />', $wxrPost->post_content);
+        $wxrPost->post_content = str_replace('<hr>', '<hr />', $wxrPost->post_content);
+        //** end post content */
 
-        $postdata = compact('post_id', 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_excerpt',
-            'post_title', 'status', 'post_name', 'comment_status', 'ping_status', 'guid', 'post_parent',
-            'menu_order', 'post_type', 'post_password', 'is_sticky'
-        );
-
+        //----------------------------------------------
+        // Post Terms
+        //----------------------------------------------
         $attachment_url = $this->get_tag($post, 'wp:attachment_url');
         if ($attachment_url)
-            $postdata['attachment_url'] = $attachment_url;
-
+            $wxrPost->attachment_url['attachment_url'] = $attachment_url;
         preg_match_all('|<category domain="([^"]+?)" nicename="([^"]+?)">(.+?)</category>|is', $post, $terms, PREG_SET_ORDER);
         foreach ($terms as $t) {
-            $post_terms[] = array(
-                'slug' => $t[2],
-                'domain' => $t[1],
-                'name' => str_replace(array('<![CDATA[', ']]>'), '', $t[3]),
-            );
+            $post_term = new WxrTerm();
+            $post_term->slug = $t[2];
+            $post_term->domain = $t[1];
+            $post_term->term_name = str_replace(array('<![CDATA[', ']]>'), '', $t[3]);
+            $post_terms[] = $post_term;
         }
-        if (!empty($post_terms)) $postdata['terms'] = $post_terms;
+        if (!empty($post_terms)) $wxrPost->terms = $post_terms;
+        //** End post terms */
 
+        //----------------------------------------------
+        // Post Comments
+        //----------------------------------------------
         preg_match_all('|<wp:comment>(.+?)</wp:comment>|is', $post, $comments);
         $comments = $comments[1];
+        $post_comments = array();
         if ($comments) {
             foreach ($comments as $comment) {
+                $wxrComment = new WxrComment();
+                //----------------------------------------------
+                // Comment Meta Data
+                //----------------------------------------------
                 preg_match_all('|<wp:commentmeta>(.+?)</wp:commentmeta>|is', $comment, $commentmeta);
                 $commentmeta = $commentmeta[1];
-                $c_meta = array();
                 foreach ($commentmeta as $m) {
-                    $c_meta[] = array(
+                    $wxrComment->commentmeta[] = array(
                         'key' => $this->get_tag($m, 'wp:meta_key'),
                         'value' => $this->get_tag($m, 'wp:meta_value'),
                     );
                 }
+                //** end comment meta data */
 
-                $post_comments[] = array(
-                    'comment_id' => $this->get_tag($comment, 'wp:comment_id'),
-                    'comment_author' => $this->get_tag($comment, 'wp:comment_author'),
-                    'comment_author_email' => $this->get_tag($comment, 'wp:comment_author_email'),
-                    'comment_author_IP' => $this->get_tag($comment, 'wp:comment_author_IP'),
-                    'comment_author_url' => $this->get_tag($comment, 'wp:comment_author_url'),
-                    'comment_date' => $this->get_tag($comment, 'wp:comment_date'),
-                    'comment_date_gmt' => $this->get_tag($comment, 'wp:comment_date_gmt'),
-                    'comment_content' => $this->get_tag($comment, 'wp:comment_content'),
-                    'comment_approved' => $this->get_tag($comment, 'wp:comment_approved'),
-                    'comment_type' => $this->get_tag($comment, 'wp:comment_type'),
-                    'comment_parent' => $this->get_tag($comment, 'wp:comment_parent'),
-                    'comment_user_id' => $this->get_tag($comment, 'wp:comment_user_id'),
-                    'commentmeta' => $c_meta,
-                );
+                //----------------------------------------------
+                // Standard Comment Data
+                //----------------------------------------------
+                $wxrComment->comment_id = $this->get_tag($comment, 'wp:comment_id');
+                $wxrComment->comment_author = $this->get_tag($comment, 'wp:comment_author');
+                $wxrComment->comment_author_email = $this->get_tag($comment, 'wp:comment_author_email');
+                $wxrComment->comment_author_IP = $this->get_tag($comment, 'wp:comment_author_IP');
+                $wxrComment->comment_author_url = $this->get_tag($comment, 'wp:comment_author_url');
+                $wxrComment->comment_date = $this->get_tag($comment, 'wp:comment_date');
+                $wxrComment->comment_date_gmt = $this->get_tag($comment, 'wp:comment_date_gmt');
+                $wxrComment->comment_content = $this->get_tag($comment, 'wp:comment_content');
+                $wxrComment->comment_approved = $this->get_tag($comment, 'wp:comment_approved');
+                $wxrComment->comment_type = $this->get_tag($comment, 'wp:comment_type');
+                $wxrComment->comment_parent = $this->get_tag($comment, 'wp:comment_parent');
+                $wxrComment->comment_user_id = $this->get_tag($comment, 'wp:comment_user_id');
+                $post_comments[] = $wxrComment;
+                //** End standard comment data */
+
             }
         }
-        if (!empty($post_comments)) $postdata['comments'] = $post_comments;
+        if (!empty($post_comments)) $wxrPost->comments = $post_comments;
+        //** End Post Comments */
 
+        //----------------------------------------------
+        //   Post MetaData
+        //----------------------------------------------
         preg_match_all('|<wp:postmeta>(.+?)</wp:postmeta>|is', $post, $postmeta);
         $postmeta = $postmeta[1];
         if ($postmeta) {
@@ -291,9 +318,13 @@ class BWXR_Parser_Regex
                 );
             }
         }
-        if (!empty($post_postmeta)) $postdata['postmeta'] = $post_postmeta;
+        if (!empty($post_postmeta)) $wxrPost->postmeta = $post_postmeta;
+        //** end Post MetaData */
 
-        return $postdata;
+        //----------------------------------------------
+        // Return completed Post Object
+        //----------------------------------------------
+        return $wxrPost;
     }
 
     /**

@@ -66,27 +66,27 @@ class BWXR_Parser_SimpleXML
             $a = $author_arr->children($namespaces['wp']);
             $login = (string)$a->author_login;
             // Create author object
-//            $author = new WxrAuthor();
-//            $author->author_id = $a->author_id;
-//            $author->author_first_name = $a->author_first_name;
-//            $author->author_last_name = $a->author_last_name;
-//            $author->author_display_name = $a->author_display_name;
-//            $author->author_email =$a->author_email;
-//            $author->author_login= $login;
-//            // Add $author to to $authors Array
-//            $authors[$login] = $author;
+            $author = new WxrAuthor();
+            $author->author_id = $a->author_id;
+            $author->author_first_name = $a->author_first_name;
+            $author->author_last_name = $a->author_last_name;
+            $author->author_display_name = $a->author_display_name;
+            $author->author_email =$a->author_email;
+            $author->author_login= $login;
+            // Add $author to to $authors Array
+            $authors[$login] = $author;
         }
 
         // grab cats, tags and terms
         foreach ($xml->xpath('/rss/channel/wp:category') as $term_arr) {
             $t = $term_arr->children($namespaces['wp']);
-            $categories[] = array(
-                'term_id' => (int)$t->term_id,
-                'category_nicename' => (string)$t->category_nicename,
-                'category_parent' => (string)$t->category_parent,
-                'cat_name' => (string)$t->cat_name,
-                'category_description' => (string)$t->category_description
-            );
+            $category = new WxrCategory();
+            $category->term_id = (int)$t->term_id;
+            $category->category_nicename = (string)$t->category_nicename;
+            $category->category_parent = (string)$t->category_parent;
+            $category->cat_name = (string)$t->cat_name;
+            $category->category_description = (string)$t->category_description;
+            $categories[] = $category;
         }
 
         foreach ($xml->xpath('/rss/channel/wp:tag') as $term_arr) {

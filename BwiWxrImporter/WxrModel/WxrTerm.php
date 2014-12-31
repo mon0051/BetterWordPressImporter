@@ -14,6 +14,7 @@ class WxrTerm extends aWxrModel{
     public $term_parent;
     public $term_name;
     public $term_description;
+    public $domain;
     /**
      * @return string | WP_Error
      */
