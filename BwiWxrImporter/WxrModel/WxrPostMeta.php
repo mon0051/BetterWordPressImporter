@@ -3,7 +3,11 @@
  * Author: Andrew Monteith
  * Date: 23/12/14 6:20 PM
  */
+require_once 'aWxrModel.php';
 
+/**
+ * Class WxrPostMeta
+ */
 class WxrPostMeta extends aWxrModel{
     public $key;
     public $value;

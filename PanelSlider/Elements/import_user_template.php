@@ -10,10 +10,12 @@
     </div>
     <?php
     foreach ($authors as $author) :
-        $id = $author['author_id'];
-        $name = $author['author_display_name'];
-        $username = $author['user_login'];
-        $email = $author['author_email'];
+        /** @var  WxrAuthor $author */
+
+        $id = $author->author_id;
+        $name = $author->author_display_name;
+        $username = $author->author_login;
+        $email = $author->author_email;
         ?>
         <div class="author-wrapper" id="bwi-author-template">
             <input type="hidden" class="bwi-author-id" name="author-id" value="<?php echo $id;?>">

@@ -3,7 +3,10 @@
  * Author: Andrew Monteith
  * Date: 23/12/14 6:06 PM
  */
-
+require_once 'aWxrModel.php';
+/**
+ * Class WxrTag
+ */
 class WxrTag extends aWxrModel{
     public $term_id;
     public $tag_slug;

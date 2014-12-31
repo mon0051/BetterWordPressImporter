@@ -3,7 +3,11 @@
  * Author: Andrew Monteith
  * Date: 23/12/14 6:10 PM
  */
+require_once 'aWxrModel.php';
 
+/**
+ * Class WxrCategory
+ */
 class WxrCategory extends aWxrModel{
     public $term_id;
     public $category_nicename;

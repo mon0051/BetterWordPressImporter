@@ -8,12 +8,15 @@ require_once 'aWxrModel.php';
 
 /**
  * Class WxrAuthor
- *
  */
 class WxrAuthor extends aWxrModel
 {
     /** @var int */
     public $author_id;
+
+    /**
+     * @return int
+     */
     public $author_first_name;
     public $author_last_name;
     public $author_email;

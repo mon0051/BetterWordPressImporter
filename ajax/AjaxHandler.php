@@ -3,10 +3,11 @@
  * Author: Andrew Monteith
  * Date: 15/12/14 7:13 PM
  */
+require_once dirname(__FILE__) .'../../BwiWxrImporter/BWxrParser.php';
 require_once 'ajax_authenticate.php';
-require_once 'parser.php';
 require_once 'BigUpload.php';
 require_once 'BmiImport.php';
+
 
 /**
  * Class AjaxHandler
@@ -166,39 +167,39 @@ class AjaxHandler
         if (!isset($_SESSION['bwi-uploadFilename']) || $_SESSION['bwi-uploadFilename'] == '') {
             die("Filename is not set, have you uploaded the file?");
         }
-        // parser.php is the same parser used by the official WordPress Importer, with some
-        // improvements to the robustness of the code.
-        require_once 'parser.php';
+
         /*
          *   The working path is where we will store the data of in-progress imports
-         *   It would be extreamly inefficient to add this data to the database every
-         *   time it is updated, so it will only be added once compleated.
+         *   It would be extremely inefficient to add this data to the database every
+         *   time it is updated, so it will only be added once completed.
          */
         $wp_uploads = wp_upload_dir();
         $uploadPath = $wp_uploads['basedir'] . '/imports/';
         // filename is an absolute path to the location of the xml file uploaded
         $filename = $uploadPath . $_SESSION['bwi-uploadFilename'];
         // Create the WXR_Parser object that will handle the file, die() if file not valid
-        $ajax_parser = new WXR_Parser();
+        $ajax_parser = new BWXR_Parser();
         if (!is_file($filename)) {
             echo $filename;
             die("File Error: File could not be opened");
         }
         try {
             $results = $ajax_parser->parse($filename);
-            // Save results to SESSION variable that will be available to future AJAX requests
+             //Save results to SESSION variable that will be available to future AJAX requests
             $_SESSION['bwi_results'] = $results;
             $authors = $results['authors'];
             foreach ($authors as $author) {
+                /** @var WxrAuthor $author */
+                var_dump($author);
                 ?>
                 <div class="author-wrapper">
-                    <div class="author-login"><?php echo $author['author_login']; ?></div>
-                    <input type="hidden" class="author_id" value="<?php echo $author['author_id']; ?>">
+                    <div class="author-login"><?php echo $author->author_login; ?></div>
+                    <input type="hidden" class="author_id" value="<?php echo $author->author_id; ?>">
                 </div>
             <?php
             }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            echo "Caught an arror!" .$e->getMessage();
         }
     }
 
@@ -234,7 +235,6 @@ class AjaxHandler
          * Template for user form
          */
         require_once dirname(__FILE__) . '../../PanelSlider/Elements/import_user_template.php';
-
     }
 
     /**

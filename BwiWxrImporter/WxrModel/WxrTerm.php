@@ -3,7 +3,10 @@
  * Author: Andrew Monteith
  * Date: 23/12/14 5:59 PM
  */
-
+require_once 'aWxrModel.php';
+/**
+ * Class WxrTerm
+ */
 class WxrTerm extends aWxrModel{
     public $term_id;
     public $term_taxonomy;

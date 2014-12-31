@@ -3,7 +3,11 @@
  * Author: Andrew Monteith
  * Date: 23/12/14 5:39 PM
  */
+require_once 'aWxrModel.php';
 
+/**
+ * Class WxrComment
+ */
 class WxrComment extends aWxrModel{
     public $comment_post_id;
     public $comment_id;
