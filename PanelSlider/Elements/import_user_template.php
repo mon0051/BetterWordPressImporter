@@ -11,7 +11,6 @@
     <?php
     foreach ($authors as $author) :
         /** @var  WxrAuthor $author */
-
         $id = $author->author_id;
         $name = $author->author_display_name;
         $username = $author->author_login;
