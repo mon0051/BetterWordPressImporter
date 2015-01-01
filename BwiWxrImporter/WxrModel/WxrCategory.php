@@ -8,7 +8,8 @@ require_once 'aWxrModel.php';
 /**
  * Class WxrCategory
  */
-class WxrCategory extends aWxrModel{
+class WxrCategory extends aWxrModel
+{
     public $term_id;
     public $category_nicename;
     public $category_parent;
@@ -21,11 +22,11 @@ class WxrCategory extends aWxrModel{
     function getJson()
     {
         $jsonString = "{";
-        if(!is_null($this->term_id)) $jsonString .= "\"term_id\"" . $this->term_id . ",";
-        if(!is_null($this->category_nicename)) $jsonString .= "\"category_nicename\"" . "\"" .$this->category_nicename . "\",";
-        if(!is_null($this->category_parent)) $jsonString .= "\"category_parent\"" . "\"".$this->category_parent . "\",";
-        if(!is_null($this->cat_name)) $jsonString .= "\"cat_name\"" . "\"" .$this->cat_name . "\",";
-        if(!is_null($this->category_description)) $jsonString .= "\"category_description\"" . "\"" .$this->category_description . "\"";
+        if (!is_null($this->term_id)) $jsonString .= "\"term_id\"" . $this->term_id . ",";
+        if (!is_null($this->category_nicename)) $jsonString .= "\"category_nicename\"" . "\"" . $this->category_nicename . "\",";
+        if (!is_null($this->category_parent)) $jsonString .= "\"category_parent\"" . "\"" . $this->category_parent . "\",";
+        if (!is_null($this->cat_name)) $jsonString .= "\"cat_name\"" . "\"" . $this->cat_name . "\",";
+        if (!is_null($this->category_description)) $jsonString .= "\"category_description\"" . "\"" . $this->category_description . "\"";
         $jsonString .= "}";
         return $jsonString;
     }
@@ -43,6 +44,6 @@ class WxrCategory extends aWxrModel{
             'category_parent' => $this->category_parent,
             'taxonomy' => 'category'
         );
-        return wp_insert_category($cat_array,true);
+        return wp_insert_category($cat_array, true);
     }
 }

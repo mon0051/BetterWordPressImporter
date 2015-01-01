@@ -22,23 +22,12 @@ function register_admin_menu()
  * bwi_rollback_data array contains all the information necessary to undo an import
  * (as well as resume a partially completed one)
  *
- * bwi_import_log details any errors that occured during an import
+ * bwi_import_log details any errors that occurred during an import
  */
-function register_bwi_custom_post_types(){
-    $rollback_cpt_args = array(
-        'labels'=> array(
-            'name' => 'rollback_dataset',
-            'menu_name' => 'BWI Backup Data'
-        ),
-        'description' => 'A log to enable the resumption and rollback of bwi imports',
-        'show_ui' => 'true',
-        'show_in_nav_menus' => 'true',
-        'show_in_menu' => 'true',
-        'show_in_admin_bar' => 'true',
-    );
-   register_post_type("bwi_rollback_data",$rollback_cpt_args);
+function register_bwi_custom_post_types()
+{
     $bwi_cpt_log_args = array(
-        'labels'=> array(
+        'labels' => array(
             'name' => 'rollback_dataset',
             'menu_name' => 'BWI Backup Data'
         ),
@@ -48,22 +37,22 @@ function register_bwi_custom_post_types(){
         'show_in_menu' => 'true',
         'show_in_admin_bar' => 'true',
     );
-    register_post_type("bwi_import_log",$bwi_cpt_log_args);
+    register_post_type("bwi_import_log", $bwi_cpt_log_args);
 }
+
 // Enqueue Scripts
 function bwi_scripts()
 {
     $bwi_plugin_folder_url = plugins_url() . '/better-wordpress-importer';
     wp_register_script('bigUpload', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/bigUpload.js", array('jquery'));
     wp_register_script('panelSlider', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/PanelSlider.js", array('jquery'));
-    wp_register_script('authorBuilder', $bwi_plugin_folder_url . "/PanelSlider/JavaScript/authorBuilder.js", array('jquery'));
-    wp_register_style('bwistylesheet',$bwi_plugin_folder_url . "/PanelSlider/css/sass-styles.css",array(),false,false);
-    wp_register_style('bwi-font-awesome',$bwi_plugin_folder_url . '/PanelSlider/css/font-awesome-4.2.0/css/font-awesome.css');
+    wp_register_style('bwistylesheet', $bwi_plugin_folder_url . "/PanelSlider/css/sass-styles.css", array(), false, false);
+    wp_register_style('bwi-font-awesome', $bwi_plugin_folder_url . '/PanelSlider/css/font-awesome-4.2.0/css/font-awesome.css');
     wp_enqueue_script('panelSlider');
     wp_enqueue_script('bigUpload');
-    wp_enqueue_script('authorBuilder');
     wp_enqueue_style('bwistylesheet');
     wp_enqueue_style('bwi-font-awesome');
 }
+
 add_action('admin_enqueue_scripts', 'bwi_scripts');
-add_action('init','register_bwi_custom_post_types');
+add_action('init', 'register_bwi_custom_post_types');

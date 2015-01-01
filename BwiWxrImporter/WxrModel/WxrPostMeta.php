@@ -8,7 +8,8 @@ require_once 'aWxrModel.php';
 /**
  * Class WxrPostMeta
  */
-class WxrPostMeta extends aWxrModel{
+class WxrPostMeta extends aWxrModel
+{
     public $key;
     public $value;
     public $post_id;
@@ -19,10 +20,10 @@ class WxrPostMeta extends aWxrModel{
     function getJson()
     {
         $jsonString = "{";
-        if(!is_null($this->key)) $jsonString .= "\"key\"" . "\"" .$this->key . "\",";
-        if(!is_null($this->value)) $jsonString .= "\"value\"" . "\"" .$this->value . "\",";
-        if(!is_null($this->post_id)) $jsonString .= "\"post_id\"" . $this->post_id . ",";
-        $jsonString .="}";
+        if (!is_null($this->key)) $jsonString .= "\"key\"" . "\"" . $this->key . "\",";
+        if (!is_null($this->value)) $jsonString .= "\"value\"" . "\"" . $this->value . "\",";
+        if (!is_null($this->post_id)) $jsonString .= "\"post_id\"" . $this->post_id . ",";
+        $jsonString .= "}";
         return $jsonString;
     }
 
@@ -31,6 +32,6 @@ class WxrPostMeta extends aWxrModel{
      */
     function saveToDatabase()
     {
-        return update_post_meta($this->post_id,$this->key,$this->value);
+        return update_post_meta($this->post_id, $this->key, $this->value);
     }
 }

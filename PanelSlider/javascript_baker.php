@@ -24,7 +24,7 @@ function bakeInPhpUploadLimits()
          * or megabytes. The section below will convert the number
          * if this is the case.
          */
-        $smallest_value = $megabyte *100;
+        $smallest_value = $megabyte * 100;
         foreach ($size_checks as $check_name => $check_value) {
             $last_letter = strtolower(substr($check_value, -1));
             if ($last_letter == "m") {
@@ -32,16 +32,16 @@ function bakeInPhpUploadLimits()
                 $i_max = floatval($check_value);
                 $i_max = $i_max * $megabyte;
                 // Leaving 10kb for headers etc
-                $check_value = $i_max -($kilobyte *10);
+                $check_value = $i_max - ($kilobyte * 10);
             }
             if ($last_letter == "k") {
                 $check_value = substr($check_value, 0, -1);
                 $i_max = floatval($check_value);
                 $i_max = $i_max * $kilobyte;
                 // Leaving 10kb for headers etc
-                $check_value = $i_max - ($kilobyte *10);
+                $check_value = $i_max - ($kilobyte * 10);
             }
-            if($check_value < $smallest_value){
+            if ($check_value < $smallest_value) {
 
                 $smallest_value = $check_value;
             }

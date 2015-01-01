@@ -143,10 +143,10 @@ class BWXR_Parser_Regex
     {
         $category = new WxrCategory();
         $category->term_id = $this->get_tag($c, 'wp:term_id');
-        $category->cat_name =  $this->get_tag($c, 'wp:cat_name');
+        $category->cat_name = $this->get_tag($c, 'wp:cat_name');
         $category->category_nicename = $this->get_tag($c, 'wp:category_nicename');
         $category->category_parent = $this->get_tag($c, 'wp:category_parent');
-        $category->category_description =$this->get_tag($c, 'wp:category_description');
+        $category->category_description = $this->get_tag($c, 'wp:category_description');
         return $category;
     }
 
@@ -158,8 +158,8 @@ class BWXR_Parser_Regex
     {
         $tag = new WxrTag();
         $tag->term_id = $this->get_tag($t, 'wp:term_id');
-        $tag->tag_slug=$this->get_tag($t, 'wp:tag_slug');
-        $tag->tag_name=$this->get_tag($t, 'wp:tag_name');
+        $tag->tag_slug = $this->get_tag($t, 'wp:tag_slug');
+        $tag->tag_name = $this->get_tag($t, 'wp:tag_name');
         $tag->tag_description = $this->get_tag($t, 'wp:tag_description');
         return $tag;
     }
@@ -195,7 +195,7 @@ class BWXR_Parser_Regex
         $author->author_display_name = $this->get_tag($a, 'wp:author_display_name');
         $author->author_email = $this->get_tag($a, 'wp:author_email');
         $author->author_login = $this->get_tag($a, 'wp:author_login');
-       return $author;
+        return $author;
     }
 
     /**

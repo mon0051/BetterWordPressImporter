@@ -26,8 +26,8 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
         var reload_authors_button = jQuery("#bwi_reload_authors").children(".bwi-button-text");
         reload_authors_button.text("loading...");
         /*
-        *   Download the user import form via ajax
-        */
+         *   Download the user import form via ajax
+         */
         jQuery.ajax({url: ajax_file_url, data: {action: 'get_authors_form'}}).done(function (author_form) {
             var form_wrapper = jQuery('#bwi-import-author-form');
             form_wrapper.empty();
@@ -47,7 +47,7 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
     }
     /**
      * Parses the author form into an array
-     * @return authorData an array eg.
+     * @return array authorData an array eg.
      * [    0 : { id: a, opt: b,new_value: c, exisiting_author: d, username: e },
      *      1 : { id: f, opt: g,new_value: h, exisiting_author: i, username: j }   ];
      */
@@ -69,8 +69,8 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
         return authorData;
     }
     /*
-    * Add Handlers to the panel
-    */
+     * Add Handlers to the panel
+     */
     jQuery('#import_authors').on("slideFocused", function () {
         bwi_read_authors();
     });

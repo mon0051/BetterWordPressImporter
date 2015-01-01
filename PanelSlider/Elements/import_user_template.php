@@ -2,6 +2,7 @@
 /* *****************************
  *  The template for the author import form
  ******************************/
+$wp_users = get_users(array('who' => 'authors'));
 ?>
 <div class="bwi-input-area">
     <div class="bwi-form-header">
@@ -19,6 +20,7 @@
         <div class="author-wrapper" id="bwi-author-template">
             <input type="hidden" class="bwi-author-id" name="author-id" value="<?php echo $id;?>">
             <input type="hidden" name="action" value="post-author-import-form">
+
             <div class="bwi-author-name-wrapper bwi-author">
                 <div class="bwi-author-name"><?php echo $name;?></div>
             </div>
@@ -53,7 +55,7 @@
                 </div>
             </div>
         </div>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 </div>
 <div class="bwi-row bwi-children-align-right">
     <div class="bwi-button" id="bwi-submit-author-form">

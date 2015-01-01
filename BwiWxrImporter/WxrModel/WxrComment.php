@@ -8,7 +8,8 @@ require_once 'aWxrModel.php';
 /**
  * Class WxrComment
  */
-class WxrComment extends aWxrModel{
+class WxrComment extends aWxrModel
+{
     public $comment_post_id;
     public $comment_id;
     public $comment_author;
@@ -30,19 +31,19 @@ class WxrComment extends aWxrModel{
     function getJson()
     {
         $jsonString = "{";
-        if(!is_null($this->comment_id)) $jsonString .= "\"comment_id\"" . $this->comment_id . ",";
-        if(!is_null($this->comment_author)) $jsonString .= "\"comment_author\"" . "\"" .$this->comment_author . "\",";
-        if(!is_null($this->comment_author_email)) $jsonString .= "\"comment_author_email\"" . "\"" .$this->comment_author_email . "\",";
-        if(!is_null($this->comment_author_IP)) $jsonString .= "\"comment_author_IP\"" . "\"" .$this->comment_author_IP . "\",";
-        if(!is_null($this->comment_author_url)) $jsonString .= "\"comment_author_url\"" . "\"" .$this->comment_author_url . "\",";
-        if(!is_null($this->comment_date)) $jsonString .= "\"comment_date\"" . "\"" .$this->comment_date . "\",";
-        if(!is_null($this->comment_date_gmt)) $jsonString .= "\"comment_date_gmt\"" . "\"" .$this->comment_date_gmt . "\",";
-        if(!is_null($this->comment_content)) $jsonString .= "\"comment_content\"" . "\"" .$this->comment_content . "\",";
-        if(!is_null($this->comment_approved)) $jsonString .= "\"comment_approved\"" . "\"" .$this->comment_approved . "\",";
-        if(!is_null($this->comment_type)) $jsonString .= "\"comment_type\"" . "\"" .$this->comment_type . "\",";
-        if(!is_null($this->comment_parent)) $jsonString .= "\"comment_parent\"" . "\"" .$this->comment_parent . "\",";
-        if(!is_null($this->comment_user_id)) $jsonString .= "\"comment_user_id\"" . "\"" .$this->comment_user_id . "\",";
-        if(!is_null($this->commentmeta)) $jsonString .= "\"commentmeta\"" . "\"" .$this->commentmeta . "\"";
+        if (!is_null($this->comment_id)) $jsonString .= "\"comment_id\"" . $this->comment_id . ",";
+        if (!is_null($this->comment_author)) $jsonString .= "\"comment_author\"" . "\"" . $this->comment_author . "\",";
+        if (!is_null($this->comment_author_email)) $jsonString .= "\"comment_author_email\"" . "\"" . $this->comment_author_email . "\",";
+        if (!is_null($this->comment_author_IP)) $jsonString .= "\"comment_author_IP\"" . "\"" . $this->comment_author_IP . "\",";
+        if (!is_null($this->comment_author_url)) $jsonString .= "\"comment_author_url\"" . "\"" . $this->comment_author_url . "\",";
+        if (!is_null($this->comment_date)) $jsonString .= "\"comment_date\"" . "\"" . $this->comment_date . "\",";
+        if (!is_null($this->comment_date_gmt)) $jsonString .= "\"comment_date_gmt\"" . "\"" . $this->comment_date_gmt . "\",";
+        if (!is_null($this->comment_content)) $jsonString .= "\"comment_content\"" . "\"" . $this->comment_content . "\",";
+        if (!is_null($this->comment_approved)) $jsonString .= "\"comment_approved\"" . "\"" . $this->comment_approved . "\",";
+        if (!is_null($this->comment_type)) $jsonString .= "\"comment_type\"" . "\"" . $this->comment_type . "\",";
+        if (!is_null($this->comment_parent)) $jsonString .= "\"comment_parent\"" . "\"" . $this->comment_parent . "\",";
+        if (!is_null($this->comment_user_id)) $jsonString .= "\"comment_user_id\"" . "\"" . $this->comment_user_id . "\",";
+        if (!is_null($this->commentmeta)) $jsonString .= "\"commentmeta\"" . "\"" . $this->commentmeta . "\"";
         $jsonString .= "}";
     }
 

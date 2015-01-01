@@ -1,7 +1,7 @@
 /**
  * Created by Andrew Monteith on 18/12/14.
  */
-function PanelSlider(){
+function PanelSlider() {
     var ps = this;
     this.slideWidth = 680;
     this.bwi_active_slide = 0;
@@ -13,8 +13,8 @@ function PanelSlider(){
      * A simple helper to ensure logging does not crash program in old browsers
      * */
 
-    this.safeLog = function (message){
-        if(window.console){
+    this.safeLog = function (message) {
+        if (window.console) {
             console.log(message);
         }
     };
@@ -40,22 +40,26 @@ function PanelSlider(){
      * @param trigger_default_action
      * @returns {boolean}
      */
-    this.bwi_jump_to_slide = function (slide_number,trigger_default_action){
+    this.bwi_jump_to_slide = function (slide_number, trigger_default_action) {
         // Sets the trigger default action to false if it's not set
         trigger_default_action = typeof trigger_default_action !== 'undefined' ? trigger_default_action : false;
-        ps.safeLog("bwi_jump_to_slide "+slide_number);
+        ps.safeLog("bwi_jump_to_slide " + slide_number);
         var slide_offset = slide_number - ps.bwi_active_slide;
         // Check if requires movement, then check if slide is in valid range
-        if (slide_offset === 0){return true;}
-        if (slide_number > ps.bwi_slide_count || slide_number < 0){return false;}
+        if (slide_offset === 0) {
+            return true;
+        }
+        if (slide_number > ps.bwi_slide_count || slide_number < 0) {
+            return false;
+        }
         // Perform actual slide here
         var bwiMagazine = jQuery('#bwi-slide-magazine');
-        bwiMagazine.animate({left: "-="+slide_offset * ps.slideWidth}, ps.slider_transistion_time);
+        bwiMagazine.animate({left: "-=" + slide_offset * ps.slideWidth}, ps.slider_transistion_time);
         // The next two lines properly set the current active slide
         ps.bwi_active_slide = slide_number;
         ps.bwi_slide_select();
-        if(trigger_default_action === true){
-            bwiMagazine.children('.bwi-slide-wrapper[data_position=' +ps.bwi_active_slide+ ']').trigger('slideDisplay');
+        if (trigger_default_action === true) {
+            bwiMagazine.children('.bwi-slide-wrapper[data_position=' + ps.bwi_active_slide + ']').trigger('slideDisplay');
         }
         return true;
     };
@@ -79,8 +83,8 @@ function PanelSlider(){
      * @returns {boolean}
      */
     this.bwi_slideLeft = function () {
-        if (ps.bwi_active_slide < ps.bwi_slide_count -1) {
-            ps.bwi_jump_to_slide((ps.bwi_active_slide +1),false);
+        if (ps.bwi_active_slide < ps.bwi_slide_count - 1) {
+            ps.bwi_jump_to_slide((ps.bwi_active_slide + 1), false);
             return true;
         }
         return false;
@@ -92,7 +96,7 @@ function PanelSlider(){
      */
     this.bwi_slideRight = function () {
         if (ps.bwi_active_slide > 0) {
-            ps.bwi_jump_to_slide(ps.bwi_active_slide -1,false);
+            ps.bwi_jump_to_slide(ps.bwi_active_slide - 1, false);
         }
         return false;
     };
@@ -102,14 +106,14 @@ function PanelSlider(){
      * @param slideId
      * @param trigger_default_action If true, will trigger the slides default action immediatly on arrival
      */
-    this.bwi_jumpToSlideWithId = function (slideId,trigger_default_action){
+    this.bwi_jumpToSlideWithId = function (slideId, trigger_default_action) {
         trigger_default_action = typeof trigger_default_action !== 'undefined' ? trigger_default_action : false;
-        var jquery_selector = "#"+slideId;
+        var jquery_selector = "#" + slideId;
         var panel_position = jQuery(jquery_selector).attr('data_position');
-        ps.bwi_jump_to_slide(panel_position,trigger_default_action);
+        ps.bwi_jump_to_slide(panel_position, trigger_default_action);
         var magazine = jQuery('#bwi-slide-magazine');
-        jquery_selector = "[data_position=" + ps.bwi_active_slide +"]";
-        ps.safeLog("trigger"+jquery_selector);
+        jquery_selector = "[data_position=" + ps.bwi_active_slide + "]";
+        ps.safeLog("trigger" + jquery_selector);
         magazine.children(jquery_selector).trigger("slideFocused");
     }
 }

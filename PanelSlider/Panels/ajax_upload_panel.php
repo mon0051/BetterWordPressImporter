@@ -34,7 +34,7 @@ global $bwi_plugin_folder_url;
     }
     function OnProgress(event, position, total, percentComplete) {
         // Update Progress Bar
-        panelSlider.safeLog(event+position+total);
+        panelSlider.safeLog(event + position + total);
         var progress_box = jQuery('#chunk-progress-box');
         progress_box.show();
         progress_box.find('#chunk-progress-bar').width(percentComplete + '%');
@@ -56,7 +56,8 @@ global $bwi_plugin_folder_url;
         <div id="status-txt"></div>
     </div>
     <div id="timeRemaining"></div>
-    <div id="upload-button-wrapper"><input type="button" id="bigUploadSubmit" value="Start Upload" onclick="upload()" /></div>
+    <div id="upload-button-wrapper"><input type="button" id="bigUploadSubmit" value="Start Upload" onclick="upload()"/>
+    </div>
 </form>
 <div id="bigUploadResponse"></div>
 

@@ -47,6 +47,7 @@ application.css.ejs.scss:1
 /usr/local/bin/scss:23:in `<main>'
 */
 body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: bootstrap-mincer.\A               Load path: /var/www/html/wordpress/wp-content/plugins/better-wordpress-importer/css/bootstrap/test/dummy_node_mincer\A         on line 1 of application.css.ejs.scss\A \A 1: @import \"bootstrap-mincer\";\A 2: @import \"bootstrap\";\A 3: \A 4: #image-retina {\A 5:   @include img-retina(\"apple-touch-icon-144-precomposed.png\", \"apple-touch-icon-144-precomposed.png\", 72px, 72px);\A 6: }"; }
+    white-space: pre;
+    font-family: monospace;
+    content: "Syntax error: File to import not found or unreadable: bootstrap-mincer.\A               Load path: /var/www/html/wordpress/wp-content/plugins/better-wordpress-importer/css/bootstrap/test/dummy_node_mincer\A         on line 1 of application.css.ejs.scss\A \A 1: @import \"bootstrap-mincer\";\A 2: @import \"bootstrap\";\A 3: \A 4: #image-retina {\A 5:   @include img-retina(\"apple-touch-icon-144-precomposed.png\", \"apple-touch-icon-144-precomposed.png\", 72px, 72px);\A 6: }";
+}

@@ -47,10 +47,10 @@
             if (html == "no_session") {
                 jQuery('#bwi_no_session_found').toggleClass('bwi-hidden', false);
                 jQuery('#bwi_session_found').toggleClass("bwi-hidden", true);
-                if(bwi_session_check_first){
+                if (bwi_session_check_first) {
                     bwi_session_check_first = false;
                     panelSlider.bwi_slideLeft();
-                }else{
+                } else {
                     jQuery('#bwi_start_new').appendTo('#bwi_no_session_found');
                 }
             } else {
@@ -74,8 +74,8 @@
     jQuery('#bwi_retry_session').click(function () {
         check_session();
     });
-    jQuery('#bwi_resume').click(function() {
-        panelSlider.bwi_jumpToSlideWithId("import_authors",true);
+    jQuery('#bwi_resume').click(function () {
+        panelSlider.bwi_jumpToSlideWithId("import_authors", true);
     });
 </script>
 

@@ -33,6 +33,7 @@ class WxrPost extends aWxrModel
     public $comments = array();
 
     /**
+     * Does not output the content of the post, as this data could be very large and is not necessary for a rollback
      * @return string | WP_Error
      */
     function getJson()
@@ -41,7 +42,6 @@ class WxrPost extends aWxrModel
         if (!is_null($this->post_title)) $jsonString .= "\"post_title\"" . "\"" . $this->post_title . "\",";
         if (!is_null($this->guid)) $jsonString .= "\"guid\"" . "\"" . $this->guid . "\",";
         if (!is_null($this->post_author)) $jsonString .= "\"post_author\"" . "\"" . $this->post_author . "\",";
-        if (!is_null($this->post_content)) $jsonString .= "\"post_content\"" . "\"" . $this->post_content . "\",";
         if (!is_null($this->post_id)) $jsonString .= "\"post_id\"" . $this->post_id . ",";
         if (!is_null($this->post_date)) $jsonString .= "\"post_date\"" . "\"" . $this->post_date . "\",";
         if (!is_null($this->post_date_gmt)) $jsonString .= "\"post_date_gmt\"" . "\"" . $this->post_date_gmt . "\",";
@@ -110,27 +110,27 @@ class WxrPost extends aWxrModel
         );
         $post_id = wp_insert_post($args, true);
         // Return if post did not insert
-        if(is_wp_error($post_id)) return $post_id;
+        if (is_wp_error($post_id)) return $post_id;
 
         foreach ($this->comments as $comment) {
             /** @var WxrComment $comment */
             $comment->comment_post_id = $post_id;
             $comment->saveToDatabase();
         }
-        foreach ($this->postmeta as $postmeta){
+        foreach ($this->postmeta as $postmeta) {
             /** @var WxrPostMeta $postmeta */
             $postmeta->post_id = $post_id;
             $postmeta->saveToDatabase();
         }
 
-        foreach($this->terms as $term){
+        foreach ($this->terms as $term) {
             /** @var WxrTerm $term */
-            $term_id = array(term_exists($term->term_id,$term->term_taxonomy,$term->term_parent));
-            if($term == 0){
+            $term_id = array(term_exists($term->term_id, $term->term_taxonomy, $term->term_parent));
+            if ($term == 0) {
                 $term->saveToDatabase();
-                $term_id = array(term_exists($term->term_id,$term->term_taxonomy,$term->term_parent));
+                $term_id = array(term_exists($term->term_id, $term->term_taxonomy, $term->term_parent));
             }
-            wp_set_post_terms($post_id,$term_id,$term->term_taxonomy,true);
+            wp_set_post_terms($post_id, $term_id, $term->term_taxonomy, true);
         }
 
         return $post_id;

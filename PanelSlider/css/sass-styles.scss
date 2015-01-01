@@ -16,15 +16,15 @@ $class: #4ec9b0;
 *   Standard Sizes
 ***************************************************************/
 $medium-padding: 2rem;
-$small-padding:1rem;
-$half-text-padding:0.5rem;
-$tiny-padding:0.25rem;
-$button-font-size:2rem;
-$container-height:3.3rem;
-$slide-width:64rem;
-$slide-window-width:$slide-width+(2 *$medium-padding);
-$slide-height:48rem;
-$slide-window-height:48rem+(2 *$medium-padding);
+$small-padding: 1rem;
+$half-text-padding: 0.5rem;
+$tiny-padding: 0.25rem;
+$button-font-size: 2rem;
+$container-height: 3.3rem;
+$slide-width: 64rem;
+$slide-window-width: $slide-width+(2 *$medium-padding);
+$slide-height: 48rem;
+$slide-window-height: 48rem+(2 *$medium-padding);
 
 html {
   font-size: 10px;
@@ -37,17 +37,17 @@ html {
   .blurb *, .blurb {
     color: $light-text;
   }
-  .bwi-center{
+  .bwi-center {
     text-align: center;
   }
-  .bwi-input-area{
-    color:$light-text;
+  .bwi-input-area {
+    color: $light-text;
   }
-  .bwi-button{
+  .bwi-button {
     text-align: center;
     position: relative;
     display: inline-block;
-    margin:$medium-padding $medium-padding;
+    margin: $medium-padding $medium-padding;
     min-width: 12rem;
     min-height: $container-height;
     width: 20%;
@@ -68,14 +68,14 @@ html {
   .buffer {
     padding-bottom: $medium-padding;
   }
-  .bwi-hidden{
-    display:none !important;
+  .bwi-hidden {
+    display: none !important;
   }
   .blocker {
     background: $dark-background;
   }
   .bwi-row {
-    width:100%;
+    width: 100%;
   }
   /***************************************************************
   *   Slider Window
@@ -104,17 +104,17 @@ html {
   *   Slider Controls
   ***************************************************************/
   #bwi-slider-controls {
-    color:$light-text;
-    width:$slide-width;
+    color: $light-text;
+    width: $slide-width;
     display: block;
     position: relative;
     margin-right: auto;
     margin-left: auto;
     font-size: $container-height;
-    top:-$container-height - $tiny-padding;
+    top: -$container-height - $tiny-padding;
     text-align: center;
     div {
-      cursor:pointer;
+      cursor: pointer;
       opacity: 0.5;
       position: absolute;
       display: inline-block;
@@ -122,39 +122,39 @@ html {
     div:hover {
       opacity: 1;
     }
-    #bwi-page-selector{
+    #bwi-page-selector {
       position: relative;
       margin-left: auto;
       margin-right: auto;
-      *{
+      * {
         position: relative;
         padding-left: $tiny-padding;
         padding-right: $tiny-padding;
       }
     }
-    #bwi-slider-right-button{
+    #bwi-slider-right-button {
       a {
         color: $light-text;
         padding-left: $medium-padding;
         padding-right: $medium-padding;
       }
-      a:hover{
-        color:white;
+      a:hover {
+        color: white;
         opacity: 1;
       }
-      right:0;
+      right: 0;
     }
-    #bwi-slider-left-button{
+    #bwi-slider-left-button {
       a {
         color: $light-text;
         padding-left: $medium-padding;
         padding-right: $medium-padding;
       }
-      a:hover{
-        color:white;
+      a:hover {
+        color: white;
         opacity: 1;
       }
-      left:0;
+      left: 0;
     }
   }
   /***************************************************************
@@ -182,7 +182,7 @@ html {
     height: $container-height - $half-text-padding;
     width: 0;
     text-align: center;
-    padding-top:$half-text-padding;
+    padding-top: $half-text-padding;
   }
   #status-txt {
     position: absolute;
@@ -206,7 +206,7 @@ html {
     height: $container-height - $half-text-padding;
     width: 0;
     text-align: center;
-    padding-top:$half-text-padding;
+    padding-top: $half-text-padding;
   }
   #chunk-status-txt {
     position: absolute;
@@ -222,52 +222,52 @@ html {
     text-align: left;
     padding-top: $medium-padding;
   }
-  .bwi-text-input,.author-login{
-    display:inline-block;
+  .bwi-text-input, .author-login {
+    display: inline-block;
   }
-  #import-author-form .author-wrapper{
+  #import-author-form .author-wrapper {
     display: block;
     margin-top: $medium-padding;
     margin-bottom: $medium-padding;
   }
 
-  #import-author-form{
+  #import-author-form {
     text-align: left;
   }
   #import-author-form * {
     display: inline-block;
-    color:$light-text;
+    color: $light-text;
   }
-  #import-author-form{
-    select,input,option{
-      color:$dark-border;
+  #import-author-form {
+    select, input, option {
+      color: $dark-border;
     }
   }
-  .bwi-author-name-wrapper{
-    min-width:20%;
+  .bwi-author-name-wrapper {
+    min-width: 20%;
   }
-  .bwi-input-area{
+  .bwi-input-area {
     padding: $small-padding;
-    width:$slide-width - $medium-padding;
+    width: $slide-width - $medium-padding;
     margin-top: $small-padding;
-    margin-right:$medium-padding;
-    height:20rem;
+    margin-right: $medium-padding;
+    height: 20rem;
     overflow-y: scroll;
-    box-shadow: 0px 2px 1px $light-text,0 -1px 1px $dark-border;
+    box-shadow: 0px 2px 1px $light-text, 0 -1px 1px $dark-border;
   }
-  .bwi-form-header{
-    width:$slide-width - 2 *$medium-padding;
+  .bwi-form-header {
+    width: $slide-width - 2 *$medium-padding;
   }
-  .bwi-author{
+  .bwi-author {
     position: relative;
     display: inline-block;
-    width:20%;
+    width: 20%;
   }
-  .bwi-action{
+  .bwi-action {
     position: relative;
     display: inline-block;
   }
-  .bwi-children-align-right{
+  .bwi-children-align-right {
     text-align: right;
   }
 

@@ -6,6 +6,7 @@ require_once 'WxrModel/WxrPost.php';
 require_once 'WxrModel/WxrPostMeta.php';
 require_once 'WxrModel/WxrTag.php';
 require_once 'WxrModel/WxrTerm.php';
+
 /**
  * WXR Parser that makes use of the XML Parser PHP extension.
  */

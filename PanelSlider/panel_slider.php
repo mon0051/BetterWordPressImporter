@@ -36,8 +36,8 @@ $panelController = new PanelController();
     jQuery('#bwi-slider-right-button').click(function () {
         panelSlider.bwi_slideLeft();
     });
-    jQuery('#bwi-page-selector').on('click','.page-selector-button',function(){
-        panelSlider.bwi_jump_to_slide(jQuery(this).index(),false);
+    jQuery('#bwi-page-selector').on('click', '.page-selector-button', function () {
+        panelSlider.bwi_jump_to_slide(jQuery(this).index(), false);
     });
     // resetMagazine now, all slides should be added
     panelSlider.bwi_resetMagazine();

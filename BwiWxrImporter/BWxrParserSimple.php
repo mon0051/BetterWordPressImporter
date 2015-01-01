@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrPost.php';
 require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrPostMeta.php';
 require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrTag.php';
 require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrTerm.php';
+
 /**
  * WXR Parser that makes use of the SimpleXML PHP extension.
  */
@@ -71,8 +72,8 @@ class BWXR_Parser_SimpleXML
             $author->author_first_name = $a->author_first_name;
             $author->author_last_name = $a->author_last_name;
             $author->author_display_name = $a->author_display_name;
-            $author->author_email =$a->author_email;
-            $author->author_login= $login;
+            $author->author_email = $a->author_email;
+            $author->author_login = $login;
             // Add $author to to $authors Array
             $authors[$login] = $author;
         }

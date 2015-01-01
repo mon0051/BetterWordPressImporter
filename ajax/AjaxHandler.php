@@ -3,10 +3,9 @@
  * Author: Andrew Monteith
  * Date: 15/12/14 7:13 PM
  */
-require_once dirname(__FILE__) .'../../BwiWxrImporter/BWxrParser.php';
+
 require_once 'ajax_authenticate.php';
 require_once 'BigUpload.php';
-require_once 'BmiImport.php';
 
 
 /**
@@ -62,11 +61,11 @@ class AjaxHandler
     }
 
     /**
-     * @global $_POST['action']
+     * @global $_POST ['action']
      */
     private static function doPostAction()
     {
-        switch ($_POST['action']){
+        switch ($_POST['action']) {
             case "post-author-import-form":
                 $importer = new BmiImport();
                 $importer->authorImport();
@@ -75,69 +74,44 @@ class AjaxHandler
     }
 
     /**
-     * @global $_GET['key']
+     * @return BigUpload
      */
+    private static function getBigUpload()
+    {
+        $bigUpload = new BigUpload;
+        $tempName = null;
+        if (isset($_GET['key'])) {
+            $tempName = $_GET['key'];
+        }
+        if (isset($_POST['key'])) {
+            $tempName = $_POST['key'];
+        }
+        $bigUpload->setTempName($tempName);
+        return $bigUpload;
+    }
+
     private static function bigUpload()
     {
-        $bigUpload = new BigUpload;
-        $tempName = null;
-        if (isset($_GET['key'])) {
-            $tempName = $_GET['key'];
-        }
-        if (isset($_POST['key'])) {
-            $tempName = $_POST['key'];
-        }
-        $bigUpload->setTempName($tempName);
+        $bigUpload = AjaxHandler::getBigUpload();
         print $bigUpload->uploadFile();
     }
-    /**
-     * @global $_GET['key']
-     */
+
     private static function bigUploadFinish()
     {
-        $bigUpload = new BigUpload;
-        $tempName = null;
-        if (isset($_GET['key'])) {
-            $tempName = $_GET['key'];
-        }
-        if (isset($_POST['key'])) {
-            $tempName = $_POST['key'];
-        }
-        $bigUpload->setTempName($tempName);
+        $bigUpload = AjaxHandler::getBigUpload();
         $_SESSION['bwi-uploadFilename'] = $_POST['name'];
         print $bigUpload->finishUpload($_POST['name']);
     }
-    /**
-     * @global $_GET['key']
-     */
+
     private static function bigUploadUnsupported()
     {
-        $bigUpload = new BigUpload;
-        $tempName = null;
-        if (isset($_GET['key'])) {
-            $tempName = $_GET['key'];
-        }
-        if (isset($_POST['key'])) {
-            $tempName = $_POST['key'];
-        }
-        $bigUpload->setTempName($tempName);
+        $bigUpload = AjaxHandler::getBigUpload();
         print $bigUpload->postUnsupported();
     }
-    /**
-     * @global $_GET['key']
-     */
+
     private static function bigUploadAbort()
     {
-        //Instantiate the class
-        $bigUpload = new BigUpload;
-        $tempName = null;
-        if (isset($_GET['key'])) {
-            $tempName = $_GET['key'];
-        }
-        if (isset($_POST['key'])) {
-            $tempName = $_POST['key'];
-        }
-        $bigUpload->setTempName($tempName);
+        $bigUpload = AjaxHandler::getBigUpload();
         print $bigUpload->abortUpload();
     }
 
@@ -185,7 +159,7 @@ class AjaxHandler
         }
         try {
             $results = $ajax_parser->parse($filename);
-             //Save results to SESSION variable that will be available to future AJAX requests
+            //Save results to SESSION variable that will be available to future AJAX requests
             $_SESSION['bwi_results'] = $results;
             $authors = $results['authors'];
             foreach ($authors as $author) {
@@ -199,7 +173,7 @@ class AjaxHandler
             <?php
             }
         } catch (Exception $e) {
-            echo "Caught an arror!" .$e->getMessage();
+            echo "Caught an arror!" . $e->getMessage();
         }
     }
 
@@ -224,26 +198,15 @@ class AjaxHandler
 
     /**
      * Outputs the user form.
-     * Generally a bad idea to mix buisness logic with frontend, i will eventually move the template to a seperate file.
      */
     private static function get_authors_form()
     {
         $authors = (isset($_SESSION['bwi_results']['authors'])) ? $_SESSION['bwi_results']['authors'] : die("No Authors Found");
         if ($authors == array()) die("No Authors Found");
-        $wp_users = AjaxHandler::get_wordpress_users();
         /*
          * Template for user form
          */
         require_once dirname(__FILE__) . '../../PanelSlider/Elements/import_user_template.php';
     }
-
-    /**
-     * @return array Array of WordPress Users
-     */
-    public static function get_wordpress_users()
-    {
-        return get_users(array('who' => 'authors'));
-    }
-
 
 }

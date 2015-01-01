@@ -34,7 +34,7 @@ class WxrAuthor extends aWxrModel
         if (!is_null($this->author_last_name)) $jsonString .= "\"author_last_name\"" . "\"" . $this->author_last_name . "\"" . ",";
         if (!is_null($this->author_first_name)) $jsonString .= "\"author_first_name\"" . "\"" . $this->author_first_name . "\"" . ",";
         if (!is_null($this->author_email)) $jsonString .= "\"author_email\"" . "\"" . $this->author_email . "\"" . ",";
-        if (!is_null($this->author_login)) $jsonString .= "\"author_login\"" . "\"" . $this->author_login . "\"" ;
+        if (!is_null($this->author_login)) $jsonString .= "\"author_login\"" . "\"" . $this->author_login . "\"";
         $jsonString .= "},";
         return $jsonString;
     }
@@ -52,6 +52,6 @@ class WxrAuthor extends aWxrModel
             'user_email' => $this->author_email,
             'display_name' => $this->author_display_name
         );
-        return wp_insert_user($args,true);
+        return wp_insert_user($args, true);
     }
 }
