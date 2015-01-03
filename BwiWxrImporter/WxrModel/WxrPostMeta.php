@@ -34,4 +34,18 @@ class WxrPostMeta extends aWxrModel
     {
         return update_post_meta($this->post_id, $this->key, $this->value);
     }
+
+    /**
+     * @return string
+     */
+    function getImportLog()
+    {
+        $logString = '{ \'imported_postmeta\' {:';
+        if (!is_null($this->post_id)) $logString .= '\'post_id\' :' . $this->post_id . ',';
+        if (!is_null($this->key)) $logString .= '\'key\' : \'' . $this->key . '\',';
+        if (!is_null($this->value)) $logString .= '\'value\' : \'' . $this->value . '\',';
+
+        $logString .= "}}\n";
+        return $logString;
+    }
 }

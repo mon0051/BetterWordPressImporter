@@ -12,6 +12,7 @@ class WxrComment extends aWxrModel
 {
     public $comment_post_id;
     public $comment_id;
+    public $wxr_comment_id;
     public $comment_author;
     public $comment_author_email;
     public $comment_author_IP;
@@ -45,6 +46,7 @@ class WxrComment extends aWxrModel
         if (!is_null($this->comment_user_id)) $jsonString .= "\"comment_user_id\"" . "\"" . $this->comment_user_id . "\",";
         if (!is_null($this->commentmeta)) $jsonString .= "\"commentmeta\"" . "\"" . $this->commentmeta . "\"";
         $jsonString .= "}";
+        return $jsonString;
     }
 
     /**
@@ -66,5 +68,17 @@ class WxrComment extends aWxrModel
             'comment_approved' => $this->comment_approved
         );
         return wp_insert_comment($args);
+    }
+
+    /**
+     * @return string $logString
+     */
+    function getImportLog()
+    {
+        $logString = '{ \'imported_comment\' {:';
+        if (!is_null($this->comment_id)) $logString .= '\'comment_id\' :' . $this->comment_id . ',';
+
+        $logString .= "}}\n";
+        return $logString;
     }
 }

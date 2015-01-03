@@ -38,7 +38,9 @@ class BwiLog
             $this->buffer .= $section;
         }
     }
-
+    public function close_log(){
+        $this->writeBufferToDb();
+    }
     function __sleep()
     {
         $this->writeBufferToDb();
@@ -51,7 +53,8 @@ class BwiLog
 
     private function writeBufferToDb()
     {
-        update_post_meta($this->log_post_id, 'section_' . $this->output_pointer, $this->buffer);
+        $section_name = 'section_' . $this->output_pointer;
+        update_post_meta($this->log_post_id, $section_name, $this->buffer);
         $this->output_pointer += 1;
         $this->buffer = '';
     }

@@ -15,4 +15,6 @@ abstract class aWxrModel
      * @return int | WP_Error
      */
     abstract function saveToDatabase();
+
+    abstract function getImportLog();
 }

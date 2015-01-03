@@ -136,4 +136,16 @@ class WxrPost extends aWxrModel
         return $post_id;
 
     }
+
+    /**
+     * @return string
+     */
+    function getImportLog()
+    {
+        $logString = '{ \'imported_post\':{';
+        if (!is_null($this->post_id)) $logString .= '\'post_id\' :' . $this->post_id . ',';
+
+        $logString .= "}}\n";
+        return $logString;
+    }
 }

@@ -47,4 +47,15 @@ class WxrTerm extends aWxrModel
         );
         return wp_insert_term($this->term_name, $this->term_taxonomy, $args);
     }
+
+    /**
+     * @return string
+     */
+    function getImportLog()
+    {
+        $logString = '{ \'imported_term\' {:';
+        if (!is_null($this->term_id)) $logString .= '\'post_id\' :' . $this->term_id . ',';
+        $logString .= "}}\n";
+        return $logString;
+    }
 }

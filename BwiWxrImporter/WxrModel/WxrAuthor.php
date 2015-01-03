@@ -29,12 +29,12 @@ class WxrAuthor extends aWxrModel
     function getJson()
     {
         $jsonString = "{";
-        if (!is_null($this->author_id)) $jsonString .= "\"author_id\"" . $this->author_id . ",";
-        if (!is_null($this->author_display_name)) $jsonString .= "\"author_display_name\"" . "\"" . $this->author_display_name . "\"" . ",";
-        if (!is_null($this->author_last_name)) $jsonString .= "\"author_last_name\"" . "\"" . $this->author_last_name . "\"" . ",";
-        if (!is_null($this->author_first_name)) $jsonString .= "\"author_first_name\"" . "\"" . $this->author_first_name . "\"" . ",";
-        if (!is_null($this->author_email)) $jsonString .= "\"author_email\"" . "\"" . $this->author_email . "\"" . ",";
-        if (!is_null($this->author_login)) $jsonString .= "\"author_login\"" . "\"" . $this->author_login . "\"";
+        if (!is_null($this->author_id)) $jsonString .= '\'author_id\'' .':'. $this->author_id . ",";
+        if (!is_null($this->author_display_name)) $jsonString .= '\'author_display_name\'' .':\'' . $this->author_display_name . "\"" . ",";
+        if (!is_null($this->author_last_name)) $jsonString .= '\'author_last_name\'' .':\'' . $this->author_last_name . "\"" . ",";
+        if (!is_null($this->author_first_name)) $jsonString .= '\'author_first_name\'' .':\'' . $this->author_first_name . "\"" . ",";
+        if (!is_null($this->author_email)) $jsonString .= '\'author_email\'' .':\'' . $this->author_email . "\"" . ",";
+        if (!is_null($this->author_login)) $jsonString .= '\'author_login\'' .':\'' . $this->author_login . "\"";
         $jsonString .= "},";
         return $jsonString;
     }
@@ -53,5 +53,16 @@ class WxrAuthor extends aWxrModel
             'display_name' => $this->author_display_name
         );
         return wp_insert_user($args, true);
+    }
+
+    /**
+     * @return string $logString
+     */
+    function getImportLog(){
+        $logString = '{ \'imported_author\':{';
+        if (!is_null($this->author_id)) $logString .= '\'author_id\'' .':'. $this->author_id . ",";
+        if (!is_null($this->author_login)) $logString .= '\'author_login\'' .':\'' . $this->author_login . "\"";
+        $logString .= "}},";
+        return $logString;
     }
 }

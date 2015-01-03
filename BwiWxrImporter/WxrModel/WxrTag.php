@@ -40,4 +40,16 @@ class WxrTag extends aWxrModel
         );
         return wp_insert_term($this->tag_name, 'post_tag', $args);
     }
+
+    /**
+     * @return string
+     */
+    function getImportLog()
+    {
+        $logString = '{ \'imported_tag\' {:';
+        if (!is_null($this->term_id)) $logString .= '\'term_id\' :' . $this->term_id . ',';
+
+        $logString .= "}}\n";
+        return $logString;
+    }
 }
