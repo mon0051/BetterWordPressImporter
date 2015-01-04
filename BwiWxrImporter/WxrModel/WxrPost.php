@@ -10,26 +10,42 @@ require_once 'aWxrModel.php';
  */
 class WxrPost extends aWxrModel
 {
-    public $post_title;
+    /**
+     * @var int $post_id
+     * This refers to the local post_id after it has been inserted into the database
+     * Before such time this value is NULL, and must be so in order for the save to
+     * database function to work properly
+     */
+    public $post_id = NULL;
+    public $post_title = '';
     public $guid;
     public $post_author;
     public $post_content;
     public $post_excerpt;
-    public $post_id;
     public $post_date;
     public $post_date_gmt;
     public $comment_status;
     public $ping_status;
     public $post_name;
     public $status;
-    public $post_parent;
+
     public $menu_order;
     public $post_type;
     public $post_password;
     public $is_sticky;
     public $attachment_url;
+
+    /** @var  WxrAuthor $wxrAuthor */
+    public $wxrAuthor;
+    public $wxrPostId;
+    public $post_parent=false;
+    public $wxrPostParent=false;
+
+    // $terms is an array of WxrTerm objects
     public $terms = array();
+    // $postmeta is an array of (key => value) pairs
     public $postmeta = array();
+    // $comments is an array of WxrComment objects
     public $comments = array();
 
     /**
@@ -43,6 +59,7 @@ class WxrPost extends aWxrModel
         if (!is_null($this->guid)) $jsonString .= "\"guid\"" . "\"" . $this->guid . "\",";
         if (!is_null($this->post_author)) $jsonString .= "\"post_author\"" . "\"" . $this->post_author . "\",";
         if (!is_null($this->post_id)) $jsonString .= "\"post_id\"" . $this->post_id . ",";
+        if (!is_null($this->wxrPostId)) $jsonString .= "\"wxrPostId\"" . $this->wxrPostId . ",";
         if (!is_null($this->post_date)) $jsonString .= "\"post_date\"" . "\"" . $this->post_date . "\",";
         if (!is_null($this->post_date_gmt)) $jsonString .= "\"post_date_gmt\"" . "\"" . $this->post_date_gmt . "\",";
         if (!is_null($this->comment_status)) $jsonString .= "\"comment_status\"" . "\"" . $this->comment_status . "\",";
@@ -84,10 +101,15 @@ class WxrPost extends aWxrModel
     }
 
     /**
-     * @return int | WP_Error
+     * @param array $orphanList
+     * @return int|WP_Error
      */
-    function saveToDatabase()
+    function saveToDatabase($orphanList)
     {
+        // If we have post parent, then this post will be added to the orphan list
+        if((int) $this->wxrPostParent){
+
+        }
         $args = array(
             'post_title' => $this->post_title,
             'guid' => $this->guid,
@@ -105,8 +127,7 @@ class WxrPost extends aWxrModel
             'post_type' => $this->post_type,
             'post_password' => $this->post_password,
             'is_sticky' => $this->is_sticky,
-            'attachment_url' => $this->attachment_url,
-
+            'attachment_url' => $this->attachment_url
         );
         $post_id = wp_insert_post($args, true);
         // Return if post did not insert
@@ -132,9 +153,7 @@ class WxrPost extends aWxrModel
             }
             wp_set_post_terms($post_id, $term_id, $term->term_taxonomy, true);
         }
-
         return $post_id;
-
     }
 
     /**

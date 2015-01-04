@@ -70,6 +70,9 @@ class AjaxHandler
                 $importer = new BmiImport();
                 $importer->authorImport();
                 break;
+            case "import_content":
+                $importer = new BmiImport();
+                $importer->contentImport();
         }
     }
 
@@ -173,7 +176,7 @@ class AjaxHandler
             <?php
             }
         } catch (Exception $e) {
-            echo "Caught an arror!" . $e->getMessage();
+            echo "Caught an error!" . $e->getMessage();
         }
     }
 

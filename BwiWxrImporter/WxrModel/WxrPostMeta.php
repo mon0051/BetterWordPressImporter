@@ -30,7 +30,7 @@ class WxrPostMeta extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase()
+    function saveToDatabase($orphanList)
     {
         return update_post_meta($this->post_id, $this->key, $this->value);
     }

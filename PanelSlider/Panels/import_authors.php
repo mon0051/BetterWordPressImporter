@@ -7,19 +7,18 @@
 $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
 ?>
 <div class="blurb">
-    <h1>Import Authors</h1>
+    <h1><?php echo __("Import Authors",'better-wordpress-importer'); ?></h1>
 </div>
 <div id="bwi_reload_authors" class="bwi-button">
-    <div class="bwi-button-text">Refresh</div>
+    <div class="bwi-button-text"><?php echo __("Refresh",'better-wordpress-importer'); ?></div>
 </div>
-<?php //include dirname(__FILE__) . '../../Elements/import_user_template.php'; ?>
 <form class="bwi-form" id="bwi-import-author-form"
       action="<?php echo $ajax_url; ?>">
 </form>
 <script>
     var ajax_file_url = "<?php echo $ajax_url;?>";
     /**
-     *  Reads the authors found in the import file and creates a form bsed on that data
+     *  Reads the authors found in the import file and creates a form based on that data
      *  so they can be imported or overwritten
      **/
     function bwi_read_authors() {
@@ -41,13 +40,14 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
                 };
                 jQuery.ajax(ajax_options).done(function (html) {
                     panelSlider.safeLog("Ajax Done </br>" + html);
+                    panelSlider.bwi_slideLeft();
                 });
             });
         });
     }
     /**
      * Parses the author form into an array
-     * @return array authorData an array eg.
+     * @return Array authorData an array eg.
      * [    0 : { id: a, opt: b,new_value: c, exisiting_author: d, username: e },
      *      1 : { id: f, opt: g,new_value: h, exisiting_author: i, username: j }   ];
      */

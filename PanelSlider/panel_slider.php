@@ -19,6 +19,7 @@ $panelController = new PanelController();
             $panelController->add_panel('Panels/ajax_upload_panel.php');
             $panelController->add_panel('Panels/parse_xml.php');
             $panelController->add_panel('Panels/import_authors.php');
+            $panelController->add_panel('Panels/import_content.php')
             ?>
         </div>
     </div>

@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__FILE__) . '../../config.php';
+include_once '../config.php';
 
 /**
  * Author: Andrew Monteith
@@ -16,6 +18,8 @@ class PanelController
     {
         $this->panel_count = 0;
     }
+
+
 
     /**
      * @param $panel_name

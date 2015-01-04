@@ -12,9 +12,10 @@ abstract class aWxrModel
     abstract function getJson();
 
     /**
-     * @return int | WP_Error
+     * @param $orphanList
+     * @return int|WP_Error
      */
-    abstract function saveToDatabase();
+    abstract function saveToDatabase($orphanList);
 
     abstract function getImportLog();
 }

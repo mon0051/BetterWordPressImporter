@@ -6,18 +6,10 @@
  */
 ?>
 <div id="parse-blurb" class="blurb bwi-hidden">
-    <h1>Upload Success</h1>
-
-    <p>Seems like the file has uploaded to the server correctly, that's a good start!</p>
-
-    <p>Now we need to try and read the file. If there is a problem with the export file, this is where it will be
-        picked up.</p>
-
-    <p>Click on the Parse button (that's computer speak for read) to start the process. This should take no more
-        than 30 seconds if the file is properly exported.</p>
+    <h1><?php echo __("Upload Success", 'better-wordpress-importer'); ?></h1>
 </div>
 <div id="ajax-parse-button" class="bwi-button">
-    <div class="bwi-button-text">Parse</div>
+    <div class="bwi-button-text"><?php echo __("Parse", 'better-wordpress-importer'); ?></div>
 </div>
 <div id="ajax-parse-return" class="ajax-return-value"></div>
 <script type="text/javascript">

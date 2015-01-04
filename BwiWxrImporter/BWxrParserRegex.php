@@ -145,7 +145,7 @@ class BWXR_Parser_Regex
         $category->term_id = $this->get_tag($c, 'wp:term_id');
         $category->cat_name = $this->get_tag($c, 'wp:cat_name');
         $category->category_nicename = $this->get_tag($c, 'wp:category_nicename');
-        $category->category_parent = $this->get_tag($c, 'wp:category_parent');
+        $category->wxrCategoryParent = $this->get_tag($c, 'wp:category_parent');
         $category->category_description = $this->get_tag($c, 'wp:category_description');
         return $category;
     }
@@ -208,7 +208,7 @@ class BWXR_Parser_Regex
         // Standard Post Data
         //----------------------------------------------
         $wxrPost = new WxrPost();
-        $wxrPost->post_id = $this->get_tag($post, 'wp:post_id');
+        $wxrPost->wxrPostId = $this->get_tag($post, 'wp:post_id');
         $wxrPost->post_title = $this->get_tag($post, 'title');
         $wxrPost->post_date = $this->get_tag($post, 'wp:post_date');
         $wxrPost->post_date_gmt = $this->get_tag($post, 'wp:post_date_gmt');
@@ -216,7 +216,7 @@ class BWXR_Parser_Regex
         $wxrPost->ping_status = $this->get_tag($post, 'wp:ping_status');
         $wxrPost->status = $this->get_tag($post, 'wp:status');
         $wxrPost->post_name = $this->get_tag($post, 'wp:post_name');
-        $wxrPost->post_parent = $this->get_tag($post, 'wp:post_parent');
+        $wxrPost->wxrPostParent = $this->get_tag($post, 'wp:post_parent');
         $wxrPost->menu_order = $this->get_tag($post, 'wp:menu_order');
         $wxrPost->post_type = $this->get_tag($post, 'wp:post_type');
         $wxrPost->post_password = $this->get_tag($post, 'wp:post_password');

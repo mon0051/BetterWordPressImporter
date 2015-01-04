@@ -38,8 +38,12 @@ class WxrTerm extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase()
+    function saveToDatabase($orphanList)
     {
+        if(term_exists($this->slug,$this->term_taxonomy)){
+            $err = new WP_Error("Term : \"$this->term_id\" already exists, leaving it alone ");
+            return $err;
+        }
         $args = array(
             'description' => $this->term_description,
             'parent' => $this->term_parent,

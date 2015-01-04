@@ -64,7 +64,7 @@ function bwi_import_log() {
 
 }
 
-// Hook into the 'init' action
+// Hook into the 'init' action to create the custom post type at the right time
 add_action( 'init', 'bwi_import_log', 0 );
 
 // Enqueue Scripts
@@ -82,4 +82,3 @@ function bwi_scripts()
 }
 
 add_action('admin_enqueue_scripts', 'bwi_scripts');
-add_action('init', 'register_bwi_custom_post_types');

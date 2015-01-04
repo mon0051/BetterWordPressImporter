@@ -42,7 +42,7 @@ class WxrAuthor extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase()
+    function saveToDatabase($orphanList)
     {
         $args = array(
             'first_name' => $this->author_first_name,
@@ -52,17 +52,18 @@ class WxrAuthor extends aWxrModel
             'user_email' => $this->author_email,
             'display_name' => $this->author_display_name
         );
-        return wp_insert_user($args, true);
+        $this->author_id =  wp_insert_user($args, true);
+        return $this->author_id;
     }
 
     /**
      * @return string $logString
      */
     function getImportLog(){
-        $logString = '{ \'imported_author\':{';
-        if (!is_null($this->author_id)) $logString .= '\'author_id\'' .':'. $this->author_id . ",";
-        if (!is_null($this->author_login)) $logString .= '\'author_login\'' .':\'' . $this->author_login . "\"";
-        $logString .= "}},";
+        $logString = '{ \'imported_author\' : { ';
+        if (!is_null($this->author_id)) $logString .= '\'author_id\'' .' : '. $this->author_id . ",";
+        if (!is_null($this->author_login)) $logString .= '\'author_login\'' .' : \'' . $this->author_login . '\' ';
+        $logString .= "}},\n";
         return $logString;
     }
 }

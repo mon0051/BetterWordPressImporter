@@ -6,29 +6,28 @@
  */ ?>
 
 <div class="bwi-panel-header">
-    <h1> Checking for current Import processe's...</h1>
+    <h1> <?php echo __("Checking for current Import processe's...",'better-wordpress-importer'); ?></h1>
 </div>
 <div class="blurb">
     <p>
-        Checking to see if there is another process running...
+        <?php echo __("Checking to see if there is another process running...",'better-wordpress-importer'); ?>
     </p>
 </div>
 <div id="ajax-response-session-check">
     <div id="bwi_session_found" class="bwi-hidden bwi-center">
-        <p>A previous session was found, do you want to continue with this import, or start a new import?</p>
+        <p><?php echo __("A previous session was found, do you want to continue with this import, or start a new import?",'better-wordpress-importer'); ?></p>
 
         <div id="bwi_start_new" class="bwi-button">
-            <div class="bwi-button-text">New Import</div>
+            <div class="bwi-button-text"><?php echo __("New Import",'better-wordpress-importer'); ?></div>
         </div>
         <div id="bwi_resume" class="bwi-button">
-            <div class="bwi-button-text">Resume</div>
+            <div class="bwi-button-text"><?php echo __("Resume",'better-wordpress-importer');?></div>
         </div>
     </div>
     <div id="bwi_no_session_found" class="bwi-hidden bwi-center">
-        <p>No Session was found</p>
-
+        <p><?php echo __("No Session was found","better-wordpress-importer");?></p>
         <div id="bwi_retry_session" class="bwi-button">
-            <div class="bwi-button-text">Retry</div>
+            <div class="bwi-button-text"><?php echo __("Retry","better-wordpress-importer");?></div>
         </div>
     </div>
 </div>

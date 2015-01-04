@@ -4,6 +4,17 @@
  * Author: Andrew Monteith
  * Date: 2/01/15 1:53 AM
  */
+
+/**
+ * Class BwiLog
+ * This class is fairly important due to the restrictive nature of some servers,
+ * which will cut a script off midway through execution if it exceeds time or
+ * memory parameters.
+ * This log will output to the database every 2kb of data that is added to the log
+ * so we will never lose more than 2kb of logs if the script is cut short.
+ * If the server puts the script to sleep it will output its buffer before exiting,
+ * allowing us to pick back off where we left from when the script resumes.
+ */
 class BwiLog
 {
     /** @var  string $buffer */
@@ -13,7 +24,7 @@ class BwiLog
     private $max_buffer_size = 2048;
 
     /**
-     * Creates the CPT for the log file and
+     * Creates the CPT for the logbook file and
      */
     function __construct()
     {
@@ -37,6 +48,21 @@ class BwiLog
         } else {
             $this->buffer .= $section;
         }
+    }
+
+    /**
+     * @param $errorMessage
+     */
+    public function logError($errorMessage){
+        $jError = "{ error : \"$errorMessage\"},\n";
+        $this->log($jError);
+    }
+    /**
+     * @param $errorMessage
+     */
+    public function logNotice($noticeMessage){
+        $jNotice = "{ notice : \"$noticeMessage\"},\n";
+        $this->log($jNotice);
     }
     public function close_log(){
         $this->writeBufferToDb();

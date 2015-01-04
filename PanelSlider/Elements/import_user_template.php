@@ -36,12 +36,12 @@ $wp_users = get_users(array('who' => 'authors'));
             </div>
             <div class="author-input-wrapper bwi-hidden">
                 <div class="author-new-input-wrapper">
-                    <label for="new-author-input-<?php echo $id;?>">New Name</label>
+                    <label for="new-author-input-<?php echo $id;?>"><?php echo __("New Name",'better-wordpress-importer'); ?></label>
                     <input type="text" name="new-author-input-<?php echo $id;?>" value="<?php echo $name;?>"
                            id="new-author-input-<?php echo $id;?>">
                 </div>
                 <div class="author-select-wrapper bwi-hidden">
-                    <label for="existing-author-selector-<?php echo $id;?>">Assign Existing Author</label>
+                    <label for="existing-author-selector-<?php echo $id;?>"><?php echo __("Assign Existing Author",'better-wordpress-importer'); ?></label>
                     <select name="existing-author-selector-<?php echo $id;?>"
                             id="existing-author-selector-<?php echo $id;?>">
                         <?php

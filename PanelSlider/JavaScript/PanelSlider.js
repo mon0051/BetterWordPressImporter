@@ -8,8 +8,9 @@ function PanelSlider() {
     this.bwi_slide_count = 0;
     this.slider_transistion_time = 250;
 
+
     /**
-     * @message A string to print out to the consolse
+     * @message A string to print out to the console
      * A simple helper to ensure logging does not crash program in old browsers
      * */
 

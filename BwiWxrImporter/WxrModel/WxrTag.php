@@ -32,8 +32,12 @@ class WxrTag extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase()
+    function saveToDatabase($orphanList)
     {
+        if(term_exists($this->tag_slug,'post_tag')){
+            $err = new WP_Error("Tag : \"$this->term_id\" already exists, leaving it alone ");
+            return $err;
+        }
         $args = array(
             'description' => $this->tag_description,
             'slug' => $this->tag_slug
