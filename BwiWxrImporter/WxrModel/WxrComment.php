@@ -52,7 +52,7 @@ class WxrComment extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase($orphanList)
+    function saveToDatabase($orphanList=false)
     {
         $args = array(
             'comment_post_id' => $this->comment_post_id,

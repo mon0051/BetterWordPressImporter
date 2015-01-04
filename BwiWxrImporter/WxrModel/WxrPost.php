@@ -136,7 +136,7 @@ class WxrPost extends aWxrModel
         foreach ($this->comments as $comment) {
             /** @var WxrComment $comment */
             $comment->comment_post_id = $post_id;
-            $comment->saveToDatabase();
+            $comment->saveToDatabase("");
         }
         foreach ($this->postmeta as $postmeta) {
             /** @var WxrPostMeta $postmeta */

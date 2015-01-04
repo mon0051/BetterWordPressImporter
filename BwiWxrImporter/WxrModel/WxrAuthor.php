@@ -42,7 +42,7 @@ class WxrAuthor extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase($orphanList)
+    function saveToDatabase($orphanList=false)
     {
         $args = array(
             'first_name' => $this->author_first_name,

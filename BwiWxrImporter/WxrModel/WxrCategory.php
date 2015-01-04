@@ -37,7 +37,7 @@ class WxrCategory extends aWxrModel
     /**
      * @return int | WP_Error
      */
-    function saveToDatabase($orphanList)
+    function saveToDatabase($orphanList=false)
     {
         if(term_exists($this->category_nicename,'category')){
             $nn = $this->category_nicename;
