@@ -12,7 +12,8 @@ class WxrComment extends aWxrModel
 {
     public $comment_post_id;
     public $comment_id;
-    public $wxr_comment_id;
+    public $wxrCommentParent;
+    public $wxrCommentId;
     public $comment_author;
     public $comment_author_email;
     public $comment_author_IP;
@@ -50,10 +51,9 @@ class WxrComment extends aWxrModel
     }
 
     /**
-     * @param bool $orphanList
      * @return int|WP_Error
      */
-    function saveToDatabase($orphanList=false)
+    function saveToDatabase()
     {
         $args = array(
             'comment_post_id' => $this->comment_post_id,
@@ -68,7 +68,8 @@ class WxrComment extends aWxrModel
             'comment_date' => $this->comment_date,
             'comment_approved' => $this->comment_approved
         );
-        return wp_insert_comment($args);
+        $this->comment_id = wp_insert_comment($args);
+        return $this->comment_id;
     }
 
     /**

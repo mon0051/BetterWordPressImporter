@@ -46,8 +46,9 @@ class BWXR_Parser_Regex
             while (!$this->feof($fp)) {
                 $importline = rtrim($this->fgets($fp));
 
-                if (!$wxr_version && preg_match('|<wp:wxr_version>(\d+\.\d+)</wp:wxr_version>|', $importline, $version))
+                if (!$wxr_version && preg_match('|<wp:wxr_version>(\d+\.\d+)</wp:wxr_version>|', $importline, $version)) {
                     $wxr_version = $version[1];
+                }
 
                 if (false !== strpos($importline, '<wp:base_site_url>')) {
                     preg_match('|<wp:base_site_url>(.*?)</wp:base_site_url>|is', $importline, $url);
@@ -97,6 +98,54 @@ class BWXR_Parser_Regex
         if (!$wxr_version)
             return new WP_Error('WXR_parse_error', __('This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer'));
 
+        //----------------------------------------------
+        //              Map Post Hierarchy
+        //----------------------------------------------
+        foreach ($this->posts as $cPost) {
+            if ($cPost instanceof WxrPost && $cPost->wxrPostParent) {
+                foreach ($this->posts as $pPost) {
+                    if ($pPost instanceof WxrPost && $cPost->wxrPostParent == $pPost->wxrPostId) {
+                        $cPost->post_parent = $pPost;
+                    }
+                }
+            }
+        }
+        //----------------------------------------------
+        //          Map Category Hierarchy
+        //----------------------------------------------
+        foreach($this->categories as $cCategory){
+            if ($cCategory instanceof WxrCategory && $cCategory->wxrCategoryParent) {
+                foreach ($this->posts as $pCategory) {
+                    if ($pCategory instanceof WxrCategory && $cCategory->wxrCategoryParent == $pCategory->wxrTermId) {
+                        $cCategory->category_parent = $pCategory;
+                    }
+                }
+            }
+        }
+        //----------------------------------------------
+        //              Map Term Hierarchy
+        //----------------------------------------------
+        foreach($this->terms as $cTerm){
+            if ($cTerm instanceof WxrTerm && $cTerm->wxrTermParent) {
+                foreach ($this->posts as $pTerm) {
+                    if ($pTerm instanceof WxrTerm && $cTerm->wxrTermParent == $pTerm->wxrTermId) {
+                        $cTerm->term_parent = $pTerm;
+                    }
+                }
+            }
+        }
+        //----------------------------------------------
+        //              Map Comment Hierarchy
+        //----------------------------------------------
+        foreach($this->terms as $cComment){
+            if ($cComment instanceof WxrComment && $cComment->wxrCommentParent) {
+                foreach ($this->posts as $pComment) {
+                    if ($pComment instanceof WxrComment && $cComment->wxrCommentParent == $pComment->wxrCommentId) {
+                        $cComment->comment_parent = $pComment;
+                    }
+                }
+            }
+        }
         return array(
             'authors' => $this->authors,
             'posts' => $this->posts,
@@ -142,7 +191,7 @@ class BWXR_Parser_Regex
     function process_category($c)
     {
         $category = new WxrCategory();
-        $category->term_id = $this->get_tag($c, 'wp:term_id');
+        $category->wxrTermId = $this->get_tag($c, 'wp:term_id');
         $category->cat_name = $this->get_tag($c, 'wp:cat_name');
         $category->category_nicename = $this->get_tag($c, 'wp:category_nicename');
         $category->wxrCategoryParent = $this->get_tag($c, 'wp:category_parent');
@@ -171,10 +220,10 @@ class BWXR_Parser_Regex
     function process_term($t)
     {
         $term = new WxrTerm();
-        $term->term_id = $this->get_tag($t, 'wp:term_id');
+        $term->wxrTermId = $this->get_tag($t, 'wp:term_id');
         $term->term_taxonomy = $this->get_tag($t, 'wp:term_taxonomy');
         $term->slug = $this->get_tag($t, 'wp:term_slug');
-        $term->term_parent = $this->get_tag($t, 'wp:term_parent');
+        $term->wxrTermParent = $this->get_tag($t, 'wp:term_parent');
         $term->term_name = $this->get_tag($t, 'wp:term_name');
         $term->term_description = $this->get_tag($t, 'wp:term_description');
         return $term;
@@ -295,7 +344,7 @@ class BWXR_Parser_Regex
                 $wxrComment->comment_content = $this->get_tag($comment, 'wp:comment_content');
                 $wxrComment->comment_approved = $this->get_tag($comment, 'wp:comment_approved');
                 $wxrComment->comment_type = $this->get_tag($comment, 'wp:comment_type');
-                $wxrComment->comment_parent = $this->get_tag($comment, 'wp:comment_parent');
+                $wxrComment->wxrCommentParent = $this->get_tag($comment, 'wp:comment_parent');
                 $wxrComment->comment_user_id = $this->get_tag($comment, 'wp:comment_user_id');
                 $post_comments[] = $wxrComment;
                 //** End standard comment data */
@@ -314,7 +363,7 @@ class BWXR_Parser_Regex
                 $pmo = new WxrPostMeta();
                 $pmo->value = $this->get_tag($p, 'wp:meta_value');
                 $pmo->key = $this->get_tag($p, 'wp:meta_key');
-                $post_postmeta[] =$pmo;
+                $post_postmeta[] = $pmo;
             }
         }
         if (!empty($post_postmeta)) $wxrPost->postmeta = $post_postmeta;

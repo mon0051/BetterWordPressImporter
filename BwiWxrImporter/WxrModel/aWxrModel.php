@@ -15,9 +15,16 @@ abstract class aWxrModel
      * @param $orphanList
      * @return int|WP_Error
      */
-    abstract function saveToDatabase($orphanList);
+    abstract function saveToDatabase();
 
     abstract function getImportLog();
+
+    /**
+     * Adds the hierarchy to the data.
+     * This can only be done after all data is inserted, as you need a
+     * reference to the parents id on the new server.
+     * @return mixed
+     */
     abstract function updateParentInDatabase();
-    protected $parentID;
+
 }

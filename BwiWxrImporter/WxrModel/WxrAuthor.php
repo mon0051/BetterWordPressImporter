@@ -43,7 +43,7 @@ class WxrAuthor extends aWxrModel
      * @param bool $orphanList
      * @return int|WP_Error
      */
-    function saveToDatabase($orphanList=false)
+    function saveToDatabase()
     {
         $args = array(
             'first_name' => $this->author_first_name,
@@ -68,8 +68,14 @@ class WxrAuthor extends aWxrModel
         return $logString;
     }
 
+    /**
+     * An author does not have a parent, but to save a tangled nightmare of
+     * multiple inheritance, all aWxrModels will implement this method.
+     * It just happens that this version does nothing.
+     * @return bool
+     */
     function updateParentInDatabase()
     {
-        // TODO: Implement updateParentInDatabase() method.
+        return false;
     }
 }

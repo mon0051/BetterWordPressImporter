@@ -38,8 +38,8 @@ class WxrPost extends aWxrModel
     /** @var  WxrAuthor $wxrAuthor */
     public $wxrAuthor;
     public $wxrPostId;
-    public $post_parent=false;
-    public $wxrPostParent=false;
+    public $post_parent = false;
+    public $wxrPostParent = false;
 
     // $terms is an array of WxrTerm objects
     public $terms = array();
@@ -101,29 +101,21 @@ class WxrPost extends aWxrModel
     }
 
     /**
-     * @param array $orphanList
      * @return int|WP_Error
      */
-    function saveToDatabase($orphanList)
+    function saveToDatabase()
     {
-        /** @var array $orphanList */
-        // If we have post parent, then this post will be added to the orphan list
-        if((int) $this->wxrPostParent){
-            $orphanList[] = $this;
-        }
         $args = array(
             'post_title' => $this->post_title,
             'guid' => $this->guid,
             'post_author' => $this->post_author,
             'post_content' => $this->post_content,
-            'ID' => $this->post_id,
             'post_date' => $this->post_date,
             'post_date_gmt' => $this->post_date_gmt,
             'comment_status' => $this->comment_status,
             'ping_status' => $this->ping_status,
             'post_name' => $this->post_name,
             'status' => $this->status,
-            'post_parent' => $this->post_parent,
             'menu_order' => $this->menu_order,
             'post_type' => $this->post_type,
             'post_password' => $this->post_password,
@@ -133,6 +125,7 @@ class WxrPost extends aWxrModel
         $post_id = wp_insert_post($args, true);
         // Return if post did not insert
         if (is_wp_error($post_id)) return $post_id;
+
 
         foreach ($this->comments as $comment) {
             /** @var WxrComment $comment */
@@ -154,6 +147,7 @@ class WxrPost extends aWxrModel
             }
             wp_set_post_terms($post_id, $term_id, $term->term_taxonomy, true);
         }
+        $this->post_id = $post_id;
         return $post_id;
     }
 
@@ -171,6 +165,12 @@ class WxrPost extends aWxrModel
 
     function updateParentInDatabase()
     {
-        // TODO: Implement updateParentInDatabase() method.
+        if ($this->post_parent instanceof WxrPost) {
+            $args = array(
+                'ID' => $this->post_id,
+                'post_parent' => $this->post_parent->post_id
+            );
+            wp_update_post($args);
+        }
     }
 }

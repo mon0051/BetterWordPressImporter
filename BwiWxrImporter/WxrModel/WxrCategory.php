@@ -11,7 +11,7 @@ require_once 'aWxrModel.php';
 class WxrCategory extends aWxrModel
 {
     public $term_id;
-    public $wxr_term_id;
+    public $wxrTermId;
     public $category_nicename;
     public $category_parent = NULL;
     public $wxrCategoryParent = NULL;
@@ -35,17 +35,16 @@ class WxrCategory extends aWxrModel
     }
 
     /**
-     * @param bool $orphanList
      * @return int|WP_Error
      */
-    function saveToDatabase($orphanList=false)
+    function saveToDatabase()
     {
         if(term_exists($this->category_nicename,'category')){
             $nn = $this->category_nicename;
             $err = new WP_Error("Category $nn Already exists, database not altered");
             return $err;
         }
-        $this->category_parent = (!empty($this->wxrCategoryParent)) ? term_exists($this->wxrCategoryParent,'category') : 0;
+
 
         // TODO check the list of WxrTerms to see if the parent is in there, as it may be out of order
 
@@ -57,7 +56,8 @@ class WxrCategory extends aWxrModel
             'category_parent' => $this->category_parent,
             'taxonomy' => 'category'
         );
-        return wp_insert_category($cat_array, true);
+        $this->term_id = wp_insert_category($cat_array, true);
+        return $this->term_id;
     }
 
     /**
@@ -73,6 +73,12 @@ class WxrCategory extends aWxrModel
 
     function updateParentInDatabase()
     {
-        // TODO: Implement updateParentInDatabase() method.
+        if ($this->category_parent instanceof WxrCategory) {
+            // the parent id must be inside an array because of legacy wordpress code
+            // from before PHP was fully Object Oriented (Lots of messy things happened back
+            // then to work around the semi Object Oriented nature of PHP)
+            $args = array('parent' => array($this->category_parent->term_id));
+            wp_update_term($this->term_id, 'category', $args);
+        }
     }
 }

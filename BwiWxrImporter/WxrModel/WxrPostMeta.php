@@ -28,11 +28,9 @@ class WxrPostMeta extends aWxrModel
     }
 
     /**
-     * @param bool $orphanList
-     *
      * @return int|WP_Error
      */
-    function saveToDatabase($orphanList=false)
+    function saveToDatabase()
     {
         return update_post_meta($this->post_id, $this->key, $this->value);
     }
