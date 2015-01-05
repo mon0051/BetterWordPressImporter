@@ -50,4 +50,9 @@ class WxrPostMeta extends aWxrModel
         $logString .= "}}\n";
         return $logString;
     }
+
+    function updateParentInDatabase()
+    {
+        // TODO: Implement updateParentInDatabase() method.
+    }
 }

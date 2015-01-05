@@ -72,7 +72,7 @@ class AjaxHandler
                 break;
             case "import_content":
                 $importer = new BmiImport();
-                $importer->contentImport();
+                $importer->importContent();
         }
     }
 

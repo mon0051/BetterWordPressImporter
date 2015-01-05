@@ -30,7 +30,8 @@ class WxrTag extends aWxrModel
     }
 
     /**
-     * @return int | WP_Error
+     * @param bool $orphanList
+     * @return int|WP_Error
      */
     function saveToDatabase($orphanList=false)
     {
@@ -55,5 +56,10 @@ class WxrTag extends aWxrModel
 
         $logString .= "}}\n";
         return $logString;
+    }
+
+    function updateParentInDatabase()
+    {
+        // TODO: Implement updateParentInDatabase() method.
     }
 }

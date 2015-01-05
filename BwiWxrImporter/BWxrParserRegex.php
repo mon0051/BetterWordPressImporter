@@ -299,7 +299,6 @@ class BWXR_Parser_Regex
                 $wxrComment->comment_user_id = $this->get_tag($comment, 'wp:comment_user_id');
                 $post_comments[] = $wxrComment;
                 //** End standard comment data */
-
             }
         }
         if (!empty($post_comments)) $wxrPost->comments = $post_comments;
@@ -312,10 +311,10 @@ class BWXR_Parser_Regex
         $postmeta = $postmeta[1];
         if ($postmeta) {
             foreach ($postmeta as $p) {
-                $post_postmeta[] = array(
-                    'key' => $this->get_tag($p, 'wp:meta_key'),
-                    'value' => $this->get_tag($p, 'wp:meta_value'),
-                );
+                $pmo = new WxrPostMeta();
+                $pmo->value = $this->get_tag($p, 'wp:meta_value');
+                $pmo->key = $this->get_tag($p, 'wp:meta_key');
+                $post_postmeta[] =$pmo;
             }
         }
         if (!empty($post_postmeta)) $wxrPost->postmeta = $post_postmeta;
@@ -382,4 +381,3 @@ class BWXR_Parser_Regex
         return fclose($fp);
     }
 }
-

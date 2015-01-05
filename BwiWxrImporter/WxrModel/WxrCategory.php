@@ -35,7 +35,8 @@ class WxrCategory extends aWxrModel
     }
 
     /**
-     * @return int | WP_Error
+     * @param bool $orphanList
+     * @return int|WP_Error
      */
     function saveToDatabase($orphanList=false)
     {
@@ -68,5 +69,10 @@ class WxrCategory extends aWxrModel
         if (!is_null($this->term_id)) $logString .= '\'term_id\':' . $this->term_id . ',';
         $logString .= "}}\n";
         return $logString;
+    }
+
+    function updateParentInDatabase()
+    {
+        // TODO: Implement updateParentInDatabase() method.
     }
 }

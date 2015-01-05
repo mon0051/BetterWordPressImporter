@@ -40,7 +40,8 @@ class WxrAuthor extends aWxrModel
     }
 
     /**
-     * @return int | WP_Error
+     * @param bool $orphanList
+     * @return int|WP_Error
      */
     function saveToDatabase($orphanList=false)
     {
@@ -65,5 +66,10 @@ class WxrAuthor extends aWxrModel
         if (!is_null($this->author_login)) $logString .= '\'author_login\'' .' : \'' . $this->author_login . '\' ';
         $logString .= "}},\n";
         return $logString;
+    }
+
+    function updateParentInDatabase()
+    {
+        // TODO: Implement updateParentInDatabase() method.
     }
 }

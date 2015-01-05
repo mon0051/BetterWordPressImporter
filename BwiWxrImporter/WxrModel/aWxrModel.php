@@ -18,4 +18,6 @@ abstract class aWxrModel
     abstract function saveToDatabase($orphanList);
 
     abstract function getImportLog();
+    abstract function updateParentInDatabase();
+    protected $parentID;
 }

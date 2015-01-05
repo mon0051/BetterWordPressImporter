@@ -106,9 +106,10 @@ class WxrPost extends aWxrModel
      */
     function saveToDatabase($orphanList)
     {
+        /** @var array $orphanList */
         // If we have post parent, then this post will be added to the orphan list
         if((int) $this->wxrPostParent){
-
+            $orphanList[] = $this;
         }
         $args = array(
             'post_title' => $this->post_title,
@@ -166,5 +167,10 @@ class WxrPost extends aWxrModel
 
         $logString .= "}}\n";
         return $logString;
+    }
+
+    function updateParentInDatabase()
+    {
+        // TODO: Implement updateParentInDatabase() method.
     }
 }
