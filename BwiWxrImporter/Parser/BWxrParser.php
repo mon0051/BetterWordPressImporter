@@ -4,9 +4,9 @@
  * @package WordPress
  * @subpackage Importer
  */
-require_once dirname(__FILE__) . '../../ajax/ajax_authenticate.php';
+require_once dirname(__FILE__) . '/../../ajax/ajax_authenticate.php';
 //require_once dirname(__FILE__) . '../../BwiWxrImporter/BWxrParserSimple.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/BWxrParserRegex.php';
+require_once 'BWxrParserRegex.php';
 
 /**
  * Class BWXR_Parser

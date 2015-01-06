@@ -14,17 +14,15 @@
  * function, server load should be minimal, hence my choice to
  * perform this server-side.
  */
-require_once dirname(__FILE__) . '/../javascript_baker.php';
+require_once dirname(__FILE__) . '/../Helpers/javascript_baker.php';
 include_once dirname(__FILE__) . '/../../better-wordpress-importer-admin.php';
 global $bwi_plugin_folder_url;
 ?>
 <script type="text/javascript">
-
     bigUpload = new BigUpload();
     bigUpload.settings['scriptPath'] = "<?php echo $bwi_plugin_folder_url; ?>ajax/bwi_ajax.php";
     <?php bakeInPhpUploadLimits(); ?>
     function upload() {
-
         panelSlider.safeLog("called upload");
         bigUpload.fire();
     }
@@ -33,7 +31,6 @@ global $bwi_plugin_folder_url;
         bigUpload.abortFileUpload();
     }
     function OnProgress(event, position, total, percentComplete) {
-        // Update Progress Bar
         panelSlider.safeLog(event + position + total);
         var progress_box = jQuery('#chunk-progress-box');
         progress_box.show();
@@ -44,8 +41,7 @@ global $bwi_plugin_folder_url;
 </script>
 <form action="<?php echo $bwi_plugin_folder_url ?>ajax/bwi_ajax.php" id="AjaxFileUpload" method="POST"
       enctype="multipart/form-data">
-    <h2>Select File To Import</h2>
-
+    <h2><?php echo __("Select File To Import",'better-wordpress-importer'); ?></h2>
     <div id="file-input-wrapper"><input type="file" id="bigUploadFile" name="FileInput"/></div>
     <div id="chunk-progress-box">
         <div id="chunk-progress-bar"></div>
@@ -60,5 +56,3 @@ global $bwi_plugin_folder_url;
     </div>
 </form>
 <div id="bigUploadResponse"></div>
-
-

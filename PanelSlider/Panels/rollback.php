@@ -13,26 +13,29 @@ $ajax_url = plugins_url() . '/better-wordpress-importer/ajax/bwi_ajax.php';
 <div class="blurb">
 </div>
 <div class="bwi-center">
-    <div class="bwi-button" id="bwi-import-content">
-        <div class="bwi-button-text">Import</div>
+    <div class="bwi-button" id="bwi-rollback-refresh">
+        <div class="bwi-button-text"><?php echo __("Refresh",'better-wordpress-importer'); ?></div>
     </div>
+</div>
+<div class="bwi-form-wrapper" id="bwi-rollback-form">
+
 </div>
 <script type="text/javascript">
     function bwi_import_content() {
-        var ajax_file_url = "<?php echo $ajax_url;?>"
+        var ajax_file_url = "<?php echo $ajax_url;?>";
         panelSlider.safeLog("Import Ajax Started");
         var ajax_options = {
-            url: ajax_file_url, type: "POST",
-            data: {action: 'import_content'}
+            url: ajax_file_url, type: "GET",
+            data: {action: 'get_rollback_data'}
         };
         jQuery.ajax(ajax_options).done(function (response) {
-            panelSlider.safeLog("Import Ajax Finished" + response);
+            jQuery('#bwi-rollback-form').append(response);
         });
     }
-    jQuery('#import_content').on("slideFocused", function () {
+    jQuery('#bwi-rollback-refresh').on("slideFocused", function () {
         bwi_import_content();
     });
-    jQuery('#bwi-import-content').click(function () {
+    jQuery('#bwi-rollback-refresh').click(function () {
         bwi_import_content();
     });
 </script>

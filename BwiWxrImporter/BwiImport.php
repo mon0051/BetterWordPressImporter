@@ -5,7 +5,7 @@ require_once 'Logger/BwiLog.php';
  * Author: Andrew Monteith
  * Date: 20/12/14 12:03 AM
  */
-class BmiImport
+class BwiImport
 {
     // The WxrData types have to be imported in a specific order, so unfortunately we can't simply
     // loop though an array of all things to import

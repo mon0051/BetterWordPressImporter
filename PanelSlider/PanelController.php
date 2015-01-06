@@ -1,6 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '../../config.php';
-include_once '../config.php';
+require_once dirname(__FILE__) . '/../config.php';
 
 /**
  * Author: Andrew Monteith

@@ -1,12 +1,11 @@
 <?php
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrAuthor.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrCategory.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrComment.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrPost.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrPostMeta.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrTag.php';
-require_once dirname(__FILE__) . '../../BwiWxrImporter/WxrModel/WxrTerm.php';
-
+require_once dirname(__FILE__) . '/../WxrModel/WxrAuthor.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrCategory.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrComment.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrPost.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrPostMeta.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrTag.php';
+require_once dirname(__FILE__) . '/../WxrModel/WxrTerm.php';
 /**
  * WXR Parser that uses regular expressions. Fallback for installs without an XML parser.
  */
